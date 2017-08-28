@@ -5,6 +5,7 @@ import dk.futte.blue.teamblep.blepcore.refs.ModInfo;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
 
 public class BlockBase extends Block
 {
@@ -18,5 +19,10 @@ public class BlockBase extends Block
     public ItemBlock getItemBlock()
     {
         return new ItemBlockBase(this);
+    }
+
+    public ItemStack getItemStack()
+    {
+        return new ItemStack(this, 1);
     }
 }
