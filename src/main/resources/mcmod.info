@@ -1,0 +1,19 @@
+[
+  {
+    "modid": "blepcore",
+    "name": "Blep Core",
+    "description": "A mod that adds a few things",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "url": "",
+    "updateUrl": "",
+    "authorList": [
+      "BlueMonster122",
+      "TheEpicTekkit"
+    ],
+    "credits": "",
+    "logoFile": "",
+    "screenshots": [],
+    "dependencies": []
+  }
+]
