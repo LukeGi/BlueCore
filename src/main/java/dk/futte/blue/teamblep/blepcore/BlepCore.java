@@ -7,6 +7,7 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import org.apache.logging.log4j.Logger;
 
 /**
  * @author Blue
@@ -20,10 +21,12 @@ public class BlepCore
     @SidedProxy(clientSide = ModInfo.PROXY_CLIENT, serverSide = ModInfo.PROXY_SERVER)
     public static IProxy proxy;
 
+    public static Logger logger;
+
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent e)
     {
-
+        logger = e.getModLog();
     }
 
     @Mod.EventHandler
