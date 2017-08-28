@@ -5,11 +5,13 @@ package dk.futte.blue.teamblep.blepcore.refs;
  */
 public class Names
 {
-    public static class Blocks {
+    public static class Blocks
+    {
         public static final String TEST_BLOCK = "testBlock";
     }
 
-    public static class Items {
+    public static class Items
+    {
         public static final String TEST_ITEM = "test_item";
     }
 }
