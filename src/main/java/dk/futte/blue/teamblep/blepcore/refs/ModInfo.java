@@ -1,6 +1,5 @@
 package dk.futte.blue.teamblep.blepcore.refs;
 
-
 public class ModInfo
 {
     public static final String MOD_ID = "blepcore";
