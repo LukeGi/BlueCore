@@ -2,6 +2,7 @@ package dk.futte.blue.teamblep.blepcore.content.blocks;
 
 import dk.futte.blue.teamblep.blepcore.BlepCore;
 import dk.futte.blue.teamblep.blepcore.content.blocks.tileentity.TileEntityTestBlock;
+import dk.futte.blue.teamblep.blepcore.refs.Names;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -15,7 +16,7 @@ import net.minecraftforge.fml.common.registry.IForgeRegistry;
 @Mod.EventBusSubscriber
 public class BlockHandler
 {
-    public static final BlockBase testBlock = (BlockBase)(new BlockBase(Material.ROCK, "testBlock").setCreativeTab(CreativeTabs.BUILDING_BLOCKS));
+    public static final BlockBase testBlock = (BlockBase)(new BlockBase(Material.ROCK, Names.Blocks.TEST_BLOCK).setCreativeTab(CreativeTabs.BUILDING_BLOCKS));
 
     @SubscribeEvent
     public static void blockRegistryEvent(Register<Block> event)

@@ -1,6 +1,7 @@
 package dk.futte.blue.teamblep.blepcore.content.items;
 
 import dk.futte.blue.teamblep.blepcore.BlepCore;
+import dk.futte.blue.teamblep.blepcore.refs.Names;
 import net.minecraft.item.Item;
 import net.minecraftforge.event.RegistryEvent.Register;
 import net.minecraftforge.fml.common.Mod;
@@ -13,7 +14,7 @@ import net.minecraftforge.fml.common.registry.IForgeRegistry;
 @Mod.EventBusSubscriber
 public class ItemHandler
 {
-    public static final ItemBase test_item = new ItemBase("test_item");
+    public static final ItemBase test_item = new ItemBase(Names.Items.TEST_ITEM);
 
     @SubscribeEvent
     public static void registerItemsEvent(Register<Item> event)
