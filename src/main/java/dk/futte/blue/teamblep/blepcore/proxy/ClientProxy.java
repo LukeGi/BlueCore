@@ -21,11 +21,13 @@ import java.util.Map;
 public class ClientProxy implements IProxy
 {
     private static Map<ItemStack, ModelResourceLocation> modelRegistry = new HashMap<>();
+
     @SubscribeEvent
     @SideOnly(Side.CLIENT)
     public static void modelRegistryEvent(ModelRegistryEvent event)
     {
-        for (Map.Entry<ItemStack, ModelResourceLocation> model : modelRegistry.entrySet()) {
+        for (Map.Entry<ItemStack, ModelResourceLocation> model : modelRegistry.entrySet())
+        {
             ModelLoader.setCustomModelResourceLocation(model.getKey().getItem(), model.getKey().getItemDamage(), model.getValue());
         }
     }
