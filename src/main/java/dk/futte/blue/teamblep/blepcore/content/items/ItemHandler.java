@@ -28,7 +28,7 @@ public class ItemHandler
         registry.register(test_item);
     }
 
-    private static void registerItemModels()
+    public static void registerItemModels()
     {
         BlepCore.proxy.registerModel(test_item.getItemStack(), test_item.getRegistryName());
     }

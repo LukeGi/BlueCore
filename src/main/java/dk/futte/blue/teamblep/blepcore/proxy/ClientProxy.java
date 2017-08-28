@@ -1,5 +1,7 @@
 package dk.futte.blue.teamblep.blepcore.proxy;
 
+import dk.futte.blue.teamblep.blepcore.content.blocks.BlockHandler;
+import dk.futte.blue.teamblep.blepcore.content.items.ItemHandler;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -26,6 +28,8 @@ public class ClientProxy implements IProxy
     @SideOnly(Side.CLIENT)
     public static void modelRegistryEvent(ModelRegistryEvent event)
     {
+        BlockHandler.registerBlockModels();
+        ItemHandler.registerItemModels();
         for (Map.Entry<ItemStack, ModelResourceLocation> model : modelRegistry.entrySet())
         {
             ModelLoader.setCustomModelResourceLocation(model.getKey().getItem(), model.getKey().getItemDamage(), model.getValue());

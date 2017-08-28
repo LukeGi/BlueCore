@@ -22,14 +22,13 @@ public class BlockHandler
     public static void blockRegistryEvent(Register<Block> event)
     {
         registerBlocks(event.getRegistry());
-        registerBlockModels();
         registerTileEntities();
     }
 
     @SubscribeEvent
     public static void itemRegistryEvent(Register<Item> event)
     {
-        event.getRegistry().register(testBlock.getItemBlock());
+        registerItemBlocks(event.getRegistry());
     }
 
     private static void registerBlocks(IForgeRegistry<Block> registry)
@@ -37,7 +36,7 @@ public class BlockHandler
         registry.register(testBlock);
     }
 
-    private static void registerBlockModels()
+    public static void registerBlockModels()
     {
         BlepCore.proxy.registerModel(testBlock.getItemStack(), testBlock.getRegistryName());
     }
@@ -45,5 +44,10 @@ public class BlockHandler
     private static void registerTileEntities()
     {
         GameRegistry.registerTileEntity(TileEntityTestBlock.class, testBlock.getRegistryName().toString());
+    }
+
+    private static void registerItemBlocks(IForgeRegistry<Item> registry)
+    {
+        registry.register(testBlock.getItemBlock());
     }
 }
