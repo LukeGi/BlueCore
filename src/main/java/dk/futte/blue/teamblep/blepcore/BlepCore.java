@@ -1,7 +1,10 @@
 package dk.futte.blue.teamblep.blepcore;
 
+import dk.futte.blue.teamblep.blepcore.content.items.ItemHandler;
+import dk.futte.blue.teamblep.blepcore.content.items.materials.ItemMaterial;
 import dk.futte.blue.teamblep.blepcore.proxy.IProxy;
 import dk.futte.blue.teamblep.blepcore.refs.ModInfo;
+import net.minecraft.client.Minecraft;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
@@ -11,6 +14,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.Side;
 import org.apache.logging.log4j.Logger;
 
 /**
@@ -38,7 +42,9 @@ public class BlepCore
     @Mod.EventHandler
     public void init(FMLInitializationEvent e)
     {
-
+        if (e.getSide() == Side.CLIENT)
+            //noinspection MethodCallSideOnly
+            Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new ItemMaterial(), ItemHandler.item_material);
     }
 
     @Mod.EventHandler

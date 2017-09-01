@@ -9,6 +9,8 @@ import net.minecraftforge.event.RegistryEvent.Register;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.IForgeRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
  * @author Blue
@@ -29,6 +31,7 @@ public class ItemHandler
         registry.register(item_material);
     }
 
+    @SideOnly(Side.CLIENT)
     public static void registerItemModels()
     {
         for (int i = 0; i < EnumMaterialType.VARIANTS.length; i++)
