@@ -1,0 +1,31 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "builtin/generated",
+    "transform": "forge:default-item"
+  },
+  "variants": {
+    "variant": {
+      "ingot_copper": {
+        "textures": {
+          "layer0": "blepcore:item/material/copper_ingot"
+        }
+      },
+      "ingot_tin": {
+        "textures": {
+          "layer0": "blepcore:item/material/tin_ingot"
+        }
+      },
+      "ingot_lead": {
+        "textures": {
+          "layer0": "blepcore:item/material/lead_ingot"
+        }
+      },
+      "ingot_silver": {
+        "textures": {
+          "layer0": "blepcore:item/material/silver_ingot"
+        }
+      }
+    }
+  }
+}

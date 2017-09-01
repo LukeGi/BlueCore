@@ -13,5 +13,6 @@ public class Names
     public static class Items
     {
         public static final String TEST_ITEM = "test_item";
+        public static final String MATERIAL = "material";
     }
 }

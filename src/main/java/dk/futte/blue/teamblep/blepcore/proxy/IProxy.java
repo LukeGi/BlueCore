@@ -9,4 +9,6 @@ import net.minecraft.util.ResourceLocation;
 public interface IProxy
 {
     void registerModel(ItemStack itemStack, ResourceLocation resourceLocation);
+
+    void registerModel(ItemStack itemStack, ResourceLocation resourceLocation, String variant);
 }

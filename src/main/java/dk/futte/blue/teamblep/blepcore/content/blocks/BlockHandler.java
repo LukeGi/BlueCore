@@ -16,7 +16,7 @@ import net.minecraftforge.fml.common.registry.IForgeRegistry;
 @Mod.EventBusSubscriber
 public class BlockHandler
 {
-    public static final BlockBase testBlock = (BlockBase)(new BlockBase(Material.ROCK, Names.Blocks.TEST_BLOCK).setCreativeTab(CreativeTabs.BUILDING_BLOCKS));
+    public static final BlockBase testBlock = (BlockBase) (new BlockBase(Material.ROCK, Names.Blocks.TEST_BLOCK).setCreativeTab(CreativeTabs.BUILDING_BLOCKS));
 
     @SubscribeEvent
     public static void blockRegistryEvent(Register<Block> event)
