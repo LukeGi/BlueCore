@@ -14,4 +14,10 @@ public class ServerProxy implements IProxy
     {
         BlepCore.logger.error("Failed to register model for " + itemStack.getDisplayName() + ". This should not be done on server-side.");
     }
+
+    @Override
+    public void registerModel(ItemStack itemStack, ResourceLocation resourceLocation, String variant)
+    {
+        BlepCore.logger.error("Failed to register model for " + itemStack.getDisplayName() + ". This should not be done on server-side.");
+    }
 }
