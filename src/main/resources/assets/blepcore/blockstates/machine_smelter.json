@@ -1,0 +1,31 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "transform": "forge:default-block",
+    "model": "blepcore:machine_orientable",
+    "textures": {
+      "top": "blepcore:block/machines/basic_top",
+      "bottom": "blepcore:block/machines/basic_bottom",
+      "front": "blepcore:block/machines/smelter_front",
+      "right": "blepcore:block/machines/basic_side",
+      "back": "blepcore:block/machines/basic_side",
+      "left": "blepcore:block/machines/basic_side"
+    }
+  },
+  "variants": {
+    "facing": {
+      "north": {
+        "y": 0
+      },
+      "east": {
+        "y": 90
+      },
+      "south": {
+        "y": 180
+      },
+      "west": {
+        "y": 270
+      }
+    }
+  }
+}
