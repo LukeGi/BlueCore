@@ -10,19 +10,11 @@
     }
   },
   "variants": {
-    "facing": {
-      "north": {
-        "y": 0
-      },
-      "east": {
-        "y": 90
-      },
-      "south": {
-        "y": 180
-      },
-      "west": {
-        "y": 270
-      }
-    }
+    "inventory": [
+      {}
+    ],
+    "normal": [
+      {}
+    ]
   }
 }

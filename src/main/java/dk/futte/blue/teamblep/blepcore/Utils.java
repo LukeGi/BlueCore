@@ -1,5 +1,8 @@
 package dk.futte.blue.teamblep.blepcore;
 
+import dk.futte.blue.teamblep.blepcore.content.block.machine.MachineData;
+import dk.futte.blue.teamblep.blepcore.content.inventory.GuiHandler;
+
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -22,6 +25,11 @@ public class Utils
         }
 
         return null;
+    }
+
+    public static int getGuiID(MachineData machineData)
+    {
+        return machineData.getInventoryContainer() == null ? -1 : GuiHandler.getIDFromHandler(machineData.getInventoryContainer());
     }
 
     public static <T> boolean instanceOf(Class<T> class1, Class<T> class2) {

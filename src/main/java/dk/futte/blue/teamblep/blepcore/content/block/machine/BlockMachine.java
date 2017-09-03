@@ -1,6 +1,7 @@
 package dk.futte.blue.teamblep.blepcore.content.block.machine;
 
 import dk.futte.blue.teamblep.blepcore.BlepCore;
+import dk.futte.blue.teamblep.blepcore.Utils;
 import dk.futte.blue.teamblep.blepcore.content.block.core.BlockTile;
 import dk.futte.blue.teamblep.blepcore.content.tileentity.machine.TileEntityMachine;
 import net.minecraft.block.material.Material;
@@ -40,11 +41,11 @@ public class BlockMachine extends BlockTile
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, @Nullable ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ)
     {
-        TileEntityMachine tileEntityMachine = getTileEntity(worldIn, pos);
+        int guiID = Utils.getGuiID(machineData);
 
-        if (tileEntityMachine != null)
+        if (guiID != -1)
         {
-            playerIn.openGui(BlepCore.instance, -1, worldIn, pos.getX(), pos.getY(), pos.getZ());
+            playerIn.openGui(BlepCore.instance, guiID, worldIn, pos.getX(), pos.getY(), pos.getZ());
             return true;
         }
 

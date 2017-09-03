@@ -88,4 +88,9 @@ public class MachineData
     {
         return tileClass;
     }
+
+    public InventoryMachineContainer getInventoryContainer()
+    {
+        return inventoryContainer;
+    }
 }

@@ -1,5 +1,6 @@
 package dk.futte.blue.teamblep.blepcore.content.item.materials;
 
+import dk.futte.blue.teamblep.blepcore.BlepCore;
 import dk.futte.blue.teamblep.blepcore.content.item.core.ItemBase;
 import dk.futte.blue.teamblep.blepcore.refs.ModInfo;
 import dk.futte.blue.teamblep.blepcore.refs.Names;
@@ -20,7 +21,7 @@ public class ItemMaterial extends ItemBase implements IItemColor
     public ItemMaterial()
     {
         super(Names.Items.MATERIAL);
-        setCreativeTab(CreativeTabs.TOOLS);
+        setCreativeTab(BlepCore.tabBlepCore);
         setHasSubtypes(true);
     }
 
