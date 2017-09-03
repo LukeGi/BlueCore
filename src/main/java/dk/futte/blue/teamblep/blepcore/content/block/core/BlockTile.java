@@ -1,6 +1,6 @@
-package dk.futte.blue.teamblep.blepcore.content.blocks;
+package dk.futte.blue.teamblep.blepcore.content.block.core;
 
-import dk.futte.blue.teamblep.blepcore.content.blocks.tileentity.TileEntityBase;
+import dk.futte.blue.teamblep.blepcore.content.tileentity.core.TileEntityBase;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;

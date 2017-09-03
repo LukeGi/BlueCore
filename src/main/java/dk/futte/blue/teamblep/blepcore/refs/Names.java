@@ -7,12 +7,15 @@ public class Names
 {
     public static class Blocks
     {
-        public static final String TEST_BLOCK = "testBlock";
+        public static final String MACHINE_CHASSIS = "machine_chassis";
+        public static final String MACHINE_SMELTER = "machine_smelter";
+        public static final String MACHINE_CRUSHER = "machine_crusher";
+        public static final String MACHINE_ELECTROLYSIS_CHAMBER = "machine_electrolysis_chamber";
+        public static final String MACHINE_CENTRIFUGE = "machine_centrifuge";
     }
 
     public static class Items
     {
-        public static final String TEST_ITEM = "test_item";
         public static final String MATERIAL = "material";
     }
 }

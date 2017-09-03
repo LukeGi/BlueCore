@@ -1,8 +1,9 @@
-package dk.futte.blue.teamblep.blepcore.content.items;
+package dk.futte.blue.teamblep.blepcore.content.item;
 
 import dk.futte.blue.teamblep.blepcore.BlepCore;
-import dk.futte.blue.teamblep.blepcore.content.items.materials.EnumMaterialType;
-import dk.futte.blue.teamblep.blepcore.content.items.materials.ItemMaterial;
+import dk.futte.blue.teamblep.blepcore.content.item.core.ItemBase;
+import dk.futte.blue.teamblep.blepcore.content.item.materials.EnumMaterialType;
+import dk.futte.blue.teamblep.blepcore.content.item.materials.ItemMaterial;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.RegistryEvent.Register;

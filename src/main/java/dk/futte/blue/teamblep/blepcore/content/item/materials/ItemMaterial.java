@@ -1,6 +1,6 @@
-package dk.futte.blue.teamblep.blepcore.content.items.materials;
+package dk.futte.blue.teamblep.blepcore.content.item.materials;
 
-import dk.futte.blue.teamblep.blepcore.content.items.ItemBase;
+import dk.futte.blue.teamblep.blepcore.content.item.core.ItemBase;
 import dk.futte.blue.teamblep.blepcore.refs.ModInfo;
 import dk.futte.blue.teamblep.blepcore.refs.Names;
 import net.minecraft.client.renderer.color.IItemColor;
@@ -27,7 +27,7 @@ public class ItemMaterial extends ItemBase implements IItemColor
     @Override
     public String getUnlocalizedName(ItemStack stack)
     {
-        return "items." + ModInfo.MOD_ID + ":" + EnumMaterialType.VARIANTS[stack.getMetadata()].getName();
+        return "item." + ModInfo.MOD_ID + ":" + EnumMaterialType.VARIANTS[stack.getMetadata()].getName();
     }
 
     @Override

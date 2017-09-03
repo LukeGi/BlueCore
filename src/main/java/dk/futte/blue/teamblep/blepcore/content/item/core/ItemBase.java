@@ -1,4 +1,4 @@
-package dk.futte.blue.teamblep.blepcore.content.items;
+package dk.futte.blue.teamblep.blepcore.content.item.core;
 
 import dk.futte.blue.teamblep.blepcore.refs.ModInfo;
 import net.minecraft.item.Item;

@@ -1,4 +1,4 @@
-package dk.futte.blue.teamblep.blepcore.content.items.materials;
+package dk.futte.blue.teamblep.blepcore.content.item.materials;
 
 import net.minecraft.util.IStringSerializable;
 

@@ -1,7 +1,7 @@
 package dk.futte.blue.teamblep.blepcore.proxy;
 
-import dk.futte.blue.teamblep.blepcore.content.blocks.BlockHandler;
-import dk.futte.blue.teamblep.blepcore.content.items.ItemHandler;
+import dk.futte.blue.teamblep.blepcore.content.block.BlockHandler;
+import dk.futte.blue.teamblep.blepcore.content.item.ItemHandler;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
