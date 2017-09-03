@@ -13,11 +13,12 @@ public class ContainerCrusher extends ContainerMachine<TileEntityCrusher>
     public ContainerCrusher(TileEntityCrusher tileEntity, InventoryPlayer inventoryPlayer)
     {
         super(tileEntity, inventoryPlayer);
+        this.addPlayerSlots(8, 104, 8, 162, 18, 18);
     }
 
     @Override
     public boolean canInteractWith(EntityPlayer playerIn)
     {
-        return false;
+        return true;
     }
 }

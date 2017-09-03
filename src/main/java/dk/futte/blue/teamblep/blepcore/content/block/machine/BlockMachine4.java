@@ -18,9 +18,9 @@ import net.minecraft.world.World;
  * @author Blue
  */
 
-public class BlockMachineNSWE extends BlockMachine
+public class BlockMachine4 extends BlockMachine
 {
-    public BlockMachineNSWE(MachineData machineData)
+    public BlockMachine4(MachineData machineData)
     {
         super(machineData);
         this.setDefaultState(this.blockState.getBaseState().withProperty(PROPERTY_FACING_4, EnumFacing.NORTH));

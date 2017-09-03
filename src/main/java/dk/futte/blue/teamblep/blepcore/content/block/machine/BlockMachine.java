@@ -39,17 +39,20 @@ public class BlockMachine extends BlockTile
     }
 
     @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, @Nullable ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ)
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, @Nullable ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ)
     {
         int guiID = Utils.getGuiID(machineData);
 
         if (guiID != -1)
         {
-            playerIn.openGui(BlepCore.instance, guiID, worldIn, pos.getX(), pos.getY(), pos.getZ());
+            if (!world.isRemote)
+            {
+                player.openGui(BlepCore.instance, guiID, world, pos.getX(), pos.getY(), pos.getZ());
+            }
             return true;
         }
 
-        return super.onBlockActivated(worldIn, pos, state, playerIn, hand, heldItem, side, hitX, hitY, hitZ);
+        return false;
     }
 
     @Override

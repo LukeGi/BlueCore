@@ -11,7 +11,7 @@ public class GuiElectrolysisChamber extends GuiMachine<TileEntityElectrolysisCha
 {
     public GuiElectrolysisChamber(TileEntityElectrolysisChamber tileEntity, ContainerElectrolysisChamber container)
     {
-        super(tileEntity, container);
+        super(tileEntity, container, 0, 0);
     }
 
     @Override

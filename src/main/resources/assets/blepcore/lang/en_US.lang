@@ -2,3 +2,7 @@ item.blepcore:ingot_copper.name=Copper Ingot
 item.blepcore:ingot_tin.name=Tin Ingot
 item.blepcore:ingot_lead.name=Lead Ingot
 item.blepcore:ingot_silver.name=Silver Ingot
+
+tile.machine_chassis.name=Machine Chassis
+tile.machine_smelter.name=Smelter
+tile.machine_crusher.name=Crusher

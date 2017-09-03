@@ -1,8 +1,13 @@
 package dk.futte.blue.teamblep.blepcore.content.tileentity.machine;
 
+import com.sun.istack.internal.NotNull;
+import dk.futte.blue.teamblep.blepcore.content.block.machine.MachineData;
 import dk.futte.blue.teamblep.blepcore.content.tileentity.core.TileEntityTickable;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.EnergyStorage;
@@ -10,6 +15,8 @@ import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
+
+import javax.annotation.Nullable;
 
 /**
  * @author Blue
@@ -21,13 +28,23 @@ public abstract class TileEntityMachine extends TileEntityTickable
     private EnergyStorage battery = createBattery();
     private ItemStackHandler inventory = createInventory();
     private FluidTank tank = createTank();
+    private ProgressTracker progressTracker = createProgressTracker();
+
+    private MachineData machineData;
     private EnumFacing facing = EnumFacing.NORTH;
+
+    public TileEntityMachine(MachineData machineData)
+    {
+        this.machineData = machineData;
+    }
 
     protected abstract EnergyStorage createBattery();
 
     protected abstract ItemStackHandler createInventory();
 
     protected abstract FluidTank createTank();
+
+    protected abstract ProgressTracker createProgressTracker();
 
     public EnergyStorage getBattery()
     {
@@ -44,6 +61,16 @@ public abstract class TileEntityMachine extends TileEntityTickable
         return tank;
     }
 
+    public ProgressTracker getProgressTracker()
+    {
+        return progressTracker;
+    }
+
+    public MachineData getMachineData()
+    {
+        return machineData;
+    }
+
     public EnumFacing getFacing()
     {
         return facing;
@@ -52,6 +79,13 @@ public abstract class TileEntityMachine extends TileEntityTickable
     public void setFacing(EnumFacing facing)
     {
         this.facing = facing;
+    }
+
+    @NotNull
+    @Override
+    public ITextComponent getDisplayName()
+    {
+        return new TextComponentTranslation(machineData.getTileName());
     }
 
     @Override

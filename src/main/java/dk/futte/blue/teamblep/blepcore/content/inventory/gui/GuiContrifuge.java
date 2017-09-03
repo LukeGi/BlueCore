@@ -11,7 +11,7 @@ public class GuiContrifuge extends GuiMachine<TileEntityCentrifuge, ContainerCen
 {
     public GuiContrifuge(TileEntityCentrifuge tileEntity, ContainerCentrifuge container)
     {
-        super(tileEntity, container);
+        super(tileEntity, container, 0, 0);
     }
 
     @Override

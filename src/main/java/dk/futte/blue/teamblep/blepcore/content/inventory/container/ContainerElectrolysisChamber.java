@@ -18,6 +18,6 @@ public class ContainerElectrolysisChamber extends ContainerMachine<TileEntityEle
     @Override
     public boolean canInteractWith(EntityPlayer playerIn)
     {
-        return false;
+        return true;
     }
 }

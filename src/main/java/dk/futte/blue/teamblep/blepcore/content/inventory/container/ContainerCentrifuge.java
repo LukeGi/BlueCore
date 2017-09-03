@@ -18,6 +18,6 @@ public class ContainerCentrifuge extends ContainerMachine<TileEntityCentrifuge>
     @Override
     public boolean canInteractWith(EntityPlayer playerIn)
     {
-        return false;
+        return true;
     }
 }

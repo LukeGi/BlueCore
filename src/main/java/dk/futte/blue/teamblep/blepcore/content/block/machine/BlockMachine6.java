@@ -15,9 +15,9 @@ import net.minecraft.world.World;
  * @author Blue
  */
 
-public class BlockMachineDUNSWE extends BlockMachine
+public class BlockMachine6 extends BlockMachine
 {
-    public BlockMachineDUNSWE(MachineData machineData)
+    public BlockMachine6(MachineData machineData)
     {
         super(machineData);
         this.setDefaultState(this.blockState.getBaseState().withProperty(PROPERTY_FACING_6, EnumFacing.NORTH));

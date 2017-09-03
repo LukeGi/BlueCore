@@ -15,7 +15,8 @@ public abstract class TileEntityBase extends TileEntity
 {
     public EntityPlayer player;
 
-    public void notifyClient() {
+    public void notifyClient()
+    {
         IBlockState state = getWorld().getBlockState(getPos());
         getWorld().notifyBlockUpdate(getPos(), state, state, 3);
         markDirty();
