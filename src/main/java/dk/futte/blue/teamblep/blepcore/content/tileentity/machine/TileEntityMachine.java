@@ -26,6 +26,9 @@ import javax.annotation.Nullable;
 
 public abstract class TileEntityMachine extends TileEntityTickable implements ISidedInventory
 {
+    private static final EnumFacing[] facings = new EnumFacing[]{EnumFacing.DOWN, EnumFacing.UP, EnumFacing.NORTH, EnumFacing.EAST, EnumFacing.SOUTH, EnumFacing.WEST, null};
+    private static final Capability[] capabilities = new Capability[]{CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, CapabilityEnergy.ENERGY, CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY};
+
     private EnergyStorage battery = createBattery();
     private ItemStackHandler inventory = createInventory();
     private FluidTank tank = createTank();
@@ -140,25 +143,22 @@ public abstract class TileEntityMachine extends TileEntityTickable implements IS
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound)
     {
-        // BATTERY
-        if (battery != null)
+        String key;
+        for (Capability capability : capabilities)
         {
-            compound.setInteger("[BLEPCORE]energyStored", battery.getEnergyStored());
-        }
-        // INVENTORY
-        if (inventory != null)
-        {
-            compound.setTag("[BLEPCORE]inventory", inventory.serializeNBT());
-        }
-        // TANK
-        if (tank != null)
-        {
-            tank.writeToNBT(compound);
+            for (EnumFacing facing : facings)
+            {
+                if (capability != null && hasCapability(capability, facing))
+                {
+                    key = "[blepcore]" + capability.getName() + "." + facing.getName();
+                    compound.setTag(key, capability.writeNBT(getCapability(capability, facing), facing));
+                }
+            }
         }
         // FACING
-        if (facing != null)
+        if (this.facing != null)
         {
-            compound.setInteger("[BLEPCORE]facing", facing.getIndex());
+            compound.setInteger("[BLEPCORE]facing", this.facing.getIndex());
         }
         return super.writeToNBT(compound);
     }
@@ -166,27 +166,21 @@ public abstract class TileEntityMachine extends TileEntityTickable implements IS
     @Override
     public void readFromNBT(NBTTagCompound compound)
     {
-        // BATTERY
-        if (compound.hasKey("[BLEPCORE]energyStored"))
+        String key;
+        for (Capability capability : capabilities)
         {
-            int energyStored = compound.getInteger("[BLEPCORE]energyStored");
-            battery = createBattery();
-            battery.receiveEnergy(energyStored, false);
-        }
-        // INVENTORY
-        if (compound.hasKey("[BLEPCORE]inventory"))
-        {
-            NBTTagCompound inventoryNBT = (NBTTagCompound) compound.getTag("[BLEPCORE]inventory");
-            inventory.deserializeNBT(inventoryNBT);
-        }
-        // TANK
-        if (createTank() != null)
-        {
-            tank.readFromNBT(compound);
+            for (EnumFacing facing : facings)
+            {
+                key = "[blepcore]" + capability.getName() + "." + facing.getName();
+                if (hasCapability(capability, facing) && compound.hasKey(key))
+                {
+                    capability.readNBT(getCapability(capability, facing), facing, compound.getTag(key));
+                }
+            }
         }
         if (compound.hasKey("[BLEPCORE]facing"))
         {
-            facing = EnumFacing.VALUES[compound.getInteger("[BLEPCORE]facing")];
+            this.facing = EnumFacing.VALUES[compound.getInteger("[BLEPCORE]facing")];
         }
         super.readFromNBT(compound);
     }
