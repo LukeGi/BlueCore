@@ -1,13 +1,11 @@
 package dk.futte.blue.teamblep.blepcore.content.inventory.gui;
 
-import dk.futte.blue.teamblep.blepcore.content.inventory.InventoryMachineContainer;
+import dk.futte.blue.teamblep.blepcore.BlepCore;
+import dk.futte.blue.teamblep.blepcore.content.inventory.SlotData;
 import dk.futte.blue.teamblep.blepcore.content.inventory.container.ContainerSmelter;
 import dk.futte.blue.teamblep.blepcore.content.tileentity.machine.ProgressBar;
 import dk.futte.blue.teamblep.blepcore.content.tileentity.machine.TileEntitySmelter;
-import dk.futte.blue.teamblep.blepcore.refs.ModInfo;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.tileentity.TileEntityFurnace;
-import net.minecraft.util.ResourceLocation;
 
 /**
  * @author Kelan
@@ -23,23 +21,12 @@ public class GuiSmelter extends GuiMachine<TileEntitySmelter, ContainerSmelter>
     @Override
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
     {
-        String s = getTileEntity().getDisplayName().getUnformattedText();
-        this.fontRendererObj.drawString(s, this.xSize / 2 - this.fontRendererObj.getStringWidth(s) / 2, 6, 4210752);
-        this.fontRendererObj.drawString(this.getContainer().getInventoryPlayer().getDisplayName().getUnformattedText(), 8, this.ySize - 96 + 2, 4210752);
-        boolean debug = true;
-        if (debug)
-        {
-            InventoryMachineContainer inventoryContainer = tileEntity.getMachineData().getInventoryContainer();
-            InventoryMachineContainer.SlotData inputSlot = inventoryContainer.getSlotData("inputSlot");
-            InventoryMachineContainer.SlotData outputSlot = inventoryContainer.getSlotData("outputSlot");
-            InventoryMachineContainer.SlotData fuelSlot = inventoryContainer.getSlotData("fuelSlot");
-            InventoryMachineContainer.SlotData batterySlot = inventoryContainer.getSlotData("batterySlot");
+        super.drawGuiContainerForegroundLayer(mouseX, mouseY);
+        String tileEntityName = getTileEntity().getDisplayName().getUnformattedText();
+        String inventoryPlayerName = getContainer().getInventoryPlayer().getDisplayName().getUnformattedText();
 
-            this.fontRendererObj.drawString(Integer.toString(inputSlot.getId()), inputSlot.getX(), inputSlot.getY(), 4210752);
-            this.fontRendererObj.drawString(Integer.toString(outputSlot.getId()), outputSlot.getX(), outputSlot.getY(), 4210752);
-            this.fontRendererObj.drawString(Integer.toString(fuelSlot.getId()), fuelSlot.getX(), fuelSlot.getY(), 4210752);
-            this.fontRendererObj.drawString(Integer.toString(batterySlot.getId()), batterySlot.getX(), batterySlot.getY(), 4210752);
-        }
+        this.renderText(tileEntityName, this.xSize / 2, 6, 4210752, true);
+        this.renderText(inventoryPlayerName, 8, this.ySize - 96 + 2, 4210752);
     }
 
     @Override

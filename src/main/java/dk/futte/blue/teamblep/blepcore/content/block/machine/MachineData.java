@@ -1,12 +1,19 @@
 package dk.futte.blue.teamblep.blepcore.content.block.machine;
 
-import com.sun.istack.internal.NotNull;
 import dk.futte.blue.teamblep.blepcore.BlepCore;
 import dk.futte.blue.teamblep.blepcore.Utils;
+import dk.futte.blue.teamblep.blepcore.content.inventory.EnumSlotType;
 import dk.futte.blue.teamblep.blepcore.content.inventory.GuiHandler;
 import dk.futte.blue.teamblep.blepcore.content.inventory.InventoryMachineContainer;
-import dk.futte.blue.teamblep.blepcore.content.inventory.container.*;
-import dk.futte.blue.teamblep.blepcore.content.inventory.gui.*;
+import dk.futte.blue.teamblep.blepcore.content.inventory.SlotData;
+import dk.futte.blue.teamblep.blepcore.content.inventory.container.ContainerCentrifuge;
+import dk.futte.blue.teamblep.blepcore.content.inventory.container.ContainerCrusher;
+import dk.futte.blue.teamblep.blepcore.content.inventory.container.ContainerElectrolysisChamber;
+import dk.futte.blue.teamblep.blepcore.content.inventory.container.ContainerSmelter;
+import dk.futte.blue.teamblep.blepcore.content.inventory.gui.GuiCentrifuge;
+import dk.futte.blue.teamblep.blepcore.content.inventory.gui.GuiCrusher;
+import dk.futte.blue.teamblep.blepcore.content.inventory.gui.GuiElectrolysisChamber;
+import dk.futte.blue.teamblep.blepcore.content.inventory.gui.GuiSmelter;
 import dk.futte.blue.teamblep.blepcore.content.inventory.slot.SlotOutput;
 import dk.futte.blue.teamblep.blepcore.content.tileentity.machine.*;
 import dk.futte.blue.teamblep.blepcore.refs.Names;
@@ -18,50 +25,54 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
  * @author Kelan
  */
 
-public class MachineData
+public class MachineData<T extends TileEntityMachine>
 {
-    public static final MachineData CHASSIS = new MachineData(Names.Blocks.MACHINE_CHASSIS, BlockMachine.class, null, null);
-    public static final MachineData SMELTER = new MachineData(Names.Blocks.MACHINE_SMELTER, BlockMachine4.class, TileEntitySmelter.class, new InventoryMachineContainer<TileEntitySmelter>(ContainerSmelter.class, GuiSmelter.class)
+    public static final MachineData<TileEntityMachine> CHASSIS = new MachineData<>(Names.Blocks.MACHINE_CHASSIS, BlockMachine.class, null, null);
+    public static final MachineData<TileEntitySmelter> SMELTER = new MachineData<>(Names.Blocks.MACHINE_SMELTER, BlockMachine4.class, TileEntitySmelter.class, new InventoryMachineContainer<TileEntitySmelter>(ContainerSmelter.class, GuiSmelter.class)
     {
         @Override
         protected void init()
         {
-            inventorySlots.add(new SlotData<>("inputSlot", 0, 56, 17, Slot.class));
-            inventorySlots.add(new SlotData<>("outputSlot", 1, 116, 35, SlotOutput.class));
-            inventorySlots.add(new SlotData<>("fuelSlot", 2, 56, 53, Slot.class));
-            inventorySlots.add(new SlotData<>("batterySlot", 3, 152, 74, Slot.class));
+            addSlot("inputSlot", 56, 17, EnumSlotType.INPUT, Slot.class);
+            addSlot("outputSlot", 116, 35, EnumSlotType.OUTPUT, SlotOutput.class);
+            addSlot("fuelSlot", 56, 53, EnumSlotType.INPUT, Slot.class);
+            addSlot("batterySlot", 152, 74, EnumSlotType.INPUT, Slot.class);
         }
     });
-    public static final MachineData CRUSHER = new MachineData(Names.Blocks.MACHINE_CRUSHER, BlockMachine4.class, TileEntityCrusher.class, new InventoryMachineContainer<TileEntityCrusher>(ContainerCrusher.class, GuiCrusher.class)
+    public static final MachineData<TileEntityCrusher> CRUSHER = new MachineData<>(Names.Blocks.MACHINE_CRUSHER, BlockMachine4.class, TileEntityCrusher.class, new InventoryMachineContainer<TileEntityCrusher>(ContainerCrusher.class, GuiCrusher.class)
     {
         @Override
         protected void init()
         {
-            inventorySlots.add(new SlotData<>("inputSlot",0, 28, 37, Slot.class));
-            inventorySlots.add(new SlotData<>("outputSlot1",1, 82, 37, SlotOutput.class));
-            inventorySlots.add(new SlotData<>("outputSlot2",2, 100, 37, Slot.class));
-            inventorySlots.add(new SlotData<>("byproductSlot",3, 78, 63, Slot.class));
-            inventorySlots.add(new SlotData<>("batterySlot",4, 152, 74, Slot.class));
+            addSlot("inputSlot", 28, 37, EnumSlotType.INPUT, Slot.class);
+            addSlot("outputSlot1", 82, 37, EnumSlotType.OUTPUT, SlotOutput.class);
+            addSlot("outputSlot2", 100, 37, EnumSlotType.OUTPUT, SlotOutput.class);
+            addSlot("byproductSlot", 78, 63, EnumSlotType.OUTPUT, SlotOutput.class);
+            addSlot("batterySlot", 152, 74, EnumSlotType.INPUT, Slot.class);
         }
     });
-    public static final MachineData ELECTROLYSIS_CHAMBER = new MachineData(Names.Blocks.MACHINE_ELECTROLYSIS_CHAMBER, BlockMachine4.class, TileEntityElectrolysisChamber.class, new InventoryMachineContainer<TileEntityElectrolysisChamber>(ContainerElectrolysisChamber.class, GuiElectrolysisChamber.class)
+    public static final MachineData<TileEntityElectrolysisChamber> ELECTROLYSIS_CHAMBER = new MachineData<>(Names.Blocks.MACHINE_ELECTROLYSIS_CHAMBER, BlockMachine4.class, TileEntityElectrolysisChamber.class, new InventoryMachineContainer<TileEntityElectrolysisChamber>(ContainerElectrolysisChamber.class, GuiElectrolysisChamber.class)
     {
         @Override
-        protected void init() { }
+        protected void init()
+        {
+        }
     });
-    public static final MachineData CENTRIFUGE = new MachineData(Names.Blocks.MACHINE_CENTRIFUGE, BlockMachine4.class, TileEntityCentrifuge.class, new InventoryMachineContainer<TileEntityCentrifuge>(ContainerCentrifuge.class, GuiCentrifuge.class)
+    public static final MachineData<TileEntityCentrifuge> CENTRIFUGE = new MachineData<>(Names.Blocks.MACHINE_CENTRIFUGE, BlockMachine4.class, TileEntityCentrifuge.class, new InventoryMachineContainer<TileEntityCentrifuge>(ContainerCentrifuge.class, GuiCentrifuge.class)
     {
         @Override
-        protected void init() { }
+        protected void init()
+        {
+        }
     });
 
     private String name;
     private BlockMachine block = null;
-    private InventoryMachineContainer inventoryContainer;
+    private InventoryMachineContainer<T> inventoryContainer;
     private Class<? extends BlockMachine> blockClass;
-    private Class<? extends TileEntityMachine> tileClass;
+    private Class<T> tileClass;
 
-    private MachineData(String name, Class<? extends BlockMachine> blockClass, Class<? extends TileEntityMachine> tileClass, InventoryMachineContainer inventoryContainer)
+    private MachineData(String name, Class<? extends BlockMachine> blockClass, Class<T> tileClass, InventoryMachineContainer<T> inventoryContainer)
     {
         this.name = name;
         this.blockClass = blockClass;
@@ -117,7 +128,7 @@ public class MachineData
         return tileClass;
     }
 
-    public InventoryMachineContainer getInventoryContainer()
+    public InventoryMachineContainer<T> getInventoryContainer()
     {
         return inventoryContainer;
     }

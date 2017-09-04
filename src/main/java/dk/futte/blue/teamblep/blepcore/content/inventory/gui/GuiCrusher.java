@@ -19,9 +19,12 @@ public class GuiCrusher extends GuiMachine<TileEntityCrusher, ContainerCrusher>
     @Override
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
     {
-        String s = getTileEntity().getDisplayName().getUnformattedText();
-        this.fontRendererObj.drawString(s, this.xSize / 2 - this.fontRendererObj.getStringWidth(s) / 2, 6, 4210752);
-        this.fontRendererObj.drawString(this.getContainer().getInventoryPlayer().getDisplayName().getUnformattedText(), 8, this.ySize - 96 + 2, 4210752);
+        super.drawGuiContainerForegroundLayer(mouseX, mouseY);
+        String tileEntityName = this.getTileEntity().getDisplayName().getUnformattedText();
+        String inventoryPlayerName = this.getContainer().getInventoryPlayer().getDisplayName().getUnformattedText();
+
+        this.renderText(tileEntityName, this.xSize / 2, 6, 4210752, true);
+        this.renderText(inventoryPlayerName, 8, this.ySize - 96 + 2, 4210752);
     }
 
     @Override
