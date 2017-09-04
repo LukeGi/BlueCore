@@ -1,4 +1,4 @@
-package dk.futte.blue.teamblep.blepcore;
+package dk.futte.blue.teamblep.blepcore.config;
 
 import dk.futte.blue.teamblep.blepcore.refs.ModInfo;
 import net.minecraftforge.common.config.Config;
@@ -10,5 +10,5 @@ import net.minecraftforge.common.config.Config;
 public class Configs
 {
     @Config.Comment("This is a test config")
-    public boolean shouldDoThing = true;
+    public static boolean shouldDoThing = true;
 }
