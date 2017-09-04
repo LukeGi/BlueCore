@@ -9,9 +9,9 @@ import javax.annotation.Nullable;
 /**
  * @author Kelan
  */
-public class SlotOutput extends SlotItemHandler
+public class SlotUpgrade extends SlotItemHandler
 {
-    public SlotOutput(IItemHandler inventory, int index, int xPosition, int yPosition)
+    public SlotUpgrade(IItemHandler inventory, int index, int xPosition, int yPosition)
     {
         super(inventory, index, xPosition, yPosition);
     }
@@ -19,6 +19,7 @@ public class SlotOutput extends SlotItemHandler
     @Override
     public boolean isItemValid(@Nullable ItemStack stack)
     {
-        return false;
+        //TODO: Check if item is a battery with CapabilityUpgrade.UPGRADE (maybe)
+        return true;
     }
 }

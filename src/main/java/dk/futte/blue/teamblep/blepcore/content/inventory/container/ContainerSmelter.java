@@ -11,7 +11,6 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.tileentity.TileEntityFurnace;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -41,7 +40,7 @@ public class ContainerSmelter extends ContainerMachine<TileEntitySmelter>
         ItemStack stackInSlot = slot.getStack();
         if (stackInSlot != null)
         {
-            for (Object o : inventoryContainer.getUnmodifiableSlotList())
+            for (Object o : inventoryContainer.getSlotList())
             {
                 SlotData slotData = (SlotData) o;
                 int slotId = machineInventory.getStart() + slotData.getId();
