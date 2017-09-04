@@ -1,7 +1,7 @@
 package dk.futte.blue.teamblep.blepcore.content.inventory.gui;
 
 import dk.futte.blue.teamblep.blepcore.content.inventory.container.ContainerCrusher;
-import dk.futte.blue.teamblep.blepcore.content.tileentity.machine.ProgressBar;
+import dk.futte.blue.teamblep.blepcore.content.tileentity.ProgressBar;
 import dk.futte.blue.teamblep.blepcore.content.tileentity.machine.TileEntityCrusher;
 import net.minecraft.client.renderer.GlStateManager;
 

@@ -1,11 +1,11 @@
 package dk.futte.blue.teamblep.blepcore.content.inventory;
 
-import net.minecraft.inventory.Slot;
+import net.minecraftforge.items.SlotItemHandler;
 
 /**
  * @author Kelan
  */
-public class SlotData<T extends Slot> implements Comparable<SlotData<T>>
+public class SlotData<T extends SlotItemHandler> implements Comparable<SlotData<T>>
 {
     protected String name;
     protected int id;

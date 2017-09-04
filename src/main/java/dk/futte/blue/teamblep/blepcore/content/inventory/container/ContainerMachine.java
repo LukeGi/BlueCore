@@ -19,11 +19,11 @@ import java.util.List;
  */
 public abstract class ContainerMachine<T extends TileEntityMachine> extends Container
 {
-    public T tileEntity;
-    public InventoryPlayer inventoryPlayer;
-    public SlotRange machineInventory = new SlotRange(0, 0, false);
-    public SlotRange playerInventory = new SlotRange(0, 0, false);
-    public SlotRange playerHotbar = new SlotRange(0, 0, false);
+    protected T tileEntity;
+    protected InventoryPlayer inventoryPlayer;
+    protected SlotRange machineInventory = new SlotRange(0, 0, false);
+    protected SlotRange playerInventory = new SlotRange(0, 0, false);
+    protected SlotRange playerHotbar = new SlotRange(0, 0, false);
 
     public ContainerMachine(T tileEntity, InventoryPlayer inventoryPlayer)
     {
@@ -53,7 +53,6 @@ public abstract class ContainerMachine<T extends TileEntityMachine> extends Cont
      */
     public void addPlayerSlots(int inventoryX, int inventoryY, int hotbarX, int hotbarY, int slotSpacingX, int slotSpacingY)
     {
-
         playerInventory.setStart(inventorySlots.size());
         for (int i = 0; i < 3; ++i)
         {
@@ -106,75 +105,6 @@ public abstract class ContainerMachine<T extends TileEntityMachine> extends Cont
     {
         ItemStack slotStackCopy = null;
         Slot slot = this.inventorySlots.get(index);
-
-//        InventoryMachineContainer inventoryContainer = getTileEntity().getMachineData().getInventoryContainer();
-//        SlotData inputSlot = inventoryContainer.getSlotData("inputSlot");
-//        SlotData outputSlot = inventoryContainer.getSlotData("outputSlot");
-//        SlotData fuelSlot = inventoryContainer.getSlotData("fuelSlot");
-//        SlotData batterySlot = inventoryContainer.getSlotData("batterySlot");
-//
-//        int playerInventorySize = player.inventory.mainInventory.length;
-//        int playerInventoryStart = inventoryContainer.getNumSlots();
-//        int playerInventoryEnd = playerInventoryStart + playerInventorySize;
-//        int playerHotbarStart = playerInventoryEnd - InventoryPlayer.getHotbarSize();
-//
-//        if (slot != null && slot.getHasStack())
-//        {
-//            ItemStack slotStack = slot.getStack();
-//            slotStackCopy = slotStack.copy();
-//
-//            if (index == outputSlot.getId())
-//            {
-//                //if the machine output slot was shift clicked, transfer the stack to the players inventory or hotbar
-//                if (!this.mergeItemStack(slotStack, playerInventoryStart, playerInventoryEnd, true))
-//                {
-//                    return null;
-//                }
-//
-//                slot.onSlotChange(slotStack, slotStackCopy);
-//            } else if (index != batterySlot.getId() && index != fuelSlot.getId() && index != inputSlot.getId())
-//            {
-//                //if the players inventory was shift clicked (not the fuel, input or battery slots)
-//                if (FurnaceRecipes.instance().getSmeltingResult(slotStack) != null && !this.mergeItemStack(slotStack, inputSlot.getId(), inputSlot.getId() + 1, false))
-//                {
-//                    //if this slot contains an item that this machine can process, transfer this stack to the input slot
-//                    return null;
-//                } else if (TileEntityFurnace.isItemFuel(slotStack) && !this.mergeItemStack(slotStack, fuelSlot.getId(), fuelSlot.getId() + 1, false))
-//                {
-//                    //if this slot contains an item that this machine can sue as fuel, transfer this stack to the fuel slot.
-//                    return null;
-//                } else if (index >= playerInventoryStart && index < playerHotbarStart && !this.mergeItemStack(slotStack, playerHotbarStart, playerInventoryEnd, false))
-//                {
-//                    //if none of the above statements did anything, and this slot is in the players main inventory, transfer this stack to the hotbar
-//                    return null;
-//                } else if (index >= playerHotbarStart && index < playerInventoryEnd && !this.mergeItemStack(slotStack, playerInventoryStart, playerHotbarStart, false))
-//                {
-//                    //if none of the above statements did anything, and this slot is in the players hotbar, transfer this stack to the main inventory
-//                    return null;
-//                }
-//            } else if (!this.mergeItemStack(slotStack, playerInventoryStart, playerInventoryEnd, false))
-//            {
-//                //if any of the remaining slots were shift clicked, transfer the stack to the players inventory or hotbar
-//                return null;
-//            }
-//
-//            if (slotStack.stackSize == 0)
-//            {
-//                slot.putStack(null);
-//            } else
-//            {
-//                slot.onSlotChanged();
-//            }
-//
-//            if (slotStack.stackSize == slotStackCopy.stackSize)
-//            {
-//                return null;
-//            }
-//
-//            slot.onPickupFromSlot(player, slotStack);
-//        }
-//
-//        return slotStackCopy;
 
         if (slot != null && slot.getHasStack())
         {

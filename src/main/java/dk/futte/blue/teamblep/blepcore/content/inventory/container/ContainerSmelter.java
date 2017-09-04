@@ -39,24 +39,27 @@ public class ContainerSmelter extends ContainerMachine<TileEntitySmelter>
     {
         InventoryMachineContainer inventoryContainer = getTileEntity().getMachineData().getInventoryContainer();
         ItemStack stackInSlot = slot.getStack();
-
         if (stackInSlot != null)
         {
             for (Object o : inventoryContainer.getUnmodifiableSlotList())
             {
                 SlotData slotData = (SlotData) o;
                 int slotId = machineInventory.getStart() + slotData.getId();
-
-                if (slotData.getSlotType() != EnumSlotType.OUTPUT)
+                if (slotData.getSlotType() != EnumSlotType.OUTPUT) //we cannot shift click something into the output slot
                 {
                     if (FurnaceRecipes.instance().getSmeltingResult(stackInSlot) != null && inventoryContainer.getSlotData("inputSlot").getId() == slotId)
                     {
+                        //If the item being shift clicked is smeltable, and the slot is the input slot, then transfer the item.
                         list.add(new SlotRange(slotId, slotId + 1, false));
                     }
                     if (TileEntityFurnace.isItemFuel(stackInSlot) && inventoryContainer.getSlotData("fuelSlot").getId() == slotId)
                     {
+                        //If the item being shift clicked is fuel, and the slot is the fuel slot, then transfer the item.
                         list.add(new SlotRange(slotId, slotId + 1, false));
                     }
+
+                    //if the item being shift clicked is both smeltable and fuel, try to transfer it to the input slot before attempting the fuel slot.
+                    // To change this, the two if-statements would be the other way round, as order matters in the list.
                 }
             }
         }

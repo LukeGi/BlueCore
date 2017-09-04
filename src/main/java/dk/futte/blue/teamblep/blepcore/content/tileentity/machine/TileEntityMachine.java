@@ -2,6 +2,7 @@ package dk.futte.blue.teamblep.blepcore.content.tileentity.machine;
 
 import com.sun.istack.internal.NotNull;
 import dk.futte.blue.teamblep.blepcore.content.block.machine.MachineData;
+import dk.futte.blue.teamblep.blepcore.content.tileentity.ProgressTracker;
 import dk.futte.blue.teamblep.blepcore.content.tileentity.core.TileEntityTickable;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
@@ -24,7 +25,7 @@ import javax.annotation.Nullable;
  * @author Kelan
  */
 
-public abstract class TileEntityMachine extends TileEntityTickable implements ISidedInventory
+public abstract class TileEntityMachine extends TileEntityTickable
 {
     private EnergyStorage battery = createBattery();
     private ItemStackHandler inventory = createInventory();
@@ -80,18 +81,6 @@ public abstract class TileEntityMachine extends TileEntityTickable implements IS
     public void setFacing(EnumFacing facing)
     {
         this.facing = facing;
-    }
-
-    @Override
-    public String getName()
-    {
-        return machineData.getName();
-    }
-
-    @Override
-    public boolean hasCustomName()
-    {
-        return getName() != null && getName().length() > 0;
     }
 
     @NotNull
@@ -155,6 +144,11 @@ public abstract class TileEntityMachine extends TileEntityTickable implements IS
         {
             tank.writeToNBT(compound);
         }
+        //PROGRESS TRACKER
+        if (progressTracker != null)
+        {
+            progressTracker.writeToNBT(compound);
+        }
         // FACING
         if (facing != null)
         {
@@ -184,86 +178,15 @@ public abstract class TileEntityMachine extends TileEntityTickable implements IS
         {
             tank.readFromNBT(compound);
         }
+        //PROGRESS TRACKER
+        if (createProgressTracker() != null)
+        {
+            progressTracker.readFromNBT(compound);
+        }
         if (compound.hasKey("[BLEPCORE]facing"))
         {
             facing = EnumFacing.VALUES[compound.getInteger("[BLEPCORE]facing")];
         }
         super.readFromNBT(compound);
-    }
-
-    @Override
-    public int getSizeInventory()
-    {
-        return getInventory().getSlots();
-    }
-
-    @Nullable
-    @Override
-    public ItemStack getStackInSlot(int index)
-    {
-        return getInventory().getStackInSlot(index);
-    }
-
-    @Nullable
-    @Override
-    public ItemStack decrStackSize(int index, int count)
-    {
-        ItemStack itemstack = getStackInSlot(index).splitStack(count);
-
-        if (getStackInSlot(index).stackSize == 0)
-        {
-            setInventorySlotContents(index, null);
-        }
-
-        return itemstack;
-    }
-
-    @Nullable
-    @Override
-    public ItemStack removeStackFromSlot(int index)
-    {
-        ItemStack stack = getStackInSlot(index);
-
-        if (stack != null && stack.stackSize > 0)
-        {
-            return getInventory().extractItem(index, stack.stackSize, false);
-        }
-        return null;
-    }
-
-    @Override
-    public void setInventorySlotContents(int index, @Nullable ItemStack stack)
-    {
-        getInventory().setStackInSlot(index, stack);
-    }
-
-    @Override
-    public int getInventoryStackLimit()
-    {
-        return 64;
-    }
-
-    @Override
-    public final int getField(int id)
-    {
-        return 0;
-    }
-
-    @Override
-    public final void setField(int id, int value)
-    {
-
-    }
-
-    @Override
-    public final int getFieldCount()
-    {
-        return 0;
-    }
-
-    @Override
-    public final void clear()
-    {
-
     }
 }

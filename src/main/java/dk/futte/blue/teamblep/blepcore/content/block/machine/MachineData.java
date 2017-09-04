@@ -5,7 +5,6 @@ import dk.futte.blue.teamblep.blepcore.Utils;
 import dk.futte.blue.teamblep.blepcore.content.inventory.EnumSlotType;
 import dk.futte.blue.teamblep.blepcore.content.inventory.GuiHandler;
 import dk.futte.blue.teamblep.blepcore.content.inventory.InventoryMachineContainer;
-import dk.futte.blue.teamblep.blepcore.content.inventory.SlotData;
 import dk.futte.blue.teamblep.blepcore.content.inventory.container.ContainerCentrifuge;
 import dk.futte.blue.teamblep.blepcore.content.inventory.container.ContainerCrusher;
 import dk.futte.blue.teamblep.blepcore.content.inventory.container.ContainerElectrolysisChamber;
@@ -17,8 +16,8 @@ import dk.futte.blue.teamblep.blepcore.content.inventory.gui.GuiSmelter;
 import dk.futte.blue.teamblep.blepcore.content.inventory.slot.SlotOutput;
 import dk.futte.blue.teamblep.blepcore.content.tileentity.machine.*;
 import dk.futte.blue.teamblep.blepcore.refs.Names;
-import net.minecraft.inventory.Slot;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.items.SlotItemHandler;
 
 /**
  * @author Blue
@@ -33,10 +32,10 @@ public class MachineData<T extends TileEntityMachine>
         @Override
         protected void init()
         {
-            addSlot("inputSlot", 56, 17, EnumSlotType.INPUT, Slot.class);
+            addSlot("inputSlot", 56, 17, EnumSlotType.INPUT, SlotItemHandler.class);
             addSlot("outputSlot", 116, 35, EnumSlotType.OUTPUT, SlotOutput.class);
-            addSlot("fuelSlot", 56, 53, EnumSlotType.INPUT, Slot.class);
-            addSlot("batterySlot", 152, 74, EnumSlotType.INPUT, Slot.class);
+            addSlot("fuelSlot", 56, 53, EnumSlotType.INPUT, SlotItemHandler.class);
+            addSlot("batterySlot", 152, 74, EnumSlotType.INPUT, SlotItemHandler.class);
         }
     });
     public static final MachineData<TileEntityCrusher> CRUSHER = new MachineData<>(Names.Blocks.MACHINE_CRUSHER, BlockMachine4.class, TileEntityCrusher.class, new InventoryMachineContainer<TileEntityCrusher>(ContainerCrusher.class, GuiCrusher.class)
@@ -44,11 +43,11 @@ public class MachineData<T extends TileEntityMachine>
         @Override
         protected void init()
         {
-            addSlot("inputSlot", 28, 37, EnumSlotType.INPUT, Slot.class);
+            addSlot("inputSlot", 28, 37, EnumSlotType.INPUT, SlotItemHandler.class);
             addSlot("outputSlot1", 82, 37, EnumSlotType.OUTPUT, SlotOutput.class);
             addSlot("outputSlot2", 100, 37, EnumSlotType.OUTPUT, SlotOutput.class);
             addSlot("byproductSlot", 78, 63, EnumSlotType.OUTPUT, SlotOutput.class);
-            addSlot("batterySlot", 152, 74, EnumSlotType.INPUT, Slot.class);
+            addSlot("batterySlot", 152, 74, EnumSlotType.INPUT, SlotItemHandler.class);
         }
     });
     public static final MachineData<TileEntityElectrolysisChamber> ELECTROLYSIS_CHAMBER = new MachineData<>(Names.Blocks.MACHINE_ELECTROLYSIS_CHAMBER, BlockMachine4.class, TileEntityElectrolysisChamber.class, new InventoryMachineContainer<TileEntityElectrolysisChamber>(ContainerElectrolysisChamber.class, GuiElectrolysisChamber.class)

@@ -1,4 +1,7 @@
-package dk.futte.blue.teamblep.blepcore.content.tileentity.machine;
+package dk.futte.blue.teamblep.blepcore.content.tileentity;
+
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.energy.EnergyStorage;
 
 /**
  * @author Kelan
@@ -89,5 +92,21 @@ public class ProgressBar
     public int hashCode()
     {
         return name != null ? name.hashCode() : 0;
+    }
+
+    public NBTTagCompound writeToNBT(NBTTagCompound compound)
+    {
+        compound.setInteger("ticksRequired", ticksRequired);
+        compound.setInteger("ticksElapsed", ticksElapsed);
+        return compound;
+    }
+
+    public void readFromNBT(NBTTagCompound compound)
+    {
+        if (compound.hasKey("ticksRequired") && compound.hasKey("ticksElapsed"))
+        {
+            ticksRequired = compound.getInteger("ticksRequired");
+            ticksElapsed = compound.getInteger("ticksElapsed");
+        }
     }
 }
