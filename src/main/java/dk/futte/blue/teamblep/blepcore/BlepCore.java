@@ -23,7 +23,7 @@ import org.apache.logging.log4j.Logger;
 /**
  * @author Blue
  */
-@Mod(modid = ModInfo.MOD_ID, name = ModInfo.MOD_NAME, version = ModInfo.VERSION)
+@Mod(modid = ModInfo.MOD_ID, name = ModInfo.MOD_NAME, version = ModInfo.VERSION, guiFactory = ModInfo.GUI_FACTORY)
 @Mod.EventBusSubscriber
 public class BlepCore
 {
