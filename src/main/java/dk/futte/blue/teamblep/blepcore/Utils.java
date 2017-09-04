@@ -13,18 +13,24 @@ import java.util.stream.Collectors;
 
 public class Utils
 {
-    public static <T> T initializeClassWithConstructor(Class<? extends T> clazz, Object... args)
+    public static <T> T initializeClassWithConstructor(Class<? extends T> clazz, Class<?>[] parameterTypes, Object[] parameters)
     {
-        Class[] objectClasses = Arrays.stream(args).map(Object::getClass).collect(Collectors.toList()).toArray(new Class[args.length]);
         try
         {
-            return clazz.getDeclaredConstructor(objectClasses).newInstance(args);
+            return clazz.getDeclaredConstructor(parameterTypes).newInstance(parameters);
         } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e)
         {
             e.printStackTrace();
         }
-
         return null;
+    }
+
+    //long method name lol
+    public static <T> T initializeClassWithConstructorAndParameters(Class<? extends T> clazz, Object... parameters)
+    {
+        Class[] parameterTypes = Arrays.stream(parameters).map(Object::getClass).collect(Collectors.toList()).toArray(new Class[parameters.length]);
+
+        return initializeClassWithConstructor(clazz, parameterTypes, parameters);
     }
 
     public static int getGuiID(MachineData machineData)

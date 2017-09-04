@@ -1,5 +1,6 @@
 package dk.futte.blue.teamblep.blepcore.content.inventory.gui;
 
+import dk.futte.blue.teamblep.blepcore.content.inventory.InventoryMachineContainer;
 import dk.futte.blue.teamblep.blepcore.content.inventory.container.ContainerSmelter;
 import dk.futte.blue.teamblep.blepcore.content.tileentity.machine.ProgressBar;
 import dk.futte.blue.teamblep.blepcore.content.tileentity.machine.TileEntitySmelter;
@@ -25,6 +26,20 @@ public class GuiSmelter extends GuiMachine<TileEntitySmelter, ContainerSmelter>
         String s = getTileEntity().getDisplayName().getUnformattedText();
         this.fontRendererObj.drawString(s, this.xSize / 2 - this.fontRendererObj.getStringWidth(s) / 2, 6, 4210752);
         this.fontRendererObj.drawString(this.getContainer().getInventoryPlayer().getDisplayName().getUnformattedText(), 8, this.ySize - 96 + 2, 4210752);
+        boolean debug = true;
+        if (debug)
+        {
+            InventoryMachineContainer inventoryContainer = tileEntity.getMachineData().getInventoryContainer();
+            InventoryMachineContainer.SlotData inputSlot = inventoryContainer.getSlotData("inputSlot");
+            InventoryMachineContainer.SlotData outputSlot = inventoryContainer.getSlotData("outputSlot");
+            InventoryMachineContainer.SlotData fuelSlot = inventoryContainer.getSlotData("fuelSlot");
+            InventoryMachineContainer.SlotData batterySlot = inventoryContainer.getSlotData("batterySlot");
+
+            this.fontRendererObj.drawString(Integer.toString(inputSlot.getId()), inputSlot.getX(), inputSlot.getY(), 4210752);
+            this.fontRendererObj.drawString(Integer.toString(outputSlot.getId()), outputSlot.getX(), outputSlot.getY(), 4210752);
+            this.fontRendererObj.drawString(Integer.toString(fuelSlot.getId()), fuelSlot.getX(), fuelSlot.getY(), 4210752);
+            this.fontRendererObj.drawString(Integer.toString(batterySlot.getId()), batterySlot.getX(), batterySlot.getY(), 4210752);
+        }
     }
 
     @Override

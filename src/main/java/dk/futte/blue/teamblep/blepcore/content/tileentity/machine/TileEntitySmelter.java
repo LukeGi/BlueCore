@@ -1,6 +1,9 @@
 package dk.futte.blue.teamblep.blepcore.content.tileentity.machine;
 
 import dk.futte.blue.teamblep.blepcore.content.block.machine.MachineData;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumFacing;
 import net.minecraftforge.energy.EnergyStorage;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.items.ItemStackHandler;
@@ -26,7 +29,14 @@ public class TileEntitySmelter extends TileEntityMachine
     @Override
     protected ItemStackHandler createInventory()
     {
-        return null;
+        return new ItemStackHandler(4)
+        {
+            @Override
+            protected void onContentsChanged(int slot)
+            {
+
+            }
+        };
     }
 
     @Override
@@ -54,5 +64,56 @@ public class TileEntitySmelter extends TileEntityMachine
     public void updateServer()
     {
 
+    }
+
+    @Override
+    public int[] getSlotsForFace(EnumFacing side)
+    {
+//        if (side == EnumFacing.DOWN)
+//        {
+//            return
+//        }
+        return new int[0];
+    }
+
+    @Override
+    public boolean canInsertItem(int index, ItemStack itemStackIn, EnumFacing direction)
+    {
+        if (getMachineData().getInventoryContainer().getSlotData("outputSlot").getId() == index)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    @Override
+    public boolean canExtractItem(int index, ItemStack stack, EnumFacing direction)
+    {
+        return true;
+    }
+
+    @Override
+    public boolean isUseableByPlayer(EntityPlayer player)
+    {
+        return false;
+    }
+
+    @Override
+    public void openInventory(EntityPlayer player)
+    {
+
+    }
+
+    @Override
+    public void closeInventory(EntityPlayer player)
+    {
+
+    }
+
+    @Override
+    public boolean isItemValidForSlot(int index, ItemStack stack)
+    {
+        return false;
     }
 }

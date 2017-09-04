@@ -14,10 +14,4 @@ public class ContainerCentrifuge extends ContainerMachine<TileEntityCentrifuge>
     {
         super(tileEntity, inventoryPlayer);
     }
-
-    @Override
-    public boolean canInteractWith(EntityPlayer playerIn)
-    {
-        return true;
-    }
 }

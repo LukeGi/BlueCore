@@ -14,10 +14,4 @@ public class ContainerElectrolysisChamber extends ContainerMachine<TileEntityEle
     {
         super(tileEntity, inventoryPlayer);
     }
-
-    @Override
-    public boolean canInteractWith(EntityPlayer playerIn)
-    {
-        return true;
-    }
 }

@@ -3,10 +3,11 @@ package dk.futte.blue.teamblep.blepcore.content.tileentity.machine;
 import com.sun.istack.internal.NotNull;
 import dk.futte.blue.teamblep.blepcore.content.block.machine.MachineData;
 import dk.futte.blue.teamblep.blepcore.content.tileentity.core.TileEntityTickable;
+import net.minecraft.inventory.ISidedInventory;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.energy.CapabilityEnergy;
@@ -23,13 +24,12 @@ import javax.annotation.Nullable;
  * @author Kelan
  */
 
-public abstract class TileEntityMachine extends TileEntityTickable
+public abstract class TileEntityMachine extends TileEntityTickable implements ISidedInventory
 {
     private EnergyStorage battery = createBattery();
     private ItemStackHandler inventory = createInventory();
     private FluidTank tank = createTank();
     private ProgressTracker progressTracker = createProgressTracker();
-
     private MachineData machineData;
     private EnumFacing facing = EnumFacing.NORTH;
 
@@ -66,6 +66,7 @@ public abstract class TileEntityMachine extends TileEntityTickable
         return progressTracker;
     }
 
+    @NotNull
     public MachineData getMachineData()
     {
         return machineData;
@@ -79,6 +80,18 @@ public abstract class TileEntityMachine extends TileEntityTickable
     public void setFacing(EnumFacing facing)
     {
         this.facing = facing;
+    }
+
+    @Override
+    public String getName()
+    {
+        return machineData.getName();
+    }
+
+    @Override
+    public boolean hasCustomName()
+    {
+        return getName() != null && getName().length() > 0;
     }
 
     @NotNull
@@ -176,5 +189,81 @@ public abstract class TileEntityMachine extends TileEntityTickable
             facing = EnumFacing.VALUES[compound.getInteger("[BLEPCORE]facing")];
         }
         super.readFromNBT(compound);
+    }
+
+    @Override
+    public int getSizeInventory()
+    {
+        return getInventory().getSlots();
+    }
+
+    @Nullable
+    @Override
+    public ItemStack getStackInSlot(int index)
+    {
+        return getInventory().getStackInSlot(index);
+    }
+
+    @Nullable
+    @Override
+    public ItemStack decrStackSize(int index, int count)
+    {
+        ItemStack itemstack = getStackInSlot(index).splitStack(count);
+
+        if (getStackInSlot(index).stackSize == 0)
+        {
+            setInventorySlotContents(index, null);
+        }
+
+        return itemstack;
+    }
+
+    @Nullable
+    @Override
+    public ItemStack removeStackFromSlot(int index)
+    {
+        ItemStack stack = getStackInSlot(index);
+
+        if (stack != null && stack.stackSize > 0)
+        {
+            return getInventory().extractItem(index, stack.stackSize, false);
+        }
+        return null;
+    }
+
+    @Override
+    public void setInventorySlotContents(int index, @Nullable ItemStack stack)
+    {
+        getInventory().setStackInSlot(index, stack);
+    }
+
+    @Override
+    public int getInventoryStackLimit()
+    {
+        return 64;
+    }
+
+    @Override
+    public final int getField(int id)
+    {
+        return 0;
+    }
+
+    @Override
+    public final void setField(int id, int value)
+    {
+
+    }
+
+    @Override
+    public final int getFieldCount()
+    {
+        return 0;
+    }
+
+    @Override
+    public final void clear()
+    {
+
     }
 }

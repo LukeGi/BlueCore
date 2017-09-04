@@ -8,24 +8,80 @@ import dk.futte.blue.teamblep.blepcore.content.inventory.gui.GuiMachine;
 import dk.futte.blue.teamblep.blepcore.content.tileentity.machine.TileEntityMachine;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.Slot;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
 
+import java.util.*;
+
 /**
  * @author Kelan
  */
 
-public class InventoryMachineContainer<T extends TileEntityMachine> implements IGuiHandler
+public abstract class InventoryMachineContainer<T extends TileEntityMachine> implements IGuiHandler
 {
+    public static class SlotData<T extends Slot> implements Comparable<SlotData<T>>
+    {
+        protected String name;
+        protected int id;
+        protected int x;
+        protected int y;
+        protected Class<T> slotClass;
+
+        public SlotData(String name, int id, int x, int y, Class<T> slotClass)
+        {
+            this.name = name;
+            this.id = id;
+            this.x = x;
+            this.y = y;
+            this.slotClass = slotClass;
+        }
+
+        public String getName()
+        {
+            return name;
+        }
+
+        public int getId()
+        {
+            return id;
+        }
+
+        public int getX()
+        {
+            return x;
+        }
+
+        public int getY()
+        {
+            return y;
+        }
+
+        public Class<T> getSlotClass()
+        {
+            return slotClass;
+        }
+
+        @Override
+        public int compareTo(SlotData<T> that)
+        {
+            return Integer.compare(this.id, that.id);
+        }
+    }
+
     protected Class<? extends ContainerMachine<T>> containerClass;
     protected Class<? extends GuiMachine<T, ? extends ContainerMachine<T>>> guiClass;
+    protected List<SlotData> inventorySlots = new ArrayList<>();
 
     public InventoryMachineContainer(Class<? extends ContainerMachine<T>> containerClass, Class<? extends GuiMachine<T, ? extends ContainerMachine<T>>> guiClass)
     {
         this.containerClass = containerClass;
         this.guiClass = guiClass;
+        init();
+        Collections.sort(inventorySlots); //don't generify this. Intellij is being stupid and things will break in MachineData.class
     }
 
     @Override
@@ -41,7 +97,7 @@ public class InventoryMachineContainer<T extends TileEntityMachine> implements I
 
             if (tile != null && machineData.getTileEntityClass() != null && machineData.getTileEntityClass().isInstance(tile))
             {
-                return Utils.initializeClassWithConstructor(getContainerClass(), tile, player.inventory);
+                return Utils.initializeClassWithConstructorAndParameters(getContainerClass(), tile, player.inventory);
             }
         }
 
@@ -61,22 +117,57 @@ public class InventoryMachineContainer<T extends TileEntityMachine> implements I
 
             if (tile != null && machineData.getTileEntityClass() != null && machineData.getTileEntityClass().isInstance(tile))
             {
-                ContainerMachine container = Utils.initializeClassWithConstructor(getContainerClass(), tile, player.inventory);
+                ContainerMachine<T> container = Utils.initializeClassWithConstructorAndParameters(getContainerClass(), tile, player.inventory);
 
-                return Utils.initializeClassWithConstructor(getGuiClass(), tile, container);
+                return Utils.initializeClassWithConstructorAndParameters(getGuiClass(), tile, container);
             }
         }
 
         return null;
     }
 
-    public Class<? extends ContainerMachine<T>> getContainerClass()
+    protected abstract void init();
+
+    public void addSlotsToContainer(ContainerMachine<T> container)
     {
-        return containerClass;
+        //this does not allow for inventory slots to be moved, this may be fine or this may need to be changed if a button opens something that shifts the inventory, or NEI shifts it.
+        //TODO: allow for this to happen ^^
+
+        for (SlotData<?> slotData : inventorySlots)
+        {
+            System.out.println("Adding slot " + slotData.getName() + " to container with ID " + slotData.getId());
+            Slot slot = (Slot) Utils.initializeClassWithConstructor(slotData.getSlotClass(), new Class<?>[] {IInventory.class, int.class, int.class, int.class}, new Object[] {container.getTileEntity(), slotData.id, slotData.x, slotData.y}); //TODO: add support for custom slot classes that have different constructor parameters
+            container.addSlotToContainer(slot);
+        }
+    }
+
+    public SlotData<Slot> getSlotData(String name)
+    {
+        if (name != null && name.length() > 0)
+        {
+            for (SlotData<Slot> slotData : inventorySlots)
+            {
+                if (name.equals(slotData.getName()))
+                {
+                    return slotData;
+                }
+            }
+        }
+        return null;
+    }
+
+    public int getNumSlots()
+    {
+        return inventorySlots.size();
     }
 
     public Class<? extends GuiMachine<T, ? extends ContainerMachine<T>>> getGuiClass()
     {
         return guiClass;
+    }
+
+    public Class<? extends ContainerMachine<T>> getContainerClass()
+    {
+        return containerClass;
     }
 }
