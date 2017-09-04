@@ -8,12 +8,13 @@ import dk.futte.blue.teamblep.blepcore.content.inventory.gui.GuiMachine;
 import dk.futte.blue.teamblep.blepcore.content.tileentity.machine.TileEntityMachine;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.Slot;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.SlotItemHandler;
 
 import java.util.*;
 
@@ -23,58 +24,10 @@ import java.util.*;
 
 public abstract class InventoryMachineContainer<T extends TileEntityMachine> implements IGuiHandler
 {
-    public static class SlotData<T extends Slot> implements Comparable<SlotData<T>>
-    {
-        protected String name;
-        protected int id;
-        protected int x;
-        protected int y;
-        protected Class<T> slotClass;
-
-        public SlotData(String name, int id, int x, int y, Class<T> slotClass)
-        {
-            this.name = name;
-            this.id = id;
-            this.x = x;
-            this.y = y;
-            this.slotClass = slotClass;
-        }
-
-        public String getName()
-        {
-            return name;
-        }
-
-        public int getId()
-        {
-            return id;
-        }
-
-        public int getX()
-        {
-            return x;
-        }
-
-        public int getY()
-        {
-            return y;
-        }
-
-        public Class<T> getSlotClass()
-        {
-            return slotClass;
-        }
-
-        @Override
-        public int compareTo(SlotData<T> that)
-        {
-            return Integer.compare(this.id, that.id);
-        }
-    }
-
     protected Class<? extends ContainerMachine<T>> containerClass;
     protected Class<? extends GuiMachine<T, ? extends ContainerMachine<T>>> guiClass;
-    protected List<SlotData> inventorySlots = new ArrayList<>();
+    private List<SlotData> inventorySlots = new ArrayList<>();
+    private Map<EnumSlotType, ArrayList<SlotData>> slotsByType = new EnumMap<>(EnumSlotType.class);
 
     public InventoryMachineContainer(Class<? extends ContainerMachine<T>> containerClass, Class<? extends GuiMachine<T, ? extends ContainerMachine<T>>> guiClass)
     {
@@ -135,17 +88,18 @@ public abstract class InventoryMachineContainer<T extends TileEntityMachine> imp
 
         for (SlotData<?> slotData : inventorySlots)
         {
-            System.out.println("Adding slot " + slotData.getName() + " to container with ID " + slotData.getId());
-            Slot slot = (Slot) Utils.initializeClassWithConstructor(slotData.getSlotClass(), new Class<?>[] {IInventory.class, int.class, int.class, int.class}, new Object[] {container.getTileEntity(), slotData.id, slotData.x, slotData.y}); //TODO: add support for custom slot classes that have different constructor parameters
+            IItemHandler inventory = container.getTileEntity().getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+            SlotItemHandler slot = Utils.initializeClassWithConstructor(slotData.getSlotClass(), new Class<?>[]{IItemHandler.class, int.class, int.class, int.class}, new Object[]{inventory, slotData.id, slotData.x, slotData.y});
+            //TODO: add support for custom slot classes that have different constructor parameters
             container.addSlotToContainer(slot);
         }
     }
 
-    public SlotData<Slot> getSlotData(String name)
+    public SlotData<SlotItemHandler> getSlotData(String name)
     {
         if (name != null && name.length() > 0)
         {
-            for (SlotData<Slot> slotData : inventorySlots)
+            for (SlotData<SlotItemHandler> slotData : inventorySlots)
             {
                 if (name.equals(slotData.getName()))
                 {
@@ -154,6 +108,44 @@ public abstract class InventoryMachineContainer<T extends TileEntityMachine> imp
             }
         }
         return null;
+    }
+
+    public SlotData<SlotItemHandler> getSlotData(int id)
+    {
+        if (id >= 0)
+        {
+            for (SlotData<SlotItemHandler> slotData : inventorySlots)
+            {
+                if (id == slotData.getId())
+                {
+                    return slotData;
+                }
+            }
+        }
+        return null;
+    }
+
+    protected <S extends SlotItemHandler> void addSlot(String name, int x, int y, EnumSlotType slotType, Class<S> slotClass)
+    {
+        SlotData<S> slotData = new SlotData<>(name, inventorySlots.size(), x, y, slotType, slotClass);
+
+        if (!slotsByType.containsKey(slotType) || slotsByType.get(slotType) == null)
+        {
+            slotsByType.put(slotType, new ArrayList<>());
+        }
+
+        slotsByType.get(slotType).add(slotData);
+        inventorySlots.add(slotData);
+    }
+
+    public List<SlotData> getUnmodifiableSlotList()
+    {
+        return new ArrayList<>(inventorySlots);
+    }
+
+    public List<SlotData> getSlotsWithType(EnumSlotType slotType)
+    {
+        return new ArrayList<>(slotsByType.get(slotType));
     }
 
     public int getNumSlots()

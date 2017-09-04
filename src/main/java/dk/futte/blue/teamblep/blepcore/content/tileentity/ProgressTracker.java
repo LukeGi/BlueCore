@@ -1,4 +1,7 @@
-package dk.futte.blue.teamblep.blepcore.content.tileentity.machine;
+package dk.futte.blue.teamblep.blepcore.content.tileentity;
+
+import net.minecraft.nbt.NBTBase;
+import net.minecraft.nbt.NBTTagCompound;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +13,9 @@ public class ProgressTracker
 {
     private List<ProgressBar> progressBars = new ArrayList<>();
 
-    private ProgressTracker() {}
+    private ProgressTracker()
+    {
+    }
 
     public static ProgressTracker create()
     {
@@ -53,5 +58,33 @@ public class ProgressTracker
         }
 
         return ticked;
+    }
+
+    public NBTTagCompound writeToNBT(NBTTagCompound compound)
+    {
+        for (ProgressBar progressBar : progressBars)
+        {
+            NBTTagCompound nbt = new NBTTagCompound();
+            progressBar.writeToNBT(nbt);
+            compound.setTag(progressBar.getName(), nbt);
+        }
+
+        return compound;
+    }
+
+    public void readFromNBT(NBTTagCompound compound)
+    {
+        for (ProgressBar progressBar : progressBars)
+        {
+            if (compound.hasKey(progressBar.getName()))
+            {
+                NBTBase nbt = compound.getTag(progressBar.getName());
+
+                if (nbt instanceof NBTTagCompound)
+                {
+                    progressBar.readFromNBT((NBTTagCompound) nbt);
+                }
+            }
+        }
     }
 }

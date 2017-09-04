@@ -33,6 +33,7 @@ public class BlepCore
     @SidedProxy(clientSide = ModInfo.PROXY_CLIENT, serverSide = ModInfo.PROXY_SERVER)
     public static IProxy proxy;
 
+    public static boolean debug = false;
     public static Logger logger;
     public static CreativeTabs tabBlepCore = new CreativeTabs(ModInfo.MOD_ID)
     {

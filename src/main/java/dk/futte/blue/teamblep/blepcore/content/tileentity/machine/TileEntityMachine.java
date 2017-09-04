@@ -2,6 +2,7 @@ package dk.futte.blue.teamblep.blepcore.content.tileentity.machine;
 
 import com.sun.istack.internal.NotNull;
 import dk.futte.blue.teamblep.blepcore.content.block.machine.MachineData;
+import dk.futte.blue.teamblep.blepcore.content.tileentity.ProgressTracker;
 import dk.futte.blue.teamblep.blepcore.content.tileentity.core.TileEntityTickable;
 import net.minecraft.util.EnumFacing;
 
