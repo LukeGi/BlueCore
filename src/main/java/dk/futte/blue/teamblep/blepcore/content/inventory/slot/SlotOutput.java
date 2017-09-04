@@ -1,19 +1,19 @@
 package dk.futte.blue.teamblep.blepcore.content.inventory.slot;
 
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.SlotItemHandler;
 
 import javax.annotation.Nullable;
 
 /**
  * @author Kelan
  */
-public class SlotOutput extends Slot
+public class SlotOutput extends SlotItemHandler
 {
-    public SlotOutput(IInventory inventoryIn, int index, int xPosition, int yPosition)
+    public SlotOutput(IItemHandler inventory, int index, int xPosition, int yPosition)
     {
-        super(inventoryIn, index, xPosition, yPosition);
+        super(inventory, index, xPosition, yPosition);
     }
 
     @Override

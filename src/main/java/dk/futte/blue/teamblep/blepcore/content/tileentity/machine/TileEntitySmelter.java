@@ -40,13 +40,13 @@ public class TileEntitySmelter extends TileEntityMachine
     @Override
     public void updateClient()
     {
-        getProgressTracker().tick();
+
     }
 
     @Override
     public void updateServer()
     {
-
+        getProgressTracker().tick();
     }
 
     @Override

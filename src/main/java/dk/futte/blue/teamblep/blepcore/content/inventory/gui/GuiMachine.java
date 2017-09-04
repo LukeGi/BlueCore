@@ -1,6 +1,7 @@
 package dk.futte.blue.teamblep.blepcore.content.inventory.gui;
 
 import dk.futte.blue.teamblep.blepcore.BlepCore;
+import dk.futte.blue.teamblep.blepcore.content.inventory.SlotData;
 import dk.futte.blue.teamblep.blepcore.content.inventory.container.ContainerMachine;
 import dk.futte.blue.teamblep.blepcore.content.tileentity.machine.TileEntityMachine;
 import dk.futte.blue.teamblep.blepcore.refs.ModInfo;
@@ -39,5 +40,35 @@ public abstract class GuiMachine<T extends TileEntityMachine, C extends Containe
     {
         this.xSize = textureWidth;
         this.ySize = textureHeight;
+    }
+
+    public void renderText(String text, int x, int y, int colour)
+    {
+        this.renderText(text, x, y, colour, false);
+    }
+
+    public void renderText(String text, int x, int y, int colour, boolean centered)
+    {
+        if (centered)
+        {
+            x -= this.fontRendererObj.getStringWidth(text) / 2;
+        }
+
+        this.fontRendererObj.drawString(text, x, y, colour);
+    }
+
+    @Override
+    protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
+    {
+        super.drawGuiContainerForegroundLayer(mouseX, mouseY);
+
+        if (BlepCore.debug)
+        {
+            for (Object o : tileEntity.getMachineData().getInventoryContainer().getUnmodifiableSlotList())
+            {
+                SlotData slotData = (SlotData) o;
+                this.renderText(Integer.toString(slotData.getId()), slotData.getX(), slotData.getY(), 4210752);
+            }
+        }
     }
 }
