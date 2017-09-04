@@ -18,4 +18,14 @@ public class Names
     {
         public static final String MATERIAL = "material";
     }
+
+    public static class Configs
+    {
+        public static final String TESTCONFIG = "shouldDoThing";
+    }
+
+    public class NBT
+    {
+        public static final String INVENTORY = ModInfo.RESOURCE_PREFIX + "inventory";
+    }
 }
