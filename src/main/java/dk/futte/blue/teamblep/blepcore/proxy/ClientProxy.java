@@ -38,7 +38,7 @@ public class ClientProxy implements IProxy
 
     public void registerModel(ItemStack itemStack, ResourceLocation resourceLocation)
     {
-        registerModel(itemStack, resourceLocation,"inventory");
+        registerModel(itemStack, resourceLocation, "inventory");
     }
 
     public void registerModel(ItemStack itemStack, ResourceLocation resourceLocation, String variant)

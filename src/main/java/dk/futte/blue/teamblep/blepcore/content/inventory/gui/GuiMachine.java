@@ -64,7 +64,7 @@ public abstract class GuiMachine<T extends TileEntityMachine, C extends Containe
 
         if (BlepCore.debug)
         {
-            for (Object o : tileEntity.getMachineData().getInventoryContainer().getUnmodifiableSlotList())
+            for (Object o : tileEntity.getMachineData().getInventoryContainer().getSlotList())
             {
                 SlotData slotData = (SlotData) o;
                 this.renderText(Integer.toString(slotData.getId()), slotData.getX(), slotData.getY(), 4210752);

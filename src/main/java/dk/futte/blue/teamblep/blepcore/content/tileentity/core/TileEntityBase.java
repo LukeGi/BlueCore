@@ -24,23 +24,27 @@ public abstract class TileEntityBase extends TileEntity
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity nbt) {
+    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity nbt)
+    {
         handleUpdateTag(nbt.getNbtCompound());
     }
 
     @Override
-    public void handleUpdateTag(NBTTagCompound tag) {
+    public void handleUpdateTag(NBTTagCompound tag)
+    {
         readFromNBT(tag);
     }
 
     @Nullable
     @Override
-    public SPacketUpdateTileEntity getUpdatePacket() {
+    public SPacketUpdateTileEntity getUpdatePacket()
+    {
         return new SPacketUpdateTileEntity(getPos(), 0, getUpdateTag());
     }
 
     @Override
-    public NBTTagCompound getUpdateTag() {
+    public NBTTagCompound getUpdateTag()
+    {
         return writeToNBT(new NBTTagCompound());
     }
 }

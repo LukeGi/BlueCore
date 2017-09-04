@@ -13,11 +13,12 @@ import dk.futte.blue.teamblep.blepcore.content.inventory.gui.GuiCentrifuge;
 import dk.futte.blue.teamblep.blepcore.content.inventory.gui.GuiCrusher;
 import dk.futte.blue.teamblep.blepcore.content.inventory.gui.GuiElectrolysisChamber;
 import dk.futte.blue.teamblep.blepcore.content.inventory.gui.GuiSmelter;
+import dk.futte.blue.teamblep.blepcore.content.inventory.slot.SlotBattery;
+import dk.futte.blue.teamblep.blepcore.content.inventory.slot.SlotInput;
 import dk.futte.blue.teamblep.blepcore.content.inventory.slot.SlotOutput;
 import dk.futte.blue.teamblep.blepcore.content.tileentity.machine.*;
 import dk.futte.blue.teamblep.blepcore.refs.Names;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.items.SlotItemHandler;
 
 /**
  * @author Blue
@@ -32,10 +33,10 @@ public class MachineData<T extends TileEntityMachine>
         @Override
         protected void init()
         {
-            addSlot("inputSlot", 56, 17, EnumSlotType.INPUT, SlotItemHandler.class);
+            addSlot("inputSlot", 56, 17, EnumSlotType.INPUT, SlotInput.class);
             addSlot("outputSlot", 116, 35, EnumSlotType.OUTPUT, SlotOutput.class);
-            addSlot("fuelSlot", 56, 53, EnumSlotType.INPUT, SlotItemHandler.class);
-            addSlot("batterySlot", 152, 74, EnumSlotType.INPUT, SlotItemHandler.class);
+            addSlot("fuelSlot", 56, 53, EnumSlotType.INPUT, SlotInput.class);
+            addSlot("batterySlot", 152, 74, EnumSlotType.BATTERY, SlotBattery.class);
         }
     });
     public static final MachineData<TileEntityCrusher> CRUSHER = new MachineData<>(Names.Blocks.MACHINE_CRUSHER, BlockMachine4.class, TileEntityCrusher.class, new InventoryMachineContainer<TileEntityCrusher>(ContainerCrusher.class, GuiCrusher.class)
@@ -43,11 +44,11 @@ public class MachineData<T extends TileEntityMachine>
         @Override
         protected void init()
         {
-            addSlot("inputSlot", 28, 37, EnumSlotType.INPUT, SlotItemHandler.class);
+            addSlot("inputSlot", 28, 37, EnumSlotType.INPUT, SlotInput.class);
             addSlot("outputSlot1", 82, 37, EnumSlotType.OUTPUT, SlotOutput.class);
             addSlot("outputSlot2", 100, 37, EnumSlotType.OUTPUT, SlotOutput.class);
             addSlot("byproductSlot", 78, 63, EnumSlotType.OUTPUT, SlotOutput.class);
-            addSlot("batterySlot", 152, 74, EnumSlotType.INPUT, SlotItemHandler.class);
+            addSlot("batterySlot", 152, 74, EnumSlotType.BATTERY, SlotBattery.class);
         }
     });
     public static final MachineData<TileEntityElectrolysisChamber> ELECTROLYSIS_CHAMBER = new MachineData<>(Names.Blocks.MACHINE_ELECTROLYSIS_CHAMBER, BlockMachine4.class, TileEntityElectrolysisChamber.class, new InventoryMachineContainer<TileEntityElectrolysisChamber>(ContainerElectrolysisChamber.class, GuiElectrolysisChamber.class)

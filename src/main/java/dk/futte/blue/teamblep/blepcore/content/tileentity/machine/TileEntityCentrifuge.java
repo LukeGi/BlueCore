@@ -3,12 +3,6 @@ package dk.futte.blue.teamblep.blepcore.content.tileentity.machine;
 import dk.futte.blue.teamblep.blepcore.content.block.machine.MachineData;
 import dk.futte.blue.teamblep.blepcore.content.tileentity.ProgressBar;
 import dk.futte.blue.teamblep.blepcore.content.tileentity.ProgressTracker;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
-import net.minecraftforge.energy.EnergyStorage;
-import net.minecraftforge.fluids.FluidTank;
-import net.minecraftforge.items.ItemStackHandler;
 
 /**
  * @author Blue
@@ -20,24 +14,6 @@ public class TileEntityCentrifuge extends TileEntityMachine
     public TileEntityCentrifuge()
     {
         super(MachineData.CENTRIFUGE);
-    }
-
-    @Override
-    protected EnergyStorage createBattery()
-    {
-        return null;
-    }
-
-    @Override
-    protected ItemStackHandler createInventory()
-    {
-        return null;
-    }
-
-    @Override
-    protected FluidTank createTank()
-    {
-        return null;
     }
 
     @Override

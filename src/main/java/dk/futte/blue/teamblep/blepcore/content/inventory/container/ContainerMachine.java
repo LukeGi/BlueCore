@@ -155,7 +155,7 @@ public abstract class ContainerMachine<T extends TileEntityMachine> extends Cont
      */
     public void addMachineTransferSlots(List<SlotRange> list, Slot slot)
     {
-        for (Object o : getTileEntity().getMachineData().getInventoryContainer().getUnmodifiableSlotList())
+        for (Object o : getTileEntity().getMachineData().getInventoryContainer().getSlotList())
         {
             int slotId = machineInventory.getStart() + ((SlotData) o).getId();
             list.add(new SlotRange(slotId, slotId + 1, false));

@@ -9,8 +9,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.FurnaceRecipes;
-import net.minecraft.tileentity.TileEntityFurnace;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -41,12 +39,12 @@ public class ContainerCrusher extends ContainerMachine<TileEntityCrusher>
 
         if (stackInSlot != null)
         {
-            for (Object o : inventoryContainer.getUnmodifiableSlotList())
+            for (Object o : inventoryContainer.getSlotList())
             {
                 SlotData slotData = (SlotData) o;
                 int slotId = machineInventory.getStart() + slotData.getId();
 
-                if (slotData.getSlotType() != EnumSlotType.OUTPUT)
+                if (slotData.getSlotType() != EnumSlotType.OUTPUT && slotData.getSlotType() != EnumSlotType.BATTERY)
                 {
                     list.add(new SlotRange(slotId, slotId + 1, false));
                 }

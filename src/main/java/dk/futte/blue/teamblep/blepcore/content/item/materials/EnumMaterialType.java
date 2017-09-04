@@ -9,10 +9,10 @@ import java.awt.*;
  */
 public enum EnumMaterialType implements IStringSerializable
 {
-    INGOT_COPPER(new Color(184,115,51)),
+    INGOT_COPPER(new Color(184, 115, 51)),
     INGOT_TIN(new Color(211, 212, 213)),
     INGOT_LEAD(new Color(159, 157, 153)),
-    INGOT_SILVER(new Color(192,192,192));
+    INGOT_SILVER(new Color(192, 192, 192));
 
     public static final EnumMaterialType[] VARIANTS;
 
