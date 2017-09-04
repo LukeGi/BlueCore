@@ -11,4 +11,6 @@ public class ModInfo
     public static final String MOD_PACKAGE = "dk.futte.blue.teamblep.blepcore";
     public static final String PROXY_CLIENT = MOD_PACKAGE + ".proxy.ClientProxy";
     public static final String PROXY_SERVER = MOD_PACKAGE + ".proxy.ServerProxy";
+    public static final String GUI_FACTORY = MOD_PACKAGE + ".config.GuiFactory";
+    public static final String RESOURCE_PREFIX = MOD_ID + ":";
 }

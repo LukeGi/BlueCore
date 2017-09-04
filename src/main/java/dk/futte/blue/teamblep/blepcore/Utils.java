@@ -2,6 +2,7 @@ package dk.futte.blue.teamblep.blepcore;
 
 import dk.futte.blue.teamblep.blepcore.content.block.machine.MachineData;
 import dk.futte.blue.teamblep.blepcore.content.inventory.GuiHandler;
+import dk.futte.blue.teamblep.blepcore.refs.ModInfo;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
@@ -18,7 +19,8 @@ public class Utils
         try
         {
             return clazz.getDeclaredConstructor(parameterTypes).newInstance(parameters);
-        } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e)
+        }
+        catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e)
         {
             e.printStackTrace();
         }
@@ -38,7 +40,13 @@ public class Utils
         return machineData.getInventoryContainer() == null ? -1 : GuiHandler.getIDFromHandler(machineData.getInventoryContainer());
     }
 
-    public static <T> boolean instanceOf(Class<T> class1, Class<T> class2) {
+    public static String translateConfig(String name)
+    {
+        return ModInfo.MOD_ID + ".config." + name;
+    }
+
+    public static <T> boolean instanceOf(Class<T> class1, Class<T> class2)
+    {
         return class1.isInstance(class2);
     }
 }

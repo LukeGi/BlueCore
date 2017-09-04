@@ -1,12 +1,12 @@
 package dk.futte.blue.teamblep.blepcore.content.tileentity.machine;
 
 import dk.futte.blue.teamblep.blepcore.content.block.machine.MachineData;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
+import dk.futte.blue.teamblep.blepcore.content.tileentity.capabilities.ItemHandlerMachine;
+import dk.futte.blue.teamblep.blepcore.refs.Names;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
-import net.minecraftforge.energy.EnergyStorage;
-import net.minecraftforge.fluids.FluidTank;
-import net.minecraftforge.items.ItemStackHandler;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.items.CapabilityItemHandler;
 
 /**
  * @author Blue
@@ -15,34 +15,17 @@ import net.minecraftforge.items.ItemStackHandler;
 
 public class TileEntitySmelter extends TileEntityMachine
 {
+    private ItemHandlerMachine inventory = new ItemHandlerMachine(new int[]{0}, new int[]{1, 2}, 3){
+        @Override
+        protected void onContentsChanged(int slot)
+        {
+            notifyClient();
+        }
+    };
+
     public TileEntitySmelter()
     {
         super(MachineData.SMELTER);
-    }
-
-    @Override
-    protected EnergyStorage createBattery()
-    {
-        return null;
-    }
-
-    @Override
-    protected ItemStackHandler createInventory()
-    {
-        return new ItemStackHandler(4)
-        {
-            @Override
-            protected void onContentsChanged(int slot)
-            {
-
-            }
-        };
-    }
-
-    @Override
-    protected FluidTank createTank()
-    {
-        return null;
     }
 
     @Override
@@ -67,53 +50,36 @@ public class TileEntitySmelter extends TileEntityMachine
     }
 
     @Override
-    public int[] getSlotsForFace(EnumFacing side)
+    public boolean hasCapability(Capability<?> capability, EnumFacing facing)
     {
-//        if (side == EnumFacing.DOWN)
-//        {
-//            return
-//        }
-        return new int[0];
-    }
-
-    @Override
-    public boolean canInsertItem(int index, ItemStack itemStackIn, EnumFacing direction)
-    {
-        if (getMachineData().getInventoryContainer().getSlotData("outputSlot").getId() == index)
+        if (capability.equals(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY))
         {
-            return false;
+            return true;
         }
-
-        return true;
+        return super.hasCapability(capability, facing);
     }
 
     @Override
-    public boolean canExtractItem(int index, ItemStack stack, EnumFacing direction)
+    public <T> T getCapability(Capability<T> capability, EnumFacing facing)
     {
-        return true;
+        if (capability.equals(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY))
+        {
+            return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(inventory);
+        }
+        return super.getCapability(capability, facing);
     }
 
     @Override
-    public boolean isUseableByPlayer(EntityPlayer player)
+    public NBTTagCompound writeToNBT(NBTTagCompound compound)
     {
-        return false;
+        compound.setTag(Names.NBT.INVENTORY, inventory.serializeNBT());
+        return super.writeToNBT(compound);
     }
 
     @Override
-    public void openInventory(EntityPlayer player)
+    public void readFromNBT(NBTTagCompound compound)
     {
-
-    }
-
-    @Override
-    public void closeInventory(EntityPlayer player)
-    {
-
-    }
-
-    @Override
-    public boolean isItemValidForSlot(int index, ItemStack stack)
-    {
-        return false;
+        inventory.deserializeNBT((NBTTagCompound) compound.getTag(Names.NBT.INVENTORY));
+        super.readFromNBT(compound);
     }
 }
