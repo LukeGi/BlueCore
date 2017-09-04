@@ -1,10 +1,13 @@
 package dk.futte.blue.teamblep.blepcore;
 
-import dk.futte.blue.teamblep.blepcore.content.items.ItemHandler;
-import dk.futte.blue.teamblep.blepcore.content.items.materials.ItemMaterial;
+import dk.futte.blue.teamblep.blepcore.content.inventory.GuiHandler;
+import dk.futte.blue.teamblep.blepcore.content.item.ItemHandler;
+import dk.futte.blue.teamblep.blepcore.content.item.materials.ItemMaterial;
 import dk.futte.blue.teamblep.blepcore.proxy.IProxy;
 import dk.futte.blue.teamblep.blepcore.refs.ModInfo;
 import net.minecraft.client.Minecraft;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
@@ -31,6 +34,14 @@ public class BlepCore
     public static IProxy proxy;
 
     public static Logger logger;
+    public static CreativeTabs tabBlepCore = new CreativeTabs(ModInfo.MOD_ID)
+    {
+        @Override
+        public Item getTabIconItem()
+        {
+            return ItemHandler.item_material;
+        }
+    };
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent e)
@@ -45,6 +56,7 @@ public class BlepCore
         if (e.getSide() == Side.CLIENT)
             //noinspection MethodCallSideOnly
             Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new ItemMaterial(), ItemHandler.item_material);
+        GuiHandler.init();
     }
 
     @Mod.EventHandler
