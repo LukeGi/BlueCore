@@ -1,7 +1,6 @@
 package dk.futte.blue.teamblep.blepcore.content.inventory.slot;
 
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 

@@ -33,7 +33,7 @@ public class BlockMachine6 extends BlockMachine
         if (tileEntityMachine != null)
         {
             Vec3d lookVec = placer.getLookVec();
-            EnumFacing placerFacing = EnumFacing.getFacingFromVector((float)lookVec.xCoord, (float)lookVec.yCoord, (float)lookVec.zCoord);
+            EnumFacing placerFacing = EnumFacing.getFacingFromVector((float) lookVec.xCoord, (float) lookVec.yCoord, (float) lookVec.zCoord);
             tileEntityMachine.setFacing(placerFacing.getOpposite());
         }
     }

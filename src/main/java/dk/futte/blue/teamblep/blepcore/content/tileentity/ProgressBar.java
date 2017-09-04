@@ -1,7 +1,6 @@
 package dk.futte.blue.teamblep.blepcore.content.tileentity;
 
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.energy.EnergyStorage;
 
 /**
  * @author Kelan

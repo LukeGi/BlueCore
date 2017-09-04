@@ -3,12 +3,6 @@ package dk.futte.blue.teamblep.blepcore.content.tileentity.machine;
 import dk.futte.blue.teamblep.blepcore.content.block.machine.MachineData;
 import dk.futte.blue.teamblep.blepcore.content.tileentity.ProgressBar;
 import dk.futte.blue.teamblep.blepcore.content.tileentity.ProgressTracker;
-import dk.futte.blue.teamblep.blepcore.content.tileentity.capabilities.ItemHandlerMachine;
-import dk.futte.blue.teamblep.blepcore.refs.Names;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumFacing;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.items.CapabilityItemHandler;
 
 /**
  * @author Blue
@@ -41,5 +35,6 @@ public class TileEntitySmelter extends TileEntityMachine
     public void updateServer()
     {
         getProgressTracker().tick();
+        //need packet handling. TODO first thing tomorrow
     }
 }

@@ -37,8 +37,7 @@ public class Utils
         try
         {
             return clazz.getDeclaredConstructor(parameterTypes).newInstance(parameters);
-        }
-        catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e)
+        } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e)
         {
             e.printStackTrace();
         }

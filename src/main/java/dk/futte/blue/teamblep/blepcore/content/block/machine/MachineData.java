@@ -19,7 +19,6 @@ import dk.futte.blue.teamblep.blepcore.content.inventory.slot.SlotOutput;
 import dk.futte.blue.teamblep.blepcore.content.tileentity.machine.*;
 import dk.futte.blue.teamblep.blepcore.refs.Names;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.items.SlotItemHandler;
 
 /**
  * @author Blue
