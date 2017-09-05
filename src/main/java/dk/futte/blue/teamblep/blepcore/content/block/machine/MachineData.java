@@ -16,6 +16,7 @@ import dk.futte.blue.teamblep.blepcore.content.inventory.gui.GuiSmelter;
 import dk.futte.blue.teamblep.blepcore.content.inventory.slot.SlotBattery;
 import dk.futte.blue.teamblep.blepcore.content.inventory.slot.SlotInput;
 import dk.futte.blue.teamblep.blepcore.content.inventory.slot.SlotOutput;
+import dk.futte.blue.teamblep.blepcore.content.tileentity.core.TileEntityAbstractMachine;
 import dk.futte.blue.teamblep.blepcore.content.tileentity.machine.*;
 import dk.futte.blue.teamblep.blepcore.refs.Names;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -25,9 +26,9 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
  * @author Kelan
  */
 
-public class MachineData<T extends TileEntityMachine>
+public class MachineData<T extends TileEntityAbstractMachine>
 {
-    public static final MachineData<TileEntityMachine> CHASSIS = new MachineData<>(Names.Blocks.MACHINE_CHASSIS, BlockMachine.class, null, null);
+    public static final MachineData<TileEntityAbstractMachine> CHASSIS = new MachineData<>(Names.Blocks.MACHINE_CHASSIS, BlockMachine.class, null, null);
     public static final MachineData<TileEntitySmelter> SMELTER = new MachineData<>(Names.Blocks.MACHINE_SMELTER, BlockMachine4.class, TileEntitySmelter.class, new InventoryMachineContainer<TileEntitySmelter>(ContainerSmelter.class, GuiSmelter.class)
     {
         @Override
@@ -93,7 +94,7 @@ public class MachineData<T extends TileEntityMachine>
         return this.block;
     }
 
-    public TileEntityMachine createTileEntity()
+    public TileEntityAbstractMachine createTileEntity()
     {
         if (this.getTileEntityClass() == null)
         {
@@ -123,7 +124,7 @@ public class MachineData<T extends TileEntityMachine>
         return blockClass;
     }
 
-    public Class<? extends TileEntityMachine> getTileEntityClass()
+    public Class<? extends TileEntityAbstractMachine> getTileEntityClass()
     {
         return tileClass;
     }

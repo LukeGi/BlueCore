@@ -11,7 +11,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 
-public abstract class TileEntityBase extends TileEntity
+public abstract class TileEntityAbstractBase extends TileEntity
 {
     public EntityPlayer player;
 

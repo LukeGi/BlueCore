@@ -1,6 +1,6 @@
 package dk.futte.blue.teamblep.blepcore.content.block.machine;
 
-import dk.futte.blue.teamblep.blepcore.content.tileentity.machine.TileEntityMachine;
+import dk.futte.blue.teamblep.blepcore.content.tileentity.core.TileEntityAbstractMachine;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
@@ -28,7 +28,7 @@ public class BlockMachine6 extends BlockMachine
     {
         super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
 
-        TileEntityMachine tileEntityMachine = getTileEntity(worldIn, pos);
+        TileEntityAbstractMachine tileEntityMachine = getTileEntity(worldIn, pos);
 
         if (tileEntityMachine != null)
         {
@@ -41,7 +41,7 @@ public class BlockMachine6 extends BlockMachine
     @Override
     public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, ItemStack stack)
     {
-        TileEntityMachine tileEntityMachine = getTileEntity(world, pos);
+        TileEntityAbstractMachine tileEntityMachine = getTileEntity(world, pos);
 
         if (tileEntityMachine != null)
         {
@@ -72,7 +72,7 @@ public class BlockMachine6 extends BlockMachine
     @Override
     public IBlockState getExtendedState(IBlockState state, IBlockAccess world, BlockPos pos)
     {
-        TileEntityMachine tileEntityMachine = getTileEntity(world, pos);
+        TileEntityAbstractMachine tileEntityMachine = getTileEntity(world, pos);
         if (tileEntityMachine != null)
         {
             return state.withProperty(PROPERTY_FACING_6, tileEntityMachine.getFacing());

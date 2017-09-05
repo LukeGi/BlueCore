@@ -3,13 +3,14 @@ package dk.futte.blue.teamblep.blepcore.content.tileentity.machine;
 import dk.futte.blue.teamblep.blepcore.content.block.machine.MachineData;
 import dk.futte.blue.teamblep.blepcore.content.tileentity.ProgressBar;
 import dk.futte.blue.teamblep.blepcore.content.tileentity.ProgressTracker;
+import dk.futte.blue.teamblep.blepcore.content.tileentity.core.TileEntityAbstractMachine;
 
 /**
  * @author Blue
  * @author Kelan
  */
 
-public class TileEntityCrusher extends TileEntityMachine
+public class TileEntityCrusher extends TileEntityAbstractMachine
 {
     public TileEntityCrusher()
     {

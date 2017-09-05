@@ -5,6 +5,7 @@ import dk.futte.blue.teamblep.blepcore.content.block.machine.MachineData;
 import dk.futte.blue.teamblep.blepcore.content.inventory.SlotData;
 import dk.futte.blue.teamblep.blepcore.content.tileentity.ProgressBar;
 import dk.futte.blue.teamblep.blepcore.content.tileentity.ProgressTracker;
+import dk.futte.blue.teamblep.blepcore.content.tileentity.core.TileEntityAbstractMachine;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.tileentity.TileEntityFurnace;
@@ -14,7 +15,7 @@ import net.minecraft.tileentity.TileEntityFurnace;
  * @author Kelan
  */
 
-public class TileEntitySmelter extends TileEntityMachine
+public class TileEntitySmelter extends TileEntityAbstractMachine
 {
     public static final String PROCESS_BAR = "process_time";
     public static final String FUEL_BAR = "fuel_time";

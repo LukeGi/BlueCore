@@ -4,7 +4,7 @@ import net.minecraft.util.ITickable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public abstract class TileEntityTickable extends TileEntityBase implements ITickable
+public abstract class TileEntityAbstractTickable extends TileEntityAbstractBase implements ITickable
 {
     @Override
     public void update()

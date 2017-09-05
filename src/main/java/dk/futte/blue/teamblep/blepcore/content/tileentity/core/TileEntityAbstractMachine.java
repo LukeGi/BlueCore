@@ -1,11 +1,10 @@
-package dk.futte.blue.teamblep.blepcore.content.tileentity.machine;
+package dk.futte.blue.teamblep.blepcore.content.tileentity.core;
 
 import com.sun.istack.internal.NotNull;
 import dk.futte.blue.teamblep.blepcore.Utils;
 import dk.futte.blue.teamblep.blepcore.content.block.machine.MachineData;
 import dk.futte.blue.teamblep.blepcore.content.tileentity.ProgressTracker;
 import dk.futte.blue.teamblep.blepcore.content.tileentity.capabilities.ItemHandlerMachine;
-import dk.futte.blue.teamblep.blepcore.content.tileentity.core.TileEntityTickable;
 import dk.futte.blue.teamblep.blepcore.refs.Names;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
@@ -21,18 +20,18 @@ import javax.annotation.Nullable;
  * @author Kelan
  */
 
-public abstract class TileEntityMachine extends TileEntityTickable
+public abstract class TileEntityAbstractMachine extends TileEntityAbstractTickable
 {
     protected ItemHandlerMachine inventory;
     protected ProgressTracker progressTracker = createProgressTracker();
     protected MachineData machineData;
     protected EnumFacing facing = EnumFacing.NORTH;
 
-    public TileEntityMachine(MachineData machineData)
+    public TileEntityAbstractMachine(MachineData machineData)
     {
         if (machineData == null)
         {
-            Utils.crashWithException(new IllegalStateException("A TileEntityMachine was created with a null MachineData object. This doesn't make any sense to do."));
+            Utils.crashWithException(new IllegalStateException("A TileEntityAbstractMachine was created with a null MachineData object. This doesn't make any sense to do."));
         } else
         {
             this.machineData = machineData;
