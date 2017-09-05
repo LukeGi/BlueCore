@@ -12,17 +12,33 @@ public abstract class TileEntityTickable extends TileEntityBase implements ITick
         if (getWorld().isRemote)
         {
             //noinspection MethodCallSideOnly
-            updateClient();
+            if (updateClient())
+            {
+                notifyServer();
+            }
         } else
         {
-            updateServer();
+            //noinspection MethodCallSideOnly
+            if (updateServer())
+            {
+                notifyClient();
+            }
         }
     }
 
+    /**
+     * Update this TileEntity on the clientside. Used for things such as rendering and other client-only things.
+     *
+     * @return true if the server needs to be notified of a change.
+     */
     @SideOnly(Side.CLIENT)
-    public abstract void updateClient();
+    public abstract boolean updateClient();
 
-    public abstract void updateServer();
-
-
+    /**
+     * Update this TileEntity on the serverside. Used for all serverside block updates, such as processing items.
+     *
+     * @return true if the client needs to be notified of a change.
+     */
+    @SideOnly(Side.SERVER)
+    public abstract boolean updateServer();
 }

@@ -26,14 +26,15 @@ public class TileEntityElectrolysisChamber extends TileEntityMachine
     }
 
     @Override
-    public void updateClient()
+    public boolean updateClient()
     {
-
+        return false;
     }
 
     @Override
-    public void updateServer()
+    public boolean updateServer()
     {
-
+        getProgressTracker().tick();
+        return true;
     }
 }

@@ -26,14 +26,16 @@ public class TileEntityCrusher extends TileEntityMachine
     }
 
     @Override
-    public void updateClient()
+    public boolean updateClient()
     {
-        getProgressTracker().tick();
+        return false;
     }
 
     @Override
-    public void updateServer()
+    public boolean updateServer()
     {
-
+        getProgressTracker().tick();
+        //TODO: only return true if something changed. Unknown performance impact but it makes sense, and is more efficient.
+        return true;
     }
 }

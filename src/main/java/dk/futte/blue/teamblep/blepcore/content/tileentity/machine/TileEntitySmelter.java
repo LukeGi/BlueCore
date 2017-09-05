@@ -26,15 +26,17 @@ public class TileEntitySmelter extends TileEntityMachine
     }
 
     @Override
-    public void updateClient()
+    public boolean updateClient()
     {
-
+        return false;
     }
 
     @Override
-    public void updateServer()
+    public boolean updateServer()
     {
         getProgressTracker().tick();
         //need packet handling. TODO first thing tomorrow
+        //TODO: only return true if something changed. Unknown performance impact but it makes sense, and is more efficient.
+        return true;
     }
 }

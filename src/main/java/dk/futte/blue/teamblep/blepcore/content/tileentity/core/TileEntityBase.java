@@ -22,6 +22,11 @@ public abstract class TileEntityBase extends TileEntity
         markDirty();
     }
 
+    public void notifyServer()
+    {
+        //TODO: implement this with custom packets.
+    }
+
     @Override
     @SideOnly(Side.CLIENT)
     public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity nbt)
