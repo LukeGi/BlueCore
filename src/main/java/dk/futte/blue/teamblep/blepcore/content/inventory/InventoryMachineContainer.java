@@ -1,5 +1,6 @@
 package dk.futte.blue.teamblep.blepcore.content.inventory;
 
+import com.sun.istack.internal.NotNull;
 import dk.futte.blue.teamblep.blepcore.Utils;
 import dk.futte.blue.teamblep.blepcore.content.block.machine.BlockMachine;
 import dk.futte.blue.teamblep.blepcore.content.block.machine.MachineData;
@@ -138,14 +139,38 @@ public abstract class InventoryMachineContainer<T extends TileEntityMachine> imp
         inventorySlots.add(slotData);
     }
 
-    public List<SlotData> getUnmodifiableSlotList()
+    public List<SlotData> getSlotList()
     {
         return new ArrayList<>(inventorySlots);
     }
 
+
+    public Map<EnumSlotType, List<SlotData>> getSlotsByType()
+    {
+        return new EnumMap<>(slotsByType);
+    }
+
+    public int[] getSlotIDArrayFor(EnumSlotType slotType)
+    {
+//        List<SlotData> slotDataList = getSlotsWithType(slotType);
+//        int[] arr = new int[slotDataList.size()];
+//
+//        for (int i = 0; i < arr.length; i++)
+//        {
+//            arr[i] = slotDataList.get(i).getId();
+//        }
+        return getSlotsWithType(slotType).stream().map(SlotData::getId).mapToInt(Integer::intValue).toArray();
+    }
+
+    @NotNull
     public List<SlotData> getSlotsWithType(EnumSlotType slotType)
     {
-        return new ArrayList<>(slotsByType.get(slotType));
+        ArrayList<SlotData> slotData = slotsByType.get(slotType);
+        if (slotData != null && !slotData.isEmpty())
+        {
+            return new ArrayList<>(slotData);
+        }
+        return new ArrayList<>();
     }
 
     public int getNumSlots()

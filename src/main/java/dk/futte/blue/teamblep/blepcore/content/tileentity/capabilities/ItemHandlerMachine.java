@@ -1,38 +1,37 @@
 package dk.futte.blue.teamblep.blepcore.content.tileentity.capabilities;
 
+import dk.futte.blue.teamblep.blepcore.content.inventory.EnumSlotType;
+import dk.futte.blue.teamblep.blepcore.content.inventory.InventoryMachineContainer;
+import dk.futte.blue.teamblep.blepcore.content.inventory.SlotData;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.items.ItemStackHandler;
 
-import java.util.Arrays;
-
 /**
  * @author Blue
+ * @author Kelan
  */
 
 public class ItemHandlerMachine extends ItemStackHandler
 {
-    private int[] inputs;
-    private int[] outputs;
-    private int battery;
+    private InventoryMachineContainer inventoryContainer;
 
-    public ItemHandlerMachine(int[] inputs, int[] outputs, int battery)
+    public ItemHandlerMachine(InventoryMachineContainer inventoryContainer)
     {
-        super(inputs.length + outputs.length + battery);
-        this.inputs = inputs;
-        this.outputs = outputs;
-        this.battery = battery;
+        super(inventoryContainer.getNumSlots());
+        this.inventoryContainer = inventoryContainer;
     }
 
     @Override
     public ItemStack insertItem(int slot, ItemStack stack, boolean simulate)
     {
-        if (Arrays.asList(inputs).contains(slot))
+        SlotData slotData = inventoryContainer.getSlotData(slot);
+
+        if (inventoryContainer.getSlotsWithType(EnumSlotType.INPUT).contains(slotData))
         {
             return super.insertItem(slot, stack, simulate);
         }
-        if (slot == battery && stack.hasCapability(CapabilityEnergy.ENERGY, null))
+        if (inventoryContainer.getSlotsWithType(EnumSlotType.BATTERY).contains(slotData) && stack.hasCapability(CapabilityEnergy.ENERGY, null))
         {
             return super.insertItem(slot, stack, simulate);
         }
@@ -42,42 +41,16 @@ public class ItemHandlerMachine extends ItemStackHandler
     @Override
     public ItemStack extractItem(int slot, int amount, boolean simulate)
     {
-        if (Arrays.asList(outputs).contains(slot))
-        {
-            return super.extractItem(slot, amount, simulate);
-        }
-        if (slot == battery)
-        {
-            return super.extractItem(slot, amount, simulate);
-        }
-        return null;
-    }
-
-    @Override
-    public NBTTagCompound serializeNBT()
-    {
-        NBTTagCompound compound = super.serializeNBT();
-        compound.setIntArray("input", inputs);
-        compound.setIntArray("output", outputs);
-        compound.setInteger("battery", battery);
-        return compound;
-    }
-
-    @Override
-    public void deserializeNBT(NBTTagCompound compound)
-    {
-        if (compound.hasKey("input"))
-        {
-            inputs = compound.getIntArray("input");
-        }
-        if (compound.hasKey("output"))
-        {
-            outputs = compound.getIntArray("output");
-        }
-        if (compound.hasKey("battery"))
-        {
-            battery = compound.getInteger("battery");
-        }
-        super.deserializeNBT(compound);
+//        SlotData slotData = inventoryContainer.getSlotData(slot);
+//
+//        if (inventoryContainer.getSlotsWithType(EnumSlotType.OUTPUT).contains(slotData))
+//        {
+//            return super.extractItem(slot, amount, simulate);
+//        }
+//        if (inventoryContainer.getSlotsWithType(EnumSlotType.BATTERY).contains(slotData)) //TODO: check if battery is empty, and if it is, pull it out of the machine.
+//        {
+//            return super.extractItem(slot, amount, simulate);
+//        }
+        return super.extractItem(slot, amount, simulate);
     }
 }
