@@ -1,5 +1,6 @@
 package dk.futte.blue.teamblep.blepcore.content.tileentity.capabilities;
 
+import dk.futte.blue.teamblep.blepcore.Utils;
 import dk.futte.blue.teamblep.blepcore.content.inventory.EnumSlotType;
 import dk.futte.blue.teamblep.blepcore.content.inventory.InventoryMachineContainer;
 import dk.futte.blue.teamblep.blepcore.content.inventory.SlotData;
@@ -20,6 +21,35 @@ public class ItemHandlerMachine extends ItemStackHandler
     {
         super(inventoryContainer.getNumSlots());
         this.inventoryContainer = inventoryContainer;
+    }
+
+    public ItemStack decrStackSize(int slot, int amount)
+    {
+        return getAndSplitStack(slot, amount);
+    }
+
+    public ItemStack getAndSplitStack(int slot, int amount)
+    {
+        validateSlotIndex(slot);
+        if (hasStackInSlot(slot) && amount > 0)
+        {
+            ItemStack itemstack = getStackInSlot(slot).splitStack(amount);
+
+            if (Utils.isItemStackNull(getStackInSlot(slot)))
+            {
+                setStackInSlot(slot, null);
+            }
+
+            return itemstack;
+        } else
+        {
+            return null;
+        }
+    }
+
+    private boolean hasStackInSlot(int slot)
+    {
+        return !Utils.isItemStackNull(getStackInSlot(slot));
     }
 
     @Override

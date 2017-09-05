@@ -10,12 +10,19 @@ public class ProgressBar
     private String name;
     private int ticksRequired;
     private int ticksElapsed;
+    private boolean reversed;
 
-    public ProgressBar(String name, int ticksRequired, int ticksElapsed)
+    public ProgressBar(String name, int ticksRequired, int ticksElapsed, boolean reversed)
     {
         this.name = name;
         this.ticksRequired = ticksRequired;
         this.ticksElapsed = ticksElapsed;
+        this.reversed = reversed;
+    }
+
+    public ProgressBar(String name, int ticksRequired, int ticksElapsed)
+    {
+        this(name, ticksRequired, ticksElapsed, false);
     }
 
     public ProgressBar(String name, int ticksRequired)
@@ -53,17 +60,47 @@ public class ProgressBar
         this.ticksElapsed = ticksElapsed;
     }
 
-    public boolean tick()
+    public boolean isReversed()
     {
-        ticksElapsed++;
+        return reversed;
+    }
 
-        if (ticksElapsed >= ticksRequired)
+    public void setReversed(boolean reversed)
+    {
+        this.reversed = reversed;
+    }
+
+    public void tick()
+    {
+        if (reversed)
+        {
+            ticksElapsed--;
+        } else
+        {
+            ticksElapsed++;
+        }
+    }
+
+    public void reset()
+    {
+        if (reversed)
+        {
+            ticksElapsed = ticksRequired;
+        } else
         {
             ticksElapsed = 0;
-            return true;
         }
+    }
 
-        return false;
+    public boolean isDone()
+    {
+        if (reversed)
+        {
+            return ticksElapsed <= 0;
+        } else
+        {
+            return ticksElapsed >= ticksRequired;
+        }
     }
 
     public int getProgressScaled(int pixels)
@@ -73,7 +110,7 @@ public class ProgressBar
             return 0;
         }
 
-        return ticksElapsed * pixels / ticksRequired;
+        return (int)Math.ceil((float)(ticksElapsed * pixels) / (float)ticksRequired);
     }
 
     @Override
@@ -97,15 +134,17 @@ public class ProgressBar
     {
         compound.setInteger("ticksRequired", ticksRequired);
         compound.setInteger("ticksElapsed", ticksElapsed);
+        compound.setBoolean("reversed", reversed);
         return compound;
     }
 
     public void readFromNBT(NBTTagCompound compound)
     {
-        if (compound.hasKey("ticksRequired") && compound.hasKey("ticksElapsed"))
+        if (compound.hasKey("ticksRequired") && compound.hasKey("ticksElapsed") && compound.hasKey("reversed"))
         {
             ticksRequired = compound.getInteger("ticksRequired");
             ticksElapsed = compound.getInteger("ticksElapsed");
+            reversed = compound.getBoolean("reversed");
         }
     }
 }

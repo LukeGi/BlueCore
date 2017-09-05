@@ -3,6 +3,7 @@ package dk.futte.blue.teamblep.blepcore;
 import dk.futte.blue.teamblep.blepcore.content.block.machine.MachineData;
 import dk.futte.blue.teamblep.blepcore.content.inventory.GuiHandler;
 import dk.futte.blue.teamblep.blepcore.refs.ModInfo;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
 import java.lang.reflect.InvocationTargetException;
@@ -15,6 +16,11 @@ import java.util.stream.Collectors;
 
 public class Utils
 {
+    public static boolean isItemStackNull(ItemStack itemStack)
+    {
+        return itemStack == null || itemStack.stackSize <= 0;
+    }
+
     public static void crashWithException(Exception exception)
     {
         crashWithException(exception, 42, false);
