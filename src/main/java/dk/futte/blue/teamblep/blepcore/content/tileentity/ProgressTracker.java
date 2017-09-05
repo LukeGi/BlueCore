@@ -34,6 +34,7 @@ public class ProgressTracker
 
     public ProgressBar getProgressBar(String name)
     {
+        //TODO: add caching here so that every time this function is called it doesn't have to re-loop over all the progress bars. This function will be called a lot.
         for (ProgressBar progressBar : progressBars)
         {
             if (progressBar.getName().equals(name))
@@ -51,9 +52,13 @@ public class ProgressTracker
 
         for (ProgressBar progressBar : progressBars)
         {
-            if (progressBar.tick())
+            if (progressBar.isDone())
             {
                 ticked.add(progressBar);
+                progressBar.reset();
+            } else
+            {
+                progressBar.tick();
             }
         }
 

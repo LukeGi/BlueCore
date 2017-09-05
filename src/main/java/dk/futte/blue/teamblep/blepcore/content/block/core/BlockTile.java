@@ -1,6 +1,6 @@
 package dk.futte.blue.teamblep.blepcore.content.block.core;
 
-import dk.futte.blue.teamblep.blepcore.content.tileentity.core.TileEntityBase;
+import dk.futte.blue.teamblep.blepcore.content.tileentity.core.TileEntityAbstractBase;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -28,9 +28,9 @@ public abstract class BlockTile extends BlockBase implements ITileEntityProvider
         if (placer instanceof EntityPlayer)
         {
             TileEntity tile = worldIn.getTileEntity(pos);
-            if (tile != null && tile instanceof TileEntityBase)
+            if (tile != null && tile instanceof TileEntityAbstractBase)
             {
-                ((TileEntityBase) tile).player = (EntityPlayer) placer;
+                ((TileEntityAbstractBase) tile).player = (EntityPlayer) placer;
             }
         }
     }

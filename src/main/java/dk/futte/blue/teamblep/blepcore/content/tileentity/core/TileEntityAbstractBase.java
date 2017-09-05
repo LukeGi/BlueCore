@@ -11,7 +11,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 
-public abstract class TileEntityBase extends TileEntity
+public abstract class TileEntityAbstractBase extends TileEntity
 {
     public EntityPlayer player;
 
@@ -20,6 +20,11 @@ public abstract class TileEntityBase extends TileEntity
         IBlockState state = getWorld().getBlockState(getPos());
         getWorld().notifyBlockUpdate(getPos(), state, state, 3);
         markDirty();
+    }
+
+    public void notifyServer()
+    {
+        //TODO: implement this with custom packets.
     }
 
     @Override

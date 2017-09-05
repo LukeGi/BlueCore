@@ -3,7 +3,7 @@ package dk.futte.blue.teamblep.blepcore.content.inventory.container;
 import dk.futte.blue.teamblep.blepcore.content.inventory.EnumSlotType;
 import dk.futte.blue.teamblep.blepcore.content.inventory.SlotData;
 import dk.futte.blue.teamblep.blepcore.content.inventory.SlotRange;
-import dk.futte.blue.teamblep.blepcore.content.tileentity.machine.TileEntityMachine;
+import dk.futte.blue.teamblep.blepcore.content.tileentity.core.TileEntityAbstractMachine;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -17,7 +17,7 @@ import java.util.List;
 /**
  * @author Kelan
  */
-public abstract class ContainerMachine<T extends TileEntityMachine> extends Container
+public abstract class ContainerMachine<T extends TileEntityAbstractMachine> extends Container
 {
     protected T tileEntity;
     protected InventoryPlayer inventoryPlayer;

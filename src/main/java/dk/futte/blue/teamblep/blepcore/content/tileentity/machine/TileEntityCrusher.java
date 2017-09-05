@@ -3,13 +3,14 @@ package dk.futte.blue.teamblep.blepcore.content.tileentity.machine;
 import dk.futte.blue.teamblep.blepcore.content.block.machine.MachineData;
 import dk.futte.blue.teamblep.blepcore.content.tileentity.ProgressBar;
 import dk.futte.blue.teamblep.blepcore.content.tileentity.ProgressTracker;
+import dk.futte.blue.teamblep.blepcore.content.tileentity.core.TileEntityAbstractMachine;
 
 /**
  * @author Blue
  * @author Kelan
  */
 
-public class TileEntityCrusher extends TileEntityMachine
+public class TileEntityCrusher extends TileEntityAbstractMachine
 {
     public TileEntityCrusher()
     {
@@ -26,14 +27,16 @@ public class TileEntityCrusher extends TileEntityMachine
     }
 
     @Override
-    public void updateClient()
+    public boolean updateClient()
     {
-        getProgressTracker().tick();
+        return false;
     }
 
     @Override
-    public void updateServer()
+    public boolean updateServer()
     {
-
+        getProgressTracker().tick();
+        //TODO: only return true if something changed. Unknown performance impact but it makes sense, and is more efficient.
+        return true;
     }
 }

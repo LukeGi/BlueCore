@@ -3,7 +3,7 @@ package dk.futte.blue.teamblep.blepcore.content.inventory.gui;
 import dk.futte.blue.teamblep.blepcore.BlepCore;
 import dk.futte.blue.teamblep.blepcore.content.inventory.SlotData;
 import dk.futte.blue.teamblep.blepcore.content.inventory.container.ContainerMachine;
-import dk.futte.blue.teamblep.blepcore.content.tileentity.machine.TileEntityMachine;
+import dk.futte.blue.teamblep.blepcore.content.tileentity.core.TileEntityAbstractMachine;
 import dk.futte.blue.teamblep.blepcore.refs.ModInfo;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.util.ResourceLocation;
@@ -11,7 +11,7 @@ import net.minecraft.util.ResourceLocation;
 /**
  * @author Kelan
  */
-public abstract class GuiMachine<T extends TileEntityMachine, C extends ContainerMachine<T>> extends GuiContainer
+public abstract class GuiMachine<T extends TileEntityAbstractMachine, C extends ContainerMachine<T>> extends GuiContainer
 {
     protected ResourceLocation GUI_BACKGROUND_TEXTURE;
     protected T tileEntity;

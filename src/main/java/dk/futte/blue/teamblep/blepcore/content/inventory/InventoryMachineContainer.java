@@ -6,7 +6,7 @@ import dk.futte.blue.teamblep.blepcore.content.block.machine.BlockMachine;
 import dk.futte.blue.teamblep.blepcore.content.block.machine.MachineData;
 import dk.futte.blue.teamblep.blepcore.content.inventory.container.ContainerMachine;
 import dk.futte.blue.teamblep.blepcore.content.inventory.gui.GuiMachine;
-import dk.futte.blue.teamblep.blepcore.content.tileentity.machine.TileEntityMachine;
+import dk.futte.blue.teamblep.blepcore.content.tileentity.core.TileEntityAbstractMachine;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -23,7 +23,7 @@ import java.util.*;
  * @author Kelan
  */
 
-public abstract class InventoryMachineContainer<T extends TileEntityMachine> implements IGuiHandler
+public abstract class InventoryMachineContainer<T extends TileEntityAbstractMachine> implements IGuiHandler
 {
     protected Class<? extends ContainerMachine<T>> containerClass;
     protected Class<? extends GuiMachine<T, ? extends ContainerMachine<T>>> guiClass;

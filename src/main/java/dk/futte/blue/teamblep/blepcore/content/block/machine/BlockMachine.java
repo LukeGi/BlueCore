@@ -3,7 +3,7 @@ package dk.futte.blue.teamblep.blepcore.content.block.machine;
 import dk.futte.blue.teamblep.blepcore.BlepCore;
 import dk.futte.blue.teamblep.blepcore.Utils;
 import dk.futte.blue.teamblep.blepcore.content.block.core.BlockTile;
-import dk.futte.blue.teamblep.blepcore.content.tileentity.machine.TileEntityMachine;
+import dk.futte.blue.teamblep.blepcore.content.tileentity.core.TileEntityAbstractMachine;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
@@ -62,10 +62,10 @@ public class BlockMachine extends BlockTile
     }
 
     @Nullable
-    protected TileEntityMachine getTileEntity(IBlockAccess world, BlockPos pos)
+    protected TileEntityAbstractMachine getTileEntity(IBlockAccess world, BlockPos pos)
     {
         TileEntity tile = world.getTileEntity(pos);
-        return tile instanceof TileEntityMachine ? (TileEntityMachine) tile : null;
+        return tile instanceof TileEntityAbstractMachine ? (TileEntityAbstractMachine) tile : null;
     }
 
     public MachineData getMachineData()
