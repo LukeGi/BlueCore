@@ -39,6 +39,5 @@ public abstract class TileEntityTickable extends TileEntityBase implements ITick
      *
      * @return true if the client needs to be notified of a change.
      */
-    @SideOnly(Side.SERVER)
     public abstract boolean updateServer();
 }
