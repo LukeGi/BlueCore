@@ -2,20 +2,49 @@
   "forge_marker": 1,
   "defaults": {
     "model": "builtin/generated",
-    "transform": "forge:default-item",
-    "textures": {
-      "layer0": "blepcore:items/ingot"
-    }
+    "transform": "forge:default-item"
   },
   "variants": {
     "variant": {
       "ingot_copper": {
+        "textures": {
+          "layer0": "blepcore:items/ingot"
+        }
       },
       "ingot_tin": {
+        "textures": {
+          "layer0": "blepcore:items/ingot"
+        }
       },
       "ingot_lead": {
+        "textures": {
+          "layer0": "blepcore:items/ingot"
+        }
       },
       "ingot_silver": {
+        "textures": {
+          "layer0": "blepcore:items/ingot"
+        }
+      },
+      "dust_copper": {
+        "textures": {
+          "layer0": "blepcore:items/dust"
+        }
+      },
+      "dust_tin": {
+        "textures": {
+          "layer0": "blepcore:items/dust"
+        }
+      },
+      "dust_lead": {
+        "textures": {
+          "layer0": "blepcore:items/dust"
+        }
+      },
+      "dust_silver": {
+        "textures": {
+          "layer0": "blepcore:items/dust"
+        }
       }
     }
   }

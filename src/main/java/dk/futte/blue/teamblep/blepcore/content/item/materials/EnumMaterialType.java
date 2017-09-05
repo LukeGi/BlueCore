@@ -4,15 +4,24 @@ import net.minecraft.util.IStringSerializable;
 
 import java.awt.*;
 
+import static dk.futte.blue.teamblep.blepcore.content.item.materials.EnumMetal.*;
+
 /**
  * @author Blue
  */
 public enum EnumMaterialType implements IStringSerializable
 {
-    INGOT_COPPER(new Color(184, 115, 51)),
-    INGOT_TIN(new Color(211, 212, 213)),
-    INGOT_LEAD(new Color(159, 157, 153)),
-    INGOT_SILVER(new Color(192, 192, 192));
+    /* INGOTS */
+    INGOT_COPPER(COPPER.getColor()),
+    INGOT_TIN(TIN.getColor()),
+    INGOT_LEAD(LEAD.getColor()),
+    INGOT_SILVER(SILVER.getColor()),
+
+    /* DUSTS */ //TODO: maybe change this
+    DUST_COPPER(COPPER.getColor()),
+    DUST_TIN(TIN.getColor()),
+    DUST_LEAD(LEAD.getColor()),
+    DUST_SILVER(SILVER.getColor());
 
     public static final EnumMaterialType[] VARIANTS;
 
@@ -40,7 +49,7 @@ public enum EnumMaterialType implements IStringSerializable
 
     public int getMetadata()
     {
-        return ordinal();
+        return meta;
     }
 
     public Color getColor()
