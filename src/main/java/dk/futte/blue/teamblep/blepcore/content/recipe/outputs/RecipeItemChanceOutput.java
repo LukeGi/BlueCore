@@ -4,15 +4,13 @@ import dk.futte.blue.teamblep.blepcore.Utils;
 import dk.futte.blue.teamblep.blepcore.content.inventory.EnumSlotType;
 import dk.futte.blue.teamblep.blepcore.content.inventory.SlotData;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.items.ItemStackHandler;
-import net.minecraftforge.items.SlotItemHandler;
 
 import java.util.List;
 
 /**
  * @author Kelan
- *
- * A recipe that will recipeItemOutput an itemstack with a chance
+ * <p>
+ * A recipe that will recipeItemOutput an itemstack with isInventoryValid chance
  */
 public class RecipeItemChanceOutput extends RecipeItemOutput
 {

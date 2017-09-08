@@ -38,6 +38,12 @@ public class RecipeItemOutput extends RecipeOutput<ItemStack>
     }
 
     @Override
+    public boolean isValid()
+    {
+        return !Utils.isItemStackNull(getOutput());
+    }
+
+    @Override
     public boolean applyOutputs(ItemStack[] inventory, List<SlotData> slots, EnumSlotType slotType, boolean simulate)
     {
         ItemStack outputStack = getOutput();

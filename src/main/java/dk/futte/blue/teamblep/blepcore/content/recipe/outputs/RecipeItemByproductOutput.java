@@ -1,5 +1,6 @@
 package dk.futte.blue.teamblep.blepcore.content.recipe.outputs;
 
+import dk.futte.blue.teamblep.blepcore.Utils;
 import dk.futte.blue.teamblep.blepcore.content.inventory.EnumSlotType;
 import net.minecraft.item.ItemStack;
 
@@ -48,6 +49,12 @@ public class RecipeItemByproductOutput extends RecipeOutput<ItemStack>
     public ItemStack getByproduct()
     {
         return recipeByproductOutput.getOutput();
+    }
+
+    @Override
+    public boolean isValid()
+    {
+        return !Utils.isItemStackNull(getOutput());
     }
 
     @Override

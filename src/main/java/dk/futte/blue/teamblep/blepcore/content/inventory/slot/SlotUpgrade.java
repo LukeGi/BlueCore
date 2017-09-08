@@ -19,7 +19,7 @@ public class SlotUpgrade extends SlotItemHandler
     @Override
     public boolean isItemValid(@Nullable ItemStack stack)
     {
-        //TODO: Check if item is a battery with CapabilityUpgrade.UPGRADE (maybe)
+        //TODO: Check if item is isInventoryValid battery with CapabilityUpgrade.UPGRADE (maybe)
         return true;
     }
 }

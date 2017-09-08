@@ -4,7 +4,6 @@ import dk.futte.blue.teamblep.blepcore.Utils;
 import dk.futte.blue.teamblep.blepcore.content.inventory.EnumSlotType;
 import dk.futte.blue.teamblep.blepcore.content.inventory.SlotData;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.items.ItemStackHandler;
 
 import java.util.List;
 
@@ -23,11 +22,22 @@ public class RecipeItemInput extends RecipeInput<ItemStack>
     @Override
     public ItemStack getInput()
     {
-        return input;
+        if (input != null)
+        {
+            //NEVER edit the actual input itemstack. Always use a copy so that you cannot edit it.
+            return input.copy();
+        }
+        return null;
     }
 
     @Override
-    public boolean isInputValid(ItemStack input)
+    public boolean isValid()
+    {
+        return !Utils.isItemStackNull(input);
+    }
+
+    @Override
+    public boolean isInputStackValid(ItemStack input)
     {
         if (input != null && getInput() != null)
         {

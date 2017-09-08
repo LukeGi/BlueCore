@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * @author Kelan
  */
-public class MachineRecipe<I extends RecipeInput, O extends RecipeOutput>
+public class MachineRecipe<I extends RecipeInput, O extends RecipeOutput, R extends MachineRecipe<I, O, R>>
 {
     protected I input;
     protected O output;
@@ -31,7 +31,17 @@ public class MachineRecipe<I extends RecipeInput, O extends RecipeOutput>
         return output;
     }
 
+    public R getRecipeFor(I input)
+    {
+        return null;
+    }
+
     public boolean processRecipe(ItemStack[] inventory, List<SlotData> slots, boolean simulate)
+    {
+        return false;
+    }
+
+    public boolean isInventoryValid(I recipeInput, O recipeOutput)
     {
         return false;
     }

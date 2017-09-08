@@ -1,5 +1,6 @@
 package dk.futte.blue.teamblep.blepcore.content.tileentity;
 
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
 /**
@@ -110,7 +111,17 @@ public class ProgressBar
             return 0;
         }
 
-        return (int)Math.ceil((float)(ticksElapsed * pixels) / (float)ticksRequired);
+        return (int) Math.ceil((float) (ticksElapsed * pixels) / (float) ticksRequired);
+    }
+
+    public ProgressBar copy()
+    {
+        ProgressBar progressBar = new ProgressBar(this.name, this.ticksRequired, this.ticksElapsed, this.reversed);
+
+        NBTTagCompound nbt = this.writeToNBT(new NBTTagCompound());
+        progressBar.readFromNBT(nbt);
+
+        return progressBar;
     }
 
     @Override

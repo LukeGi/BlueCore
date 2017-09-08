@@ -49,7 +49,7 @@ public class ItemMaterial extends ItemBase implements IItemColor
         {
             colour = Color.WHITE;
         }
-        
+
         int r = colour.getRed() << 16;
         int g = colour.getGreen() << 8;
         int b = colour.getBlue();

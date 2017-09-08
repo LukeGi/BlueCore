@@ -20,7 +20,9 @@ import java.util.stream.Collectors;
 
 public final class Utils
 {
-    private Utils() { }
+    private Utils()
+    {
+    }
 
     private static final Random random = new Random();
 
@@ -40,6 +42,11 @@ public final class Utils
         return itemStack == null || itemStack.stackSize <= 0;
     }
 
+    public static boolean canItemStacksMerge(ItemStack stack1, ItemStack stack2)
+    {
+        return !isItemStackNull(stack1) && !isItemStackNull(stack2) && stack1.isItemEqual(stack2) && stack1.stackSize + stack2.stackSize < stack1.getMaxStackSize();
+    }
+
     public static void crashWithException(Exception exception)
     {
         crashWithException(exception, 42, false);
@@ -49,7 +56,7 @@ public final class Utils
     {
         if (exception == null)
         {
-            Utils.crashWithException(new NullPointerException("You crashed with a null exception??? U dumb :("), 69, false);
+            Utils.crashWithException(new NullPointerException("You crashed with isInventoryValid null exception??? U dumb :("), 69, false);
         } else
         {
             BlepCore.logger.error("Your game appears to have crashed.", exception);
@@ -90,5 +97,20 @@ public final class Utils
     public static <T> boolean instanceOf(Class<T> class1, Class<T> class2)
     {
         return class1.isInstance(class2);
+    }
+
+    public static boolean addStackSize(ItemStack itemStack, int toAdd)
+    {
+        if (itemStack != null)
+        {
+            int newStackSize = itemStack.stackSize + toAdd;
+            if (newStackSize > 0 && newStackSize <= itemStack.getMaxStackSize())
+            {
+                itemStack.stackSize = newStackSize;
+                return true;
+            }
+        }
+
+        return false;
     }
 }

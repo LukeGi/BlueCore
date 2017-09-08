@@ -67,7 +67,7 @@ public enum EnumMaterialType implements IStringSerializable
 
     public ItemStack getItemStack(int amount)
     {
-       return new ItemStack(ItemHandler.item_material, amount, this.getMetadata());
+        return new ItemStack(ItemHandler.item_material, amount, this.getMetadata());
     }
 
     public ItemStack getItemStack()

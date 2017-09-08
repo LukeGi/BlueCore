@@ -82,17 +82,20 @@ public abstract class InventoryMachineContainer<T extends TileEntityAbstractMach
 
     protected abstract void init();
 
-    public void addSlotsToContainer(ContainerMachine<T> container)
+    public void addSlotsToContainer(ContainerMachine<? extends TileEntityAbstractMachine> container)
     {
-        //this does not allow for inventory slots to be moved, this may be fine or this may need to be changed if a button opens something that shifts the inventory, or NEI shifts it.
+        //this does not allow for inventory slots to be moved, this may be fine or this may need to be changed if isInventoryValid button opens something that shifts the inventory, or NEI shifts it.
         //TODO: allow for this to happen ^^
 
         for (SlotData<?> slotData : inventorySlots)
         {
-            IItemHandler inventory = container.getTileEntity().getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-            SlotItemHandler slot = Utils.initializeClassWithConstructor(slotData.getSlotClass(), new Class<?>[]{IItemHandler.class, int.class, int.class, int.class}, new Object[]{inventory, slotData.id, slotData.x, slotData.y});
-            //TODO: addRecipe support for custom slot classes that have different constructor parameters
-            container.addSlotToContainer(slot);
+            IItemHandler inventory = (IItemHandler) container.getTileEntity().getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+            if (inventory != null)
+            {
+                SlotItemHandler slot = Utils.initializeClassWithConstructor(slotData.getSlotClass(), new Class<?>[]{IItemHandler.class, int.class, int.class, int.class}, new Object[]{inventory, slotData.id, slotData.x, slotData.y});
+                //TODO: addRecipe support for custom slot classes that have different constructor parameters
+                container.addSlotToContainer(slot);
+            }
         }
     }
 

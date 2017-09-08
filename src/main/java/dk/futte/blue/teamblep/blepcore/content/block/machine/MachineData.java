@@ -17,7 +17,10 @@ import dk.futte.blue.teamblep.blepcore.content.inventory.slot.SlotBattery;
 import dk.futte.blue.teamblep.blepcore.content.inventory.slot.SlotInput;
 import dk.futte.blue.teamblep.blepcore.content.inventory.slot.SlotOutput;
 import dk.futte.blue.teamblep.blepcore.content.tileentity.core.TileEntityAbstractMachine;
-import dk.futte.blue.teamblep.blepcore.content.tileentity.machine.*;
+import dk.futte.blue.teamblep.blepcore.content.tileentity.machine.TileEntityCentrifuge;
+import dk.futte.blue.teamblep.blepcore.content.tileentity.machine.TileEntityCrusher;
+import dk.futte.blue.teamblep.blepcore.content.tileentity.machine.TileEntityElectrolysisChamber;
+import dk.futte.blue.teamblep.blepcore.content.tileentity.machine.TileEntitySmelter;
 import dk.futte.blue.teamblep.blepcore.refs.Names;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
@@ -86,7 +89,7 @@ public class MachineData<T extends TileEntityAbstractMachine>
     {
         if (this.getBlockClass() == null)
         {
-            BlepCore.logger.error("The machine " + this.getName() + " does not have a block class. How have you done this?");
+            BlepCore.logger.error("The machine " + this.getName() + " does not have isInventoryValid block class. How have you done this?");
             return null;
         }
 

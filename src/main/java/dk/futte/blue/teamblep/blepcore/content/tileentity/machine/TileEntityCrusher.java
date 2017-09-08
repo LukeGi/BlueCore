@@ -2,7 +2,6 @@ package dk.futte.blue.teamblep.blepcore.content.tileentity.machine;
 
 import dk.futte.blue.teamblep.blepcore.Utils;
 import dk.futte.blue.teamblep.blepcore.content.block.machine.MachineData;
-import dk.futte.blue.teamblep.blepcore.content.recipe.MachineRecipe;
 import dk.futte.blue.teamblep.blepcore.content.recipe.RecipeHandler;
 import dk.futte.blue.teamblep.blepcore.content.recipe.inputs.RecipeItemInput;
 import dk.futte.blue.teamblep.blepcore.content.recipe.outputs.RecipeItemByproductOutput;
@@ -17,7 +16,7 @@ import net.minecraft.item.ItemStack;
  * @author Kelan
  */
 
-public class TileEntityCrusher extends TileEntityAbstractMachine
+public class TileEntityCrusher extends TileEntityAbstractMachine<RecipeItemInput, RecipeItemByproductOutput, RecipeCrusher>
 {
     public static final String PROCESS_BAR = "process_time";
 
@@ -50,10 +49,12 @@ public class TileEntityCrusher extends TileEntityAbstractMachine
 
         if (Utils.isItemStackNull(output1) || Utils.isItemStackNull(output2))
         {
+            //If the items in either output slot is null, return a RecipeItemByproductOutput with a null output, as this means an item can be outputted to this slot.
             return new RecipeItemByproductOutput(null, byproduct, 0.0F);
         } else
         {
-            RecipeCrusher recipe = RecipeHandler.getCrusherRecipeFor(getCurrentRecipeInput().getInput());
+            //Else if neither output slots are empty get the output itemstack for the current input itemstack.
+            RecipeCrusher recipe = getCurrentRecipe();
             if (recipe != null)
             {
                 ItemStack recipeResult = recipe.getOutput().getOutput();
@@ -61,8 +62,9 @@ public class TileEntityCrusher extends TileEntityAbstractMachine
                 {
                     if (output1.isItemEqual(recipeResult) || output2.isItemEqual(recipeResult))
                     {
-                        int stackSize1 = output1.isItemEqual(recipeResult) ? output1.stackSize : 64;
-                        int stackSize2 = output2.isItemEqual(recipeResult) ? output2.stackSize : 64;
+                        //If isInventoryValid recipe result exists and the itemstack in either output slot equals it, return isInventoryValid new RecipeItemByproductOutput with the recipe result, as this means an utem can be outputted to this slot.
+                        int stackSize1 = output1.isItemEqual(recipeResult) ? output1.stackSize : output1.getMaxStackSize();
+                        int stackSize2 = output2.isItemEqual(recipeResult) ? output2.stackSize : output2.getMaxStackSize();
 
                         recipeResult.stackSize = Math.min(stackSize1, stackSize2);
                         return new RecipeItemByproductOutput(recipeResult, byproduct, 0.0F);
@@ -75,105 +77,22 @@ public class TileEntityCrusher extends TileEntityAbstractMachine
     }
 
     @Override
-    public boolean canProcess(boolean simulate)
+    public RecipeCrusher getCurrentRecipe()
     {
-        boolean flag = false;
+        RecipeItemInput currentRecipeInput = getCurrentRecipeInput();
 
-        ItemStack inputStack = getCurrentRecipeInput().getInput();
-        RecipeItemByproductOutput currentRecipeOutput = getCurrentRecipeOutput();
-
-        if (currentRecipeOutput != null)
+        if (currentRecipeInput != null)
         {
-            ItemStack outputStack = currentRecipeOutput.getOutput();
-            ItemStack byproductStack = currentRecipeOutput.getByproduct();
-
-            if (!Utils.isItemStackNull(inputStack))
-            {
-                MachineRecipe<RecipeItemInput, RecipeItemByproductOutput> recipe = RecipeHandler.Recipe.CRUSHER.getRecipeFor(inputStack);
-
-                ItemStack recipeResult = recipe.getOutput().getOutput();
-                ItemStack recipeByproduct = recipe.getOutput().getByproduct();
-
-                if (!Utils.isItemStackNull(recipeResult))
-                {
-                    if (Utils.isItemStackNull(recipeByproduct) || Utils.isItemStackNull(byproductStack) || recipeByproduct.stackSize + byproductStack.stackSize <= recipeByproduct.getMaxStackSize())
-                    {
-                        if (Utils.isItemStackNull(outputStack))
-                        {
-                            flag = true;
-                        } else if (outputStack.isItemEqual(recipeResult))
-                        {
-                            if (outputStack.stackSize + recipeResult.stackSize <= outputStack.getMaxStackSize())
-                            {
-                                flag = true;
-                            }
-                        }
-                    }
-                }
-            }
+            ItemStack inputStack = currentRecipeInput.getInput();
+            return (RecipeCrusher) RecipeHandler.Recipe.CRUSHER.getRecipeFor(inputStack);
         }
 
-        ProgressBar processBar = getProgressTracker().getProgressBar(PROCESS_BAR);
-        if (flag)
-        {
-            if (!simulate)
-            {
-                if (!processBar.isDone())
-                {
-                    processBar.tick();
-                }
-
-                if (processBar.isDone())
-                {
-                    processBar.reset();
-                    return true;
-                }
-            }
-            return processBar.isDone();
-        } else
-        {
-            if (!simulate)
-            {
-                processBar.reset();
-            }
-            return false;
-        }
+        return null;
     }
 
     @Override
-    public void process()
+    public ProgressBar getProcessBar()
     {
-        ItemStack inputStack = getCurrentRecipeInput().getInput();
-        if (!Utils.isItemStackNull(inputStack))
-        {
-            RecipeCrusher recipe = RecipeHandler.getCrusherRecipeFor(inputStack);
-            if (recipe != null)
-            {
-                recipe.processRecipe(getInventory().getItemStacks(), getMachineData().getInventoryContainer().getSlotList(), false);
-            }
-        }
-    }
-
-    @Override
-    public boolean updateClient()
-    {
-        return false;
-    }
-
-    @Override
-    public boolean updateServer()
-    {
-        RecipeItemInput recipeInput = getCurrentRecipeInput();
-
-        getProgressTracker().getProgressBar(PROCESS_BAR).setTicksRequired(20);
-        if (recipeInput != null)
-        {
-            if (canProcess(false))
-            {
-                process();
-            }
-            return true;
-        }
-        return false;
+        return getProgressTracker().getProgressBar(PROCESS_BAR);
     }
 }

@@ -49,7 +49,8 @@ public abstract class ContainerMachine<T extends TileEntityAbstractMachine> exte
      * @param inventoryY   The y-position of the top left of the player's inventory
      * @param hotbarX      The x-position of the top left of the player's hotbar
      * @param hotbarY      The y-position of the top left of the player's hotbar
-     * @param slotSpacingX The distance between two slots. Most inventories use a gap of 18 pixels.
+     * @param slotSpacingX The x-distance between two slots. Most inventories use a gap of 18 pixels.
+     * @param slotSpacingY The y-distance between two slots. Most inventories use a gap of 18 pixels.
      */
     public void addPlayerSlots(int inventoryX, int inventoryY, int hotbarX, int hotbarY, int slotSpacingX, int slotSpacingY)
     {
@@ -89,7 +90,7 @@ public abstract class ContainerMachine<T extends TileEntityAbstractMachine> exte
     @Override
     public Slot addSlotToContainer(Slot slotIn)
     {
-        //public override of a protected function
+        //public override of isInventoryValid protected function
         return super.addSlotToContainer(slotIn);
     }
 
@@ -144,9 +145,9 @@ public abstract class ContainerMachine<T extends TileEntityAbstractMachine> exte
     }
 
     /**
-     * Called when a slot in the players inventory is shift clicked, and the item will try to be placed in one of the machines
+     * Called when isInventoryValid slot in the players inventory is shift clicked, and the item will try to be placed in one of the machines
      * slots. Override this for custom functionality.
-     * This method should be overridden if when a certain item is shift clicked it should land in a certain slot.
+     * This method should be overridden if when isInventoryValid certain item is shift clicked it should land in isInventoryValid certain slot.
      * <p>
      * Adds SlotRange(s) to the list of existing slot ranges that correspond to what slots the shift clicked item will land in.
      *
@@ -163,7 +164,7 @@ public abstract class ContainerMachine<T extends TileEntityAbstractMachine> exte
     }
 
     /**
-     * Called when a slot in the players inventory is shift clicked, and the item will try and be placed in the players inventory
+     * Called when isInventoryValid slot in the players inventory is shift clicked, and the item will try and be placed in the players inventory
      * or hotbar. Override this for custom functionality.
      * <p>
      * Adds SlotRange(s) to the list of existing slot ranges that correspond to what slots the shift clicked item will land in.

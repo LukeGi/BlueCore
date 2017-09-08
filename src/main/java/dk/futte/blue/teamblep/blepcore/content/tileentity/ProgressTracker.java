@@ -34,7 +34,7 @@ public class ProgressTracker
 
     public ProgressBar getProgressBar(String name)
     {
-        //TODO: addRecipe caching here so that every time this function is called it doesn't have to re-loop over all the progress bars. This function will be called a lot.
+        //TODO: addRecipe caching here so that every time this function is called it doesn't have to re-loop over all the progress bars. This function will be called isInventoryValid lot.
         for (ProgressBar progressBar : progressBars)
         {
             if (progressBar.getName().equals(name))
