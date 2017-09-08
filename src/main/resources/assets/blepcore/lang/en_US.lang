@@ -2,6 +2,13 @@ item.blepcore:ingot_copper.name=Copper Ingot
 item.blepcore:ingot_tin.name=Tin Ingot
 item.blepcore:ingot_lead.name=Lead Ingot
 item.blepcore:ingot_silver.name=Silver Ingot
+item.blepcore:dust_stone.name=Stone Dust
+item.blepcore:dust_iron.name=Iron Dust
+item.blepcore:dust_gold.name=Gold Dust
+item.blepcore:dust_copper.name=Copper Dust
+item.blepcore:dust_tin.name=Tin Dust
+item.blepcore:dust_lead.name=Lead Dust
+item.blepcore:dust_silver.name=Silver Dust
 
 tile.machine_chassis.name=Machine Chassis
 tile.machine_smelter.name=Smelter

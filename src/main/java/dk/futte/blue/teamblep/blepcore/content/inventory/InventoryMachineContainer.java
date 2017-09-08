@@ -91,7 +91,7 @@ public abstract class InventoryMachineContainer<T extends TileEntityAbstractMach
         {
             IItemHandler inventory = container.getTileEntity().getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
             SlotItemHandler slot = Utils.initializeClassWithConstructor(slotData.getSlotClass(), new Class<?>[]{IItemHandler.class, int.class, int.class, int.class}, new Object[]{inventory, slotData.id, slotData.x, slotData.y});
-            //TODO: add support for custom slot classes that have different constructor parameters
+            //TODO: addRecipe support for custom slot classes that have different constructor parameters
             container.addSlotToContainer(slot);
         }
     }

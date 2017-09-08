@@ -3,6 +3,8 @@ package dk.futte.blue.teamblep.blepcore.content.tileentity.machine;
 import dk.futte.blue.teamblep.blepcore.Utils;
 import dk.futte.blue.teamblep.blepcore.content.block.machine.MachineData;
 import dk.futte.blue.teamblep.blepcore.content.inventory.SlotData;
+import dk.futte.blue.teamblep.blepcore.content.recipe.inputs.RecipeItemInput;
+import dk.futte.blue.teamblep.blepcore.content.recipe.outputs.RecipeOutput;
 import dk.futte.blue.teamblep.blepcore.content.tileentity.ProgressBar;
 import dk.futte.blue.teamblep.blepcore.content.tileentity.ProgressTracker;
 import dk.futte.blue.teamblep.blepcore.content.tileentity.core.TileEntityAbstractMachine;
@@ -35,6 +37,52 @@ public class TileEntitySmelter extends TileEntityAbstractMachine
     }
 
     @Override
+    public RecipeItemInput getCurrentRecipeInput()
+    {
+        return new RecipeItemInput(inventory.getStackInSlot(getMachineData().getInventoryContainer().getSlotData("inputSlot").getId()));
+    }
+
+    @Override
+    public RecipeOutput getCurrentRecipeOutput()
+    {
+        return null;
+    }
+
+    @Override
+    public boolean canProcess(boolean simulate)
+    {
+        ItemStack inputStack = getCurrentRecipeInput().getInput();
+        ItemStack outputStack = inventory.getStackInSlot(getMachineData().getInventoryContainer().getSlotData("outputSlot").getId());
+
+        if (!Utils.isItemStackNull(inputStack))
+        {
+            ItemStack smeltingResult = FurnaceRecipes.instance().getSmeltingResult(inputStack);
+
+            if (!Utils.isItemStackNull(smeltingResult))
+            {
+                if (Utils.isItemStackNull(outputStack))
+                {
+                    return true;
+                } else if (outputStack.isItemEqual(smeltingResult))
+                {
+                    if (outputStack.stackSize + smeltingResult.stackSize <= outputStack.getMaxStackSize())
+                    {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
+
+    @Override
+    public void process()
+    {
+
+    }
+
+    @Override
     public boolean updateClient()
     {
         return false;
@@ -61,7 +109,7 @@ public class TileEntitySmelter extends TileEntityAbstractMachine
 
         if (isBurning() || !Utils.isItemStackNull(fuelStack) && !Utils.isItemStackNull(inputStack))
         {
-            if (!isBurning() && canProcessItem(inputStack, outputStack))
+            if (!isBurning() && canProcess(true))
             {
                 getProgressTracker().getProgressBar(FUEL_BAR).setTicksRequired(TileEntityFurnace.getItemBurnTime(fuelStack));
                 getProgressTracker().getProgressBar(FUEL_BAR).reset();
@@ -72,7 +120,7 @@ public class TileEntitySmelter extends TileEntityAbstractMachine
                 }
             }
 
-            if (isBurning() && canProcessItem(inputStack, outputStack))
+            if (isBurning() && canProcess(true))
             {
                 getProgressTracker().getProgressBar(PROCESS_BAR).tick();
                 updateClient = true;
@@ -104,33 +152,9 @@ public class TileEntitySmelter extends TileEntityAbstractMachine
         return !getProgressTracker().getProgressBar(FUEL_BAR).isDone();
     }
 
-    public boolean canProcessItem(ItemStack inputSlot, ItemStack outputSlot)
-    {
-        if (!Utils.isItemStackNull(inputSlot))
-        {
-            ItemStack smeltingResult = FurnaceRecipes.instance().getSmeltingResult(inputSlot);
-
-            if (!Utils.isItemStackNull(smeltingResult))
-            {
-                if (Utils.isItemStackNull(outputSlot))
-                {
-                    return true;
-                } else if (outputSlot.isItemEqual(smeltingResult))
-                {
-                    if (outputSlot.stackSize + smeltingResult.stackSize <= outputSlot.getMaxStackSize())
-                    {
-                        return true;
-                    }
-                }
-            }
-        }
-
-        return false;
-    }
-
     public void onProcessItem(ItemStack inputSlot, ItemStack outputSlot)
     {
-        if (canProcessItem(inputSlot, outputSlot))
+        if (canProcess(true))
         {
             ItemStack smeltingResult = FurnaceRecipes.instance().getSmeltingResult(inputSlot);
 

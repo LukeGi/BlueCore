@@ -48,7 +48,7 @@ public class MachineData<T extends TileEntityAbstractMachine>
             addSlot("inputSlot", 28, 37, EnumSlotType.INPUT, SlotInput.class);
             addSlot("outputSlot1", 82, 37, EnumSlotType.OUTPUT, SlotOutput.class);
             addSlot("outputSlot2", 100, 37, EnumSlotType.OUTPUT, SlotOutput.class);
-            addSlot("byproductSlot", 78, 63, EnumSlotType.OUTPUT, SlotOutput.class);
+            addSlot("byproductSlot", 78, 63, EnumSlotType.BYPRODUCT, SlotOutput.class);
             addSlot("batterySlot", 152, 74, EnumSlotType.BATTERY, SlotBattery.class);
         }
     });

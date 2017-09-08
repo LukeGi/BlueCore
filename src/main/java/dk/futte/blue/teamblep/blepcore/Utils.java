@@ -3,19 +3,38 @@ package dk.futte.blue.teamblep.blepcore;
 import dk.futte.blue.teamblep.blepcore.content.block.machine.MachineData;
 import dk.futte.blue.teamblep.blepcore.content.inventory.GuiHandler;
 import dk.futte.blue.teamblep.blepcore.refs.ModInfo;
+import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 /**
  * @author Kelan
  */
 
-public class Utils
+public final class Utils
 {
+    private Utils() { }
+
+    private static final Random random = new Random();
+
+    @SideOnly(Side.CLIENT)
+    public static Random worldRandom()
+    {
+        return Minecraft.getMinecraft().theWorld.rand;
+    }
+
+    public static Random staticRandom()
+    {
+        return random;
+    }
+
     public static boolean isItemStackNull(ItemStack itemStack)
     {
         return itemStack == null || itemStack.stackSize <= 0;

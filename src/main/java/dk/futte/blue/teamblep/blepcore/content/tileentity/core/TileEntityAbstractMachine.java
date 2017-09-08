@@ -3,9 +3,12 @@ package dk.futte.blue.teamblep.blepcore.content.tileentity.core;
 import com.sun.istack.internal.NotNull;
 import dk.futte.blue.teamblep.blepcore.Utils;
 import dk.futte.blue.teamblep.blepcore.content.block.machine.MachineData;
+import dk.futte.blue.teamblep.blepcore.content.recipe.inputs.RecipeInput;
+import dk.futte.blue.teamblep.blepcore.content.recipe.outputs.RecipeOutput;
 import dk.futte.blue.teamblep.blepcore.content.tileentity.ProgressTracker;
 import dk.futte.blue.teamblep.blepcore.content.tileentity.capabilities.ItemHandlerMachine;
 import dk.futte.blue.teamblep.blepcore.refs.Names;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.text.ITextComponent;
@@ -136,4 +139,26 @@ public abstract class TileEntityAbstractMachine extends TileEntityAbstractTickab
         }
         super.readFromNBT(compound);
     }
+
+    /**
+     * @return A RecipeInput that contains the current items/fluids in the input slots for this machine. Shouldn't return null.
+     */
+    public abstract RecipeInput getCurrentRecipeInput();
+
+    /**
+     * Returns a RecipeOutput that contains the current items in the machines output slots.
+     * @return
+     */
+    public abstract RecipeOutput getCurrentRecipeOutput();
+
+    /**
+     * Returns true if this machine can start processing based on its current state, including the energy it has stored
+     * the input item or fluid, and the item(s) or fluid(s) in the recipeItemOutput slots.
+     *
+     * @param simulate True if this should not tick any progress bars.
+     * @return true if this machine can start processing.
+     */
+    public abstract boolean canProcess(boolean simulate);
+
+    public abstract void process();
 }

@@ -44,7 +44,7 @@ public class ContainerSmelter extends ContainerMachine<TileEntitySmelter>
             {
                 SlotData slotData = (SlotData) o;
                 int slotId = machineInventory.getStart() + slotData.getId();
-                if (slotData.getSlotType() != EnumSlotType.OUTPUT) //we cannot shift click something into the output slot
+                if (slotData.getSlotType() != EnumSlotType.OUTPUT) //we cannot shift click something into the recipeItemOutput slot
                 {
                     if (FurnaceRecipes.instance().getSmeltingResult(stackInSlot) != null && inventoryContainer.getSlotData("inputSlot").getId() == slotId)
                     {
