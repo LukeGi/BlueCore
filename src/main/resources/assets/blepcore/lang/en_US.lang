@@ -13,3 +13,4 @@ item.blepcore:dust_silver.name=Silver Dust
 tile.machine_chassis.name=Machine Chassis
 tile.machine_smelter.name=Smelter
 tile.machine_crusher.name=Crusher
+tile.blepcore:ladder.name=Escalating Ladder
