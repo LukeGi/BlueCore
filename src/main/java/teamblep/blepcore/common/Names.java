@@ -12,6 +12,7 @@ public class Names
         public static final String MACHINE_CRUSHER = "machine_crusher";
         public static final String MACHINE_ELECTROLYSIS_CHAMBER = "machine_electrolysis_chamber";
         public static final String MACHINE_CENTRIFUGE = "machine_centrifuge";
+        public static final String LADDER = "ladder";
     }
 
     public static class Items
