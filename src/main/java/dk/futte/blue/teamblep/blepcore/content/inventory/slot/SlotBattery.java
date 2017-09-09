@@ -19,7 +19,7 @@ public class SlotBattery extends SlotItemHandler
     @Override
     public boolean isItemValid(@Nullable ItemStack stack)
     {
-        //TODO: Check if item is a battery with CapabilityEnergy.ENERGY
+        //TODO: Check if item is isInventoryValid battery with CapabilityEnergy.ENERGY
         return true;
     }
 }

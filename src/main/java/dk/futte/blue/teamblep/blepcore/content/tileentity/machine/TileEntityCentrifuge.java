@@ -1,6 +1,9 @@
 package dk.futte.blue.teamblep.blepcore.content.tileentity.machine;
 
 import dk.futte.blue.teamblep.blepcore.content.block.machine.MachineData;
+import dk.futte.blue.teamblep.blepcore.content.recipe.MachineRecipe;
+import dk.futte.blue.teamblep.blepcore.content.recipe.inputs.RecipeInput;
+import dk.futte.blue.teamblep.blepcore.content.recipe.outputs.RecipeOutput;
 import dk.futte.blue.teamblep.blepcore.content.tileentity.ProgressBar;
 import dk.futte.blue.teamblep.blepcore.content.tileentity.ProgressTracker;
 import dk.futte.blue.teamblep.blepcore.content.tileentity.core.TileEntityAbstractMachine;
@@ -27,6 +30,30 @@ public class TileEntityCentrifuge extends TileEntityAbstractMachine
     }
 
     @Override
+    public RecipeInput getCurrentRecipeInput()
+    {
+        return null;
+    }
+
+    @Override
+    public RecipeOutput getCurrentRecipeOutput()
+    {
+        return null;
+    }
+
+    @Override
+    public MachineRecipe getCurrentRecipe()
+    {
+        return null;
+    }
+
+    @Override
+    public ProgressBar getProcessBar()
+    {
+        return null;
+    }
+
+    @Override
     public boolean updateClient()
     {
         return false;
@@ -35,7 +62,6 @@ public class TileEntityCentrifuge extends TileEntityAbstractMachine
     @Override
     public boolean updateServer()
     {
-        getProgressTracker().tick();
-        return true;
+        return false;
     }
 }

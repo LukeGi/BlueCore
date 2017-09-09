@@ -43,11 +43,16 @@ public class ItemMaterial extends ItemBase implements IItemColor
     @Override
     public int getColorFromItemstack(ItemStack stack, int tintIndex)
     {
-        Color color = EnumMaterialType.VARIANTS[stack.getMetadata()].getColor();
+        Color colour = EnumMaterialType.VARIANTS[stack.getMetadata()].getColor();
 
-        int r = color.getRed() << 16;
-        int g = color.getGreen() << 8;
-        int b = color.getBlue();
+        if (colour == null)
+        {
+            colour = Color.WHITE;
+        }
+
+        int r = colour.getRed() << 16;
+        int g = colour.getGreen() << 8;
+        int b = colour.getBlue();
 
         return r + b + g;
     }

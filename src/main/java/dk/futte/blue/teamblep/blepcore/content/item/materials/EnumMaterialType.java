@@ -1,5 +1,7 @@
 package dk.futte.blue.teamblep.blepcore.content.item.materials;
 
+import dk.futte.blue.teamblep.blepcore.content.item.ItemHandler;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
 
 import java.awt.*;
@@ -18,6 +20,9 @@ public enum EnumMaterialType implements IStringSerializable
     INGOT_SILVER(SILVER.getColor()),
 
     /* DUSTS */ //TODO: maybe change this
+    DUST_STONE(null),
+    DUST_IRON(IRON.getColor()),
+    DUST_GOLD(GOLD.getColor()),
     DUST_COPPER(COPPER.getColor()),
     DUST_TIN(TIN.getColor()),
     DUST_LEAD(LEAD.getColor()),
@@ -28,8 +33,11 @@ public enum EnumMaterialType implements IStringSerializable
     static
     {
         VARIANTS = new EnumMaterialType[values().length];
+
         for (EnumMaterialType type : values())
+        {
             VARIANTS[type.getMetadata()] = type;
+        }
     }
 
     private Color color;
@@ -55,5 +63,15 @@ public enum EnumMaterialType implements IStringSerializable
     public Color getColor()
     {
         return color;
+    }
+
+    public ItemStack getItemStack(int amount)
+    {
+        return new ItemStack(ItemHandler.item_material, amount, this.getMetadata());
+    }
+
+    public ItemStack getItemStack()
+    {
+        return getItemStack(1);
     }
 }

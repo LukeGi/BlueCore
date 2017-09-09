@@ -83,4 +83,9 @@ public class ItemHandlerMachine extends ItemStackHandler
 //        }
         return super.extractItem(slot, amount, simulate);
     }
+
+    public ItemStack[] getItemStacks()
+    {
+        return this.stacks;
+    }
 }

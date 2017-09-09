@@ -29,7 +29,7 @@ public abstract class TileEntityAbstractTickable extends TileEntityAbstractBase 
     /**
      * Update this TileEntity on the clientside. Used for things such as rendering and other client-only things.
      *
-     * @return true if the server needs to be notified of a change.
+     * @return true if the server needs to be notified of isInventoryValid change.
      */
     @SideOnly(Side.CLIENT)
     public abstract boolean updateClient();
@@ -37,7 +37,7 @@ public abstract class TileEntityAbstractTickable extends TileEntityAbstractBase 
     /**
      * Update this TileEntity on the serverside. Used for all serverside block updates, such as processing items.
      *
-     * @return true if the client needs to be notified of a change.
+     * @return true if the client needs to be notified of isInventoryValid change.
      */
     public abstract boolean updateServer();
 }

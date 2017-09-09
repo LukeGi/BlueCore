@@ -5,5 +5,5 @@ package dk.futte.blue.teamblep.blepcore.content.inventory;
  */
 public enum EnumSlotType
 {
-    INPUT, OUTPUT, UPGRADE, BATTERY
+    INPUT, OUTPUT, BYPRODUCT, UPGRADE, BATTERY
 }

@@ -3,9 +3,15 @@ package dk.futte.blue.teamblep.blepcore.content.tileentity.core;
 import com.sun.istack.internal.NotNull;
 import dk.futte.blue.teamblep.blepcore.Utils;
 import dk.futte.blue.teamblep.blepcore.content.block.machine.MachineData;
+import dk.futte.blue.teamblep.blepcore.content.inventory.InventoryMachineContainer;
+import dk.futte.blue.teamblep.blepcore.content.recipe.MachineRecipe;
+import dk.futte.blue.teamblep.blepcore.content.recipe.inputs.RecipeInput;
+import dk.futte.blue.teamblep.blepcore.content.recipe.outputs.RecipeOutput;
+import dk.futte.blue.teamblep.blepcore.content.tileentity.ProgressBar;
 import dk.futte.blue.teamblep.blepcore.content.tileentity.ProgressTracker;
 import dk.futte.blue.teamblep.blepcore.content.tileentity.capabilities.ItemHandlerMachine;
 import dk.futte.blue.teamblep.blepcore.refs.Names;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.text.ITextComponent;
@@ -20,14 +26,14 @@ import javax.annotation.Nullable;
  * @author Kelan
  */
 
-public abstract class TileEntityAbstractMachine extends TileEntityAbstractTickable
+public abstract class TileEntityAbstractMachine<I extends RecipeInput, O extends RecipeOutput, R extends MachineRecipe<I, O, R>> extends TileEntityAbstractTickable
 {
     protected ItemHandlerMachine inventory;
     protected ProgressTracker progressTracker = createProgressTracker();
-    protected MachineData machineData;
+    protected MachineData<? extends TileEntityAbstractMachine> machineData;
     protected EnumFacing facing = EnumFacing.NORTH;
 
-    public TileEntityAbstractMachine(MachineData machineData)
+    public TileEntityAbstractMachine(MachineData<? extends TileEntityAbstractMachine> machineData)
     {
         if (machineData == null)
         {
@@ -62,11 +68,12 @@ public abstract class TileEntityAbstractMachine extends TileEntityAbstractTickab
     }
 
     @NotNull
-    public MachineData getMachineData()
+    public MachineData<? extends TileEntityAbstractMachine> getMachineData()
     {
         return machineData;
     }
 
+    @NotNull
     public EnumFacing getFacing()
     {
         return facing;
@@ -135,5 +142,134 @@ public abstract class TileEntityAbstractMachine extends TileEntityAbstractTickab
             facing = EnumFacing.VALUES[compound.getInteger("[BLEPCORE]facing")];
         }
         super.readFromNBT(compound);
+    }
+
+    /**
+     * @return A RecipeInput that contains the current items/fluids in the input slots for this machine. Shouldn't return null.
+     */
+    public abstract I getCurrentRecipeInput();
+
+    /**
+     * Returns a RecipeOutput that contains the state of the machines current output slots. This should return a null RecipeOutput if
+     * the machine cannot process items given it's current state, otherwise it should return a RecipeOutput containing the ItemStack/FluidStack
+     * that the machine has in its output slot. If this machine has multiple output slots, this function should check against the recipe result
+     * for the current input slot and return the ItemStack in the slot that contains the recipe result, if any do.
+     *
+     * @return A RecipeOutput that contains the current items/fluids in the output slots for this machine.
+     */
+    public abstract O getCurrentRecipeOutput();
+
+    public abstract R getCurrentRecipe();
+
+    /**
+     * @return The process bar that ticks for this machine to output items.
+     */
+    public abstract ProgressBar getProcessBar();
+
+    public boolean tickProgressBar(ProgressBar progressBar, boolean doTick, boolean doReset)
+    {
+        if (!progressBar.isDone() && doTick)
+        {
+            progressBar.tick();
+        }
+
+        if (progressBar.isDone())
+        {
+            if (doReset)
+            {
+                progressBar.reset();
+            }
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Returns true if this machine can start processing based on its current state, including the energy it has stored
+     * the input item or fluid, and the item(s) or fluid(s) in the recipeItemOutput slots.
+     *
+     * @param simulate True if this should not actually change anything such as progress bars or itemstacks.
+     * @return true if this machine can start processing.
+     */
+    public boolean canProcess(boolean simulate)
+    {
+        ProgressBar processBar = getProcessBar();
+        if (processBar != null)
+        {
+            if (isInventoryValid())
+            {
+                return tickProgressBar(processBar, !simulate, !simulate);
+            } else
+            {
+                if (!simulate)
+                {
+                    processBar.reset();
+                }
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * @return True if the items/fluids in the machines inventory are valid for processing.
+     */
+    public boolean isInventoryValid()
+    {
+        I currentInputObject = getCurrentRecipeInput();
+        O currentRecipeOutput = getCurrentRecipeOutput();
+
+        R currentRecipe = getCurrentRecipe();
+
+        if (currentInputObject != null && currentRecipeOutput != null && currentRecipe != null)
+        {
+            return currentRecipe.isInventoryValid(currentInputObject, currentRecipeOutput);
+        }
+        return false;
+    }
+
+    /**
+     * Called whenever the machine should process the items/fluids inside it.
+     */
+    public void process()
+    {
+        Object inputObject = getCurrentRecipeInput().getInput();
+
+        if (inputObject instanceof ItemStack)
+        {
+            ItemStack inputStack = (ItemStack) inputObject;
+            if (!Utils.isItemStackNull(inputStack))
+            {
+                R recipe = getCurrentRecipe();
+                if (recipe != null)
+                {
+                    InventoryMachineContainer<? extends TileEntityAbstractMachine> inventoryContainer = getMachineData().getInventoryContainer();
+                    recipe.processRecipe(getInventory().getItemStacks(), inventoryContainer.getSlotList(), false);
+                }
+            }
+        }
+    }
+
+    @Override
+    public boolean updateClient()
+    {
+        return false;
+    }
+
+    @Override
+    public boolean updateServer()
+    {
+        I recipeInput = getCurrentRecipeInput();
+
+        if (recipeInput != null)
+        {
+            if (canProcess(false))
+            {
+                process();
+            }
+            return true;
+        }
+        return false;
     }
 }

@@ -26,6 +26,21 @@
           "layer0": "blepcore:items/ingot"
         }
       },
+      "dust_stone": {
+        "textures": {
+          "layer0": "blepcore:items/dust_stone"
+        }
+      },
+      "dust_iron": {
+        "textures": {
+          "layer0": "blepcore:items/dust"
+        }
+      },
+      "dust_gold": {
+        "textures": {
+          "layer0": "blepcore:items/dust"
+        }
+      },
       "dust_copper": {
         "textures": {
           "layer0": "blepcore:items/dust"

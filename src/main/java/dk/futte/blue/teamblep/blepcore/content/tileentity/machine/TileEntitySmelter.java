@@ -3,11 +3,15 @@ package dk.futte.blue.teamblep.blepcore.content.tileentity.machine;
 import dk.futte.blue.teamblep.blepcore.Utils;
 import dk.futte.blue.teamblep.blepcore.content.block.machine.MachineData;
 import dk.futte.blue.teamblep.blepcore.content.inventory.SlotData;
+import dk.futte.blue.teamblep.blepcore.content.recipe.RecipeHandler;
+import dk.futte.blue.teamblep.blepcore.content.recipe.inputs.RecipeItemInput;
+import dk.futte.blue.teamblep.blepcore.content.recipe.outputs.RecipeItemOutput;
+import dk.futte.blue.teamblep.blepcore.content.recipe.outputs.RecipeOutput;
+import dk.futte.blue.teamblep.blepcore.content.recipe.recipes.RecipeSmelter;
 import dk.futte.blue.teamblep.blepcore.content.tileentity.ProgressBar;
 import dk.futte.blue.teamblep.blepcore.content.tileentity.ProgressTracker;
 import dk.futte.blue.teamblep.blepcore.content.tileentity.core.TileEntityAbstractMachine;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.tileentity.TileEntityFurnace;
 
 /**
@@ -35,119 +39,75 @@ public class TileEntitySmelter extends TileEntityAbstractMachine
     }
 
     @Override
-    public boolean updateClient()
+    public RecipeItemInput getCurrentRecipeInput()
     {
-        return false;
+        return new RecipeItemInput(inventory.getStackInSlot(getMachineData().getInventoryContainer().getSlotData("inputSlot").getId()));
     }
 
     @Override
-    public boolean updateServer()
+    public RecipeOutput getCurrentRecipeOutput()
     {
-        boolean updateClient = false;
+        return new RecipeItemOutput(inventory.getStackInSlot(getMachineData().getInventoryContainer().getSlotData("outputSlot").getId()));
+    }
 
-        SlotData inputSlot = getMachineData().getInventoryContainer().getSlotData("inputSlot");
-        SlotData outputSlot = getMachineData().getInventoryContainer().getSlotData("outputSlot");
-        SlotData fuelSlot = getMachineData().getInventoryContainer().getSlotData("fuelSlot");
+    @Override
+    public RecipeSmelter getCurrentRecipe()
+    {
+        RecipeItemInput currentRecipeInput = getCurrentRecipeInput();
 
-        ItemStack inputStack = inventory.getStackInSlot(inputSlot.getId());
-        ItemStack outputStack = inventory.getStackInSlot(outputSlot.getId());
-        ItemStack fuelStack = inventory.getStackInSlot(fuelSlot.getId());
-
-        if (isBurning())
+        if (currentRecipeInput != null)
         {
-            getProgressTracker().getProgressBar(FUEL_BAR).tick();
-            updateClient = true;
+            ItemStack inputStack = currentRecipeInput.getInput();
+            return (RecipeSmelter) RecipeHandler.Recipe.SMELTER.getRecipeFor(inputStack);
         }
 
-        if (isBurning() || !Utils.isItemStackNull(fuelStack) && !Utils.isItemStackNull(inputStack))
-        {
-            if (!isBurning() && canProcessItem(inputStack, outputStack))
-            {
-                getProgressTracker().getProgressBar(FUEL_BAR).setTicksRequired(TileEntityFurnace.getItemBurnTime(fuelStack));
-                getProgressTracker().getProgressBar(FUEL_BAR).reset();
-
-                if (isBurning())
-                {
-                    inventory.decrStackSize(fuelSlot.getId(), 1);
-                }
-            }
-
-            if (isBurning() && canProcessItem(inputStack, outputStack))
-            {
-                getProgressTracker().getProgressBar(PROCESS_BAR).tick();
-                updateClient = true;
-
-                if (!isSmelting())
-                {
-                    getProgressTracker().getProgressBar(PROCESS_BAR).reset();
-                    onProcessItem(inputStack, outputStack);
-                }
-            } else
-            {
-                getProgressTracker().getProgressBar(PROCESS_BAR).reset();
-            }
-        } else if (!isBurning() && isSmelting())
-        {
-            getProgressTracker().getProgressBar(PROCESS_BAR).reset();
-        }
-
-        return updateClient;
+        return null;
     }
 
-    public boolean isSmelting()
+    @Override
+    public ProgressBar getProcessBar()
     {
-        return !getProgressTracker().getProgressBar(PROCESS_BAR).isDone();
+        return getProgressTracker().getProgressBar(PROCESS_BAR);
     }
 
-    public boolean isBurning()
+    public ProgressBar getFuelBar()
     {
-        return !getProgressTracker().getProgressBar(FUEL_BAR).isDone();
+        return getProgressTracker().getProgressBar(FUEL_BAR);
     }
 
-    public boolean canProcessItem(ItemStack inputSlot, ItemStack outputSlot)
+    @Override
+    public boolean canProcess(boolean simulate)
     {
-        if (!Utils.isItemStackNull(inputSlot))
+        float efficiency = 1.5F; //1.5x the output of the vanilla furnace for the same fuel.
+
+        ProgressBar fuelBar = getFuelBar();
+        if (fuelBar != null)
         {
-            ItemStack smeltingResult = FurnaceRecipes.instance().getSmeltingResult(inputSlot);
+            SlotData fuelSlot = getMachineData().getInventoryContainer().getSlotData("fuelSlot");
 
-            if (!Utils.isItemStackNull(smeltingResult))
+            if (fuelSlot != null)
             {
-                if (Utils.isItemStackNull(outputSlot))
+                boolean wasBurning = !fuelBar.isDone();
+
+                ItemStack fuelStack = inventory.getStackInSlot(fuelSlot.getId());
+
+                if (tickProgressBar(fuelBar, !simulate, false) && !Utils.isItemStackNull(fuelStack) && TileEntityFurnace.isItemFuel(fuelStack) && isInventoryValid())
                 {
-                    return true;
-                } else if (outputSlot.isItemEqual(smeltingResult))
-                {
-                    if (outputSlot.stackSize + smeltingResult.stackSize <= outputSlot.getMaxStackSize())
+                    fuelBar.setTicksRequired((int) (TileEntityFurnace.getItemBurnTime(fuelStack) * ((float) getProcessBar().getTicksRequired() / 200.0F) * efficiency));
+                    fuelBar.reset();
+
+                    if (!Utils.addStackSize(fuelStack, -1))
                     {
-                        return true;
+                        inventory.setStackInSlot(fuelSlot.getId(), null);
                     }
                 }
+
+                if (wasBurning)
+                {
+                    return super.canProcess(simulate);
+                }
             }
         }
-
         return false;
-    }
-
-    public void onProcessItem(ItemStack inputSlot, ItemStack outputSlot)
-    {
-        if (canProcessItem(inputSlot, outputSlot))
-        {
-            ItemStack smeltingResult = FurnaceRecipes.instance().getSmeltingResult(inputSlot);
-
-            if (Utils.isItemStackNull(outputSlot))
-            {
-                inventory.setStackInSlot(getMachineData().getInventoryContainer().getSlotData("outputSlot").getId(), smeltingResult.copy());
-            } else if (outputSlot.getItem() == smeltingResult.getItem())
-            {
-                outputSlot.stackSize += smeltingResult.stackSize;
-            }
-
-            inputSlot.stackSize--;
-
-            if (inputSlot.stackSize <= 0)
-            {
-                inventory.setStackInSlot(getMachineData().getInventoryContainer().getSlotData("inputSlot").getId(), null);
-            }
-        }
     }
 }

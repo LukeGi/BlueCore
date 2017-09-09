@@ -3,6 +3,7 @@ package dk.futte.blue.teamblep.blepcore;
 import dk.futte.blue.teamblep.blepcore.content.inventory.GuiHandler;
 import dk.futte.blue.teamblep.blepcore.content.item.ItemHandler;
 import dk.futte.blue.teamblep.blepcore.content.item.materials.ItemMaterial;
+import dk.futte.blue.teamblep.blepcore.content.recipe.RecipeHandler;
 import dk.futte.blue.teamblep.blepcore.proxy.IProxy;
 import dk.futte.blue.teamblep.blepcore.refs.ModInfo;
 import net.minecraft.client.Minecraft;
@@ -58,6 +59,7 @@ public class BlepCore
             //noinspection MethodCallSideOnly
             Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new ItemMaterial(), ItemHandler.item_material);
         GuiHandler.init();
+        RecipeHandler.initRecipes();
     }
 
     @Mod.EventHandler

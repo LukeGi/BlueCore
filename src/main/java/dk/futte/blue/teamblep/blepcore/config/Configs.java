@@ -9,6 +9,6 @@ import net.minecraftforge.common.config.Config;
 @Config(modid = ModInfo.MOD_ID, name = ModInfo.MOD_NAME)
 public class Configs
 {
-    @Config.Comment("This is a test config")
+    @Config.Comment("This is isInventoryValid test config")
     public static boolean shouldDoThing = true;
 }
