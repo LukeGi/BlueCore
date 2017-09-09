@@ -2,9 +2,12 @@ package dk.futte.blue.teamblep.blepcore.proxy;
 
 import dk.futte.blue.teamblep.blepcore.content.block.BlockHandler;
 import dk.futte.blue.teamblep.blepcore.content.item.ItemHandler;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.Mod;
@@ -44,5 +47,17 @@ public class ClientProxy implements IProxy
     public void registerModel(ItemStack itemStack, ResourceLocation resourceLocation, String variant)
     {
         modelRegistry.put(itemStack, new ModelResourceLocation(resourceLocation, variant));
+    }
+
+    @Override
+    public World getClientWorld()
+    {
+        return Minecraft.getMinecraft().theWorld;
+    }
+
+    @Override
+    public EntityPlayer getClientPlayer()
+    {
+        return Minecraft.getMinecraft().thePlayer;
     }
 }
