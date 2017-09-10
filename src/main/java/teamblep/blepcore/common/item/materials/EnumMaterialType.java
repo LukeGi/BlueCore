@@ -1,52 +1,66 @@
 package teamblep.blepcore.common.item.materials;
 
-import teamblep.blepcore.common.item.ItemHandler;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
 
-import java.awt.*;
-
-import static teamblep.blepcore.common.item.materials.EnumMetal.*;
-
 /**
+ * This enum is for deciding which blocks/items a material will register with when the game loads.
+ *
  * @author Blue
  */
 public enum EnumMaterialType implements IStringSerializable
 {
-    /* INGOTS */
-    INGOT_COPPER(COPPER.getColor()),
-    INGOT_TIN(TIN.getColor()),
-    INGOT_LEAD(LEAD.getColor()),
-    INGOT_SILVER(SILVER.getColor()),
+    // ##### BLOCKS #####
+    ORE(0, EnumRegistryType.BLOCK),
+    BLOCK(1, EnumRegistryType.BLOCK),
 
-    /* DUSTS */ //TODO: maybe change this
-    DUST_STONE(null),
-    DUST_IRON(IRON.getColor()),
-    DUST_GOLD(GOLD.getColor()),
-    DUST_COPPER(COPPER.getColor()),
-    DUST_TIN(TIN.getColor()),
-    DUST_LEAD(LEAD.getColor()),
-    DUST_SILVER(SILVER.getColor());
+    // ##### ITEMS #####
+    INGOT(0, EnumRegistryType.ITEM),
+    NUGGET(1, EnumRegistryType.ITEM),
+    DIRTY_DUST(2, EnumRegistryType.ITEM),
+    DUST(3, EnumRegistryType.ITEM);
 
-    public static final EnumMaterialType[] VARIANTS;
-
-    static
-    {
-        VARIANTS = new EnumMaterialType[values().length];
-
-        for (EnumMaterialType type : values())
-        {
-            VARIANTS[type.getMetadata()] = type;
-        }
-    }
-
-    private Color color;
+    private EnumRegistryType registryType;
     private int meta;
 
-    EnumMaterialType(Color color)
+    EnumMaterialType(int meta, EnumRegistryType registryType)
     {
-        this.color = color;
-        this.meta = ordinal();
+        this.meta = meta;
+        this.registryType = registryType;
+    }
+
+    public static EnumMaterialType byMeta(EnumRegistryType item, int typemeta)
+    {
+        switch (item)
+        {
+            case BLOCK:
+                switch (typemeta)
+                {
+                    case 0:
+                        return ORE;
+                    case 1:
+                        return BLOCK;
+                }
+                break;
+            case ITEM:
+                switch (typemeta)
+                {
+                    case 0:
+                        return INGOT;
+                    case 1:
+                        return NUGGET;
+                    case 2:
+                        return DIRTY_DUST;
+                    case 3:
+                        return DUST;
+                }
+                break;
+        }
+        return null;
+    }
+
+    public EnumRegistryType getRegistryType()
+    {
+        return registryType;
     }
 
     @Override
@@ -58,20 +72,5 @@ public enum EnumMaterialType implements IStringSerializable
     public int getMetadata()
     {
         return meta;
-    }
-
-    public Color getColor()
-    {
-        return color;
-    }
-
-    public ItemStack getItemStack(int amount)
-    {
-        return new ItemStack(ItemHandler.item_material, amount, this.getMetadata());
-    }
-
-    public ItemStack getItemStack()
-    {
-        return getItemStack(1);
     }
 }

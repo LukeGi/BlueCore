@@ -6,59 +6,99 @@
   },
   "variants": {
     "variant": {
-      "ingot_copper": {
+      "iron_dust": {
+        "textures": {
+          "layer0": "blepcore:items/dust"
+        }
+      },
+      "gold_dust": {
+        "textures": {
+          "layer0": "blepcore:items/dust"
+        }
+      },
+      "stone_dirty_dust": {
+        "textures": {
+          "layer0": "blepcore:items/dirty_dust"
+        }
+      },
+      "copper_ingot": {
         "textures": {
           "layer0": "blepcore:items/ingot"
         }
       },
-      "ingot_tin": {
+      "copper_nugget": {
+        "textures": {
+          "layer0": "blepcore:items/nugget"
+        }
+      },
+      "copper_dust": {
+        "textures": {
+          "layer0": "blepcore:items/dust"
+        }
+      },
+      "copper_dirty_dust": {
+        "textures": {
+          "layer0": "blepcore:items/dirty_dust"
+        }
+      },
+      "tin_ingot": {
         "textures": {
           "layer0": "blepcore:items/ingot"
         }
       },
-      "ingot_lead": {
+      "tin_nugget": {
+        "textures": {
+          "layer0": "blepcore:items/nugget"
+        }
+      },
+      "tin_dust": {
+        "textures": {
+          "layer0": "blepcore:items/dust"
+        }
+      },
+      "tin_dirty_dust": {
+        "textures": {
+          "layer0": "blepcore:items/dirty_dust"
+        }
+      },
+      "lead_ingot": {
         "textures": {
           "layer0": "blepcore:items/ingot"
         }
       },
-      "ingot_silver": {
+      "lead_nugget": {
+        "textures": {
+          "layer0": "blepcore:items/nugget"
+        }
+      },
+      "lead_dust": {
+        "textures": {
+          "layer0": "blepcore:items/dust"
+        }
+      },
+      "lead_dirty_dust": {
+        "textures": {
+          "layer0": "blepcore:items/dirty_dust"
+        }
+      },
+      "silver_ingot": {
         "textures": {
           "layer0": "blepcore:items/ingot"
         }
       },
-      "dust_stone": {
+      "silver_nugget": {
         "textures": {
-          "layer0": "blepcore:items/dust_stone"
+          "layer0": "blepcore:items/nugget"
         }
       },
-      "dust_iron": {
+      "silver_dust": {
         "textures": {
           "layer0": "blepcore:items/dust"
         }
       },
-      "dust_gold": {
+      "silver_dirty_dust": {
         "textures": {
-          "layer0": "blepcore:items/dust"
-        }
-      },
-      "dust_copper": {
-        "textures": {
-          "layer0": "blepcore:items/dust"
-        }
-      },
-      "dust_tin": {
-        "textures": {
-          "layer0": "blepcore:items/dust"
-        }
-      },
-      "dust_lead": {
-        "textures": {
-          "layer0": "blepcore:items/dust"
-        }
-      },
-      "dust_silver": {
-        "textures": {
-          "layer0": "blepcore:items/dust"
+          "layer0": "blepcore:items/dirty_dust"
         }
       }
     }

@@ -1,5 +1,7 @@
 package teamblep.blepcore.common.recipe;
 
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.FurnaceRecipes;
 import teamblep.blepcore.common.recipe.inputs.RecipeInput;
 import teamblep.blepcore.common.recipe.inputs.RecipeItemInput;
 import teamblep.blepcore.common.recipe.outputs.RecipeItemByproductOutput;
@@ -7,14 +9,9 @@ import teamblep.blepcore.common.recipe.outputs.RecipeItemOutput;
 import teamblep.blepcore.common.recipe.outputs.RecipeOutput;
 import teamblep.blepcore.common.recipe.recipes.RecipeCrusher;
 import teamblep.blepcore.common.recipe.recipes.RecipeSmelter;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.FurnaceRecipes;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import static teamblep.blepcore.common.item.materials.EnumMaterialType.*;
 
 /**
  * @author Kelan
@@ -31,8 +28,8 @@ public class RecipeHandler
         for (ItemStack input : FurnaceRecipes.instance().getSmeltingList().keySet()) addSmelterRecipe(new RecipeItemInput(input), new RecipeItemOutput(FurnaceRecipes.instance().getSmeltingList().get(input)));
 
         //CRUSHER
-        addCrusherRecipe(new RecipeItemInput(new ItemStack(Blocks.IRON_ORE)), new RecipeItemByproductOutput(DUST_IRON.getItemStack(2), DUST_STONE.getItemStack(), 0.35F));
-        addCrusherRecipe(new RecipeItemInput(new ItemStack(Blocks.GOLD_ORE)), new RecipeItemByproductOutput(DUST_GOLD.getItemStack(2), DUST_STONE.getItemStack(), 0.35F));
+//        addCrusherRecipe(new RecipeItemInput(new ItemStack(Blocks.IRON_ORE)), new RecipeItemByproductOutput(DUST_IRON.getItemStack(2), DUST_STONE.getItemStack(), 0.35F));
+//        addCrusherRecipe(new RecipeItemInput(new ItemStack(Blocks.GOLD_ORE)), new RecipeItemByproductOutput(DUST_GOLD.getItemStack(2), DUST_STONE.getItemStack(), 0.35F));
 
     }
 

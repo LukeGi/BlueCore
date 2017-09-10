@@ -34,7 +34,6 @@ public class BlockMachine extends BlockTile
     public BlockMachine(MachineData machineData)
     {
         super(Material.IRON, machineData.getName());
-        super.setCreativeTab(BlepCore.tabBlepCore);
         this.machineData = machineData;
     }
 

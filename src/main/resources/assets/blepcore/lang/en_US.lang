@@ -1,16 +1,32 @@
-item.blepcore:ingot_copper.name=Copper Ingot
-item.blepcore:ingot_tin.name=Tin Ingot
-item.blepcore:ingot_lead.name=Lead Ingot
-item.blepcore:ingot_silver.name=Silver Ingot
-item.blepcore:dust_stone.name=Stone Dust
-item.blepcore:dust_iron.name=Iron Dust
-item.blepcore:dust_gold.name=Gold Dust
-item.blepcore:dust_copper.name=Copper Dust
-item.blepcore:dust_tin.name=Tin Dust
-item.blepcore:dust_lead.name=Lead Dust
-item.blepcore:dust_silver.name=Silver Dust
+item.blepcore:iron_dust.name=Iron Dust
+item.blepcore:gold_dust.name=Gold Dust
+item.blepcore:stone_dirty_dust.name=Stone Dust
 
-tile.machine_chassis.name=Machine Chassis
-tile.machine_smelter.name=Smelter
-tile.machine_crusher.name=Crusher
+item.blepcore:copper_ingot.name=Copper Ingot
+item.blepcore:copper_nugget.name=Copper Nugget
+item.blepcore:copper_dirty_dust.name=Copper Dirty Dust
+item.blepcore:copper_dust.name=Copper Dust
+
+item.blepcore:tin_ingot.name=Tin Ingot
+item.blepcore:tin_nugget.name=Tin Nugget
+item.blepcore:tin_dirty_dust.name=Tin Dirty Dust
+item.blepcore:tin_dust.name=Tin Dust
+
+item.blepcore:lead_ingot.name=Lead Ingot
+item.blepcore:lead_nugget.name=Lead Nugget
+item.blepcore:lead_dirty_dust.name=Lead Dirty Dust
+item.blepcore:lead_dust.name=Lead Dust
+
+item.blepcore:silver_ingot.name=Silver Ingot
+item.blepcore:silver_nugget.name=Silver Nugget
+item.blepcore:silver_dirty_dust.name=Silver Dirty Dust
+item.blepcore:silver_dust.name=Silver Dust
+
 tile.blepcore:ladder.name=Escalating Ladder
+tile.blepcore:machine_chassis.name=Machine Chassis
+tile.blepcore:machine_smelter.name=Smelter
+tile.blepcore:machine_crusher.name=Crusher
+tile.blepcore:machine_electrolysis_chamber.name=Electrolysis Chamber
+tile.blepcore:machine_centrifuge.name=Centrifuge
+
+itemGroup.blepcore=Blep Core Tab

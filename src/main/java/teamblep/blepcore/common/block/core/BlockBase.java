@@ -1,5 +1,6 @@
 package teamblep.blepcore.common.block.core;
 
+import teamblep.blepcore.common.BlepCore;
 import teamblep.blepcore.common.item.core.ItemBlockBase;
 import teamblep.blepcore.common.ModInfo;
 import net.minecraft.block.Block;
@@ -14,6 +15,7 @@ public class BlockBase extends Block
         super(material);
         super.setRegistryName(ModInfo.MOD_ID, name);
         super.setUnlocalizedName(getRegistryName().toString());
+        super.setCreativeTab(BlepCore.tabBlepCore);
     }
 
     public ItemBlock getItemBlock()

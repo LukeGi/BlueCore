@@ -1,7 +1,10 @@
 package teamblep.blepcore.common;
 
+import net.minecraft.item.ItemStack;
 import teamblep.blepcore.common.inventory.GuiHandler;
 import teamblep.blepcore.common.item.ItemHandler;
+import teamblep.blepcore.common.item.materials.EnumMaterial;
+import teamblep.blepcore.common.item.materials.EnumMaterialType;
 import teamblep.blepcore.common.item.materials.ItemMaterial;
 import teamblep.blepcore.common.recipe.RecipeHandler;
 import net.minecraft.client.Minecraft;
@@ -40,6 +43,12 @@ public class BlepCore
         public Item getTabIconItem()
         {
             return ItemHandler.item_material;
+        }
+
+        @Override
+        public ItemStack getIconItemStack()
+        {
+            return new ItemStack(ItemHandler.item_material, 1, EnumMaterial.COPPER.getMetadata(EnumMaterialType.INGOT));
         }
     };
 
