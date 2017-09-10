@@ -1,6 +1,8 @@
 package teamblep.blepcore.common.item.materials;
 
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
+import teamblep.blepcore.common.item.ItemHandler;
 
 import java.awt.*;
 import java.util.*;
@@ -84,5 +86,15 @@ public enum EnumMaterial implements IStringSerializable
 
     public boolean hasType(EnumMaterialType type) {
         return getTypes().contains(type);
+    }
+
+    public ItemStack getStackForType(EnumMaterialType type)
+    {
+        return getStackForType(type, 1);
+    }
+
+    public ItemStack getStackForType(EnumMaterialType type, int amount)
+    {
+        return new ItemStack(ItemHandler.item_material, amount, getMetadata(type));
     }
 }
