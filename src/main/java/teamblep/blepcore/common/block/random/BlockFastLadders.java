@@ -8,6 +8,7 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
@@ -19,6 +20,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.lwjgl.input.Keyboard;
 import teamblep.blepcore.common.Names;
 import teamblep.blepcore.common.block.core.BlockBase;
 
@@ -49,16 +51,19 @@ public class BlockFastLadders extends BlockBase
             return;
         }
 
-        if (entity.motionY >= 0.1)
+        if (Keyboard.isKeyDown(Keyboard.KEY_SPACE) && !Keyboard.isKeyDown(Keyboard.KEY_LSHIFT))
         {
             entity.setPosition(entity.posX, entity.posY + .2, entity.posZ);
-        }
-        else if (entity.motionY <= -0.1)
+        } else if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT))
         {
             Block blockUnder = entity.worldObj.getBlockState(entity.getPosition().down()).getBlock();
             if (blockUnder == Blocks.AIR || blockUnder == this)
             {
                 entity.setPosition(entity.posX, entity.posY - .2, entity.posZ);
+                if(entity.motionY < -1)
+                {
+                    entity.motionY = -1;
+                }
             }
         }
     }
@@ -201,6 +206,11 @@ public class BlockFastLadders extends BlockBase
     @Override
     public boolean isLadder(IBlockState state, IBlockAccess world, BlockPos pos, EntityLivingBase entity)
     {
-        return true;
+        Block block = world.getBlockState(pos.down()).getBlock();
+        if (entity.isSneaking() && !Keyboard.isKeyDown(Keyboard.KEY_SPACE) && (block == Blocks.AIR || block == this))
+        {
+            return false;
+        }
+        return entity instanceof EntityPlayer;
     }
 }
