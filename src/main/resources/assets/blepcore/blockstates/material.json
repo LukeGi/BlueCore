@@ -16,7 +16,7 @@
           "layer0": "blepcore:items/dust"
         }
       },
-      "stone_dirty_dust": {
+      "stone_dust": {
         "textures": {
           "layer0": "blepcore:items/dirty_dust"
         }

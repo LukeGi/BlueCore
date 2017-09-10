@@ -15,7 +15,7 @@ public enum EnumMaterial implements IStringSerializable
     // ##### VANILLA #####
     IRON(0, EnumSubstance.IRON, EnumMaterialType.DUST),
     GOLD(1, EnumSubstance.GOLD, EnumMaterialType.DUST),
-    STONE(2, EnumSubstance.STONE, EnumMaterialType.DIRTY_DUST),
+    STONE(2, EnumSubstance.STONE, EnumMaterialType.DUST),
 
     // ##### NON-ALLOYED METALS #####
     COPPER(3, EnumSubstance.COPPER, EnumMaterialType.ORE, EnumMaterialType.BLOCK, EnumMaterialType.INGOT, EnumMaterialType.NUGGET, EnumMaterialType.DUST, EnumMaterialType.DIRTY_DUST),

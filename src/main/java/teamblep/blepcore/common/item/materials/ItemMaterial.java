@@ -46,17 +46,9 @@ public class ItemMaterial extends ItemBase implements IItemColor
                 {
                     if (material.hasType(materialType))
                     {
-                        if (material.equals(EnumMaterial.STONE) && materialType.equals(EnumMaterialType.DIRTY_DUST))
-                        {
-                            continue;
-                        }
                         subItems.add(new ItemStack(this, 1, material.getMetadata(materialType)));
                     }
                 }
-            }
-            if (materialType.equals(EnumMaterialType.DUST))
-            {
-                subItems.add(new ItemStack(this, 1, EnumMaterial.STONE.getMetadata(EnumMaterialType.DIRTY_DUST)));
             }
         }
     }
