@@ -5,7 +5,7 @@ import net.minecraft.util.IStringSerializable;
 import java.awt.*;
 
 /**
- * This enum has the colour and potentially more information about the substance of a material.
+ * This enum has the colour and potentially more information about the substance of a PROPERTY_MATERIAL.
  *
  * @author Blue
  */

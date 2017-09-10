@@ -3,7 +3,7 @@ package teamblep.blepcore.common.item.materials;
 import net.minecraft.util.IStringSerializable;
 
 /**
- * This enum is for deciding which blocks/items a material will register with when the game loads.
+ * This enum is for deciding which blocks/items a PROPERTY_MATERIAL will register with when the game loads.
  *
  * @author Blue
  */

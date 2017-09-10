@@ -1,6 +1,14 @@
 package teamblep.blepcore.common.tileentity.core;
 
 import com.sun.istack.internal.NotNull;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.items.CapabilityItemHandler;
+import teamblep.blepcore.common.Names;
 import teamblep.blepcore.common.Utils;
 import teamblep.blepcore.common.block.machine.MachineData;
 import teamblep.blepcore.common.inventory.InventoryMachineContainer;
@@ -10,14 +18,6 @@ import teamblep.blepcore.common.recipe.outputs.RecipeOutput;
 import teamblep.blepcore.common.tileentity.ProgressBar;
 import teamblep.blepcore.common.tileentity.ProgressTracker;
 import teamblep.blepcore.common.tileentity.capabilities.ItemHandlerMachine;
-import teamblep.blepcore.common.Names;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.items.CapabilityItemHandler;
 
 import javax.annotation.Nullable;
 
