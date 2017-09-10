@@ -24,20 +24,14 @@ public enum EnumMaterial implements IStringSerializable
     SILVER(6, EnumSubstance.SILVER, EnumMaterialType.ORE, EnumMaterialType.BLOCK, EnumMaterialType.INGOT, EnumMaterialType.NUGGET, EnumMaterialType.DUST, EnumMaterialType.DIRTY_DUST);
 
     public static final EnumMaterial[] MATERIALS;
-    public static final Map<EnumMaterialType, Set<EnumMaterial>> TYPE_MAP;
 
     static
     {
         MATERIALS = new EnumMaterial[values().length];
-        TYPE_MAP = new EnumMap<>(EnumMaterialType.class);
 
         for (EnumMaterial type : values())
         {
             MATERIALS[type.getMeta()] = type;
-        }
-        for (EnumMaterialType type : TYPE_MAP.keySet())
-        {
-            TYPE_MAP.put(type, new HashSet<>());
         }
     }
 
