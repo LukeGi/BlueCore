@@ -1,12 +1,16 @@
 package teamblep.blepcore.common.block.core;
 
-import teamblep.blepcore.common.BlepCore;
-import teamblep.blepcore.common.item.core.ItemBlockBase;
-import teamblep.blepcore.common.ModInfo;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import teamblep.blepcore.common.BlepCore;
+import teamblep.blepcore.common.ModInfo;
+import teamblep.blepcore.common.item.core.ItemBlockBase;
+
+/**
+ * @author Blue
+ */
 
 public class BlockBase extends Block
 {

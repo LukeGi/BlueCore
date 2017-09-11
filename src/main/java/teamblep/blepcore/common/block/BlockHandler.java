@@ -9,6 +9,7 @@ import net.minecraftforge.fml.common.registry.IForgeRegistry;
 import teamblep.blepcore.common.BlepCore;
 import teamblep.blepcore.common.block.core.BlockBase;
 import teamblep.blepcore.common.block.machine.MachineData;
+import teamblep.blepcore.common.block.material.BlockMetal;
 import teamblep.blepcore.common.block.material.BlockOre;
 import teamblep.blepcore.common.block.random.BlockFastLadders;
 
@@ -23,7 +24,8 @@ public class BlockHandler
     public static final BlockBase MACHINE_CENTRIFUGE = MachineData.CENTRIFUGE.createBlock();
 
     public static final BlockBase LADDER = new BlockFastLadders();
-    public static final BlockBase ORE = new BlockOre();
+    public static final BlockOre ORE = new BlockOre();
+    public static final BlockMetal BLOCK_METAL = new BlockMetal();
 
     @SubscribeEvent
     public static void blockRegistryEvent(Register<Block> event)
@@ -41,6 +43,7 @@ public class BlockHandler
         registry.register(MACHINE_CENTRIFUGE);
         registry.register(LADDER);
         registry.register(ORE);
+        registry.register(BLOCK_METAL);
     }
 
     private static void registerTileEntities()
@@ -66,6 +69,7 @@ public class BlockHandler
         registry.register(MACHINE_CENTRIFUGE.getItemBlock());
         registry.register(LADDER.getItemBlock());
         registry.register(ORE.getItemBlock());
+        registry.register(BLOCK_METAL.getItemBlock());
     }
 
     public static void registerBlockModels()
@@ -76,6 +80,7 @@ public class BlockHandler
         BlepCore.proxy.registerModel(MACHINE_ELECTROLYSIS_CHAMBER.getItemStack(), MACHINE_ELECTROLYSIS_CHAMBER.getRegistryName(), "facing=north");
         BlepCore.proxy.registerModel(MACHINE_CENTRIFUGE.getItemStack(), MACHINE_CENTRIFUGE.getRegistryName(), "facing=north");
         BlepCore.proxy.registerModel(LADDER.getItemStack(), LADDER.getRegistryName(), "facing=north");
-        BlepCore.proxy.registerModel(ORE.getItemStack(), ORE.getRegistryName(), "material=copper");
+        ORE.registerItemBlockModels();
+        BLOCK_METAL.registerItemBlockModels();
     }
 }

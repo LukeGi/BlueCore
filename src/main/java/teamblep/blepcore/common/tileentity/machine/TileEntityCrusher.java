@@ -1,5 +1,6 @@
 package teamblep.blepcore.common.tileentity.machine;
 
+import net.minecraft.item.ItemStack;
 import teamblep.blepcore.common.Utils;
 import teamblep.blepcore.common.block.machine.MachineData;
 import teamblep.blepcore.common.recipe.RecipeHandler;
@@ -9,7 +10,6 @@ import teamblep.blepcore.common.recipe.recipes.RecipeCrusher;
 import teamblep.blepcore.common.tileentity.ProgressBar;
 import teamblep.blepcore.common.tileentity.ProgressTracker;
 import teamblep.blepcore.common.tileentity.core.TileEntityAbstractMachine;
-import net.minecraft.item.ItemStack;
 
 /**
  * @author Blue
@@ -51,7 +51,8 @@ public class TileEntityCrusher extends TileEntityAbstractMachine<RecipeItemInput
         {
             //If the items in either output slot is null, return a RecipeItemByproductOutput with a null output, as this means an item can be outputted to this slot.
             return new RecipeItemByproductOutput(null, byproduct, 0.0F);
-        } else
+        }
+        else
         {
             //Else if neither output slots are empty get the output itemstack for the current input itemstack.
             RecipeCrusher recipe = getCurrentRecipe();

@@ -1,7 +1,7 @@
 package teamblep.blepcore.common.inventory.container;
 
-import teamblep.blepcore.common.tileentity.machine.TileEntityElectrolysisChamber;
 import net.minecraft.entity.player.InventoryPlayer;
+import teamblep.blepcore.common.tileentity.machine.TileEntityElectrolysisChamber;
 
 /**
  * @author Kelan

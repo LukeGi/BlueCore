@@ -12,9 +12,9 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import teamblep.blepcore.common.CommonProxy;
 import teamblep.blepcore.common.block.BlockHandler;
 import teamblep.blepcore.common.item.ItemHandler;
-import teamblep.blepcore.common.CommonProxy;
 
 import java.util.HashMap;
 import java.util.Map;

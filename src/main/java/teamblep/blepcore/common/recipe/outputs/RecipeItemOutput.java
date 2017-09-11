@@ -1,9 +1,9 @@
 package teamblep.blepcore.common.recipe.outputs;
 
+import net.minecraft.item.ItemStack;
 import teamblep.blepcore.common.Utils;
 import teamblep.blepcore.common.inventory.EnumSlotType;
 import teamblep.blepcore.common.inventory.SlotData;
-import net.minecraft.item.ItemStack;
 
 import java.util.List;
 
@@ -70,7 +70,8 @@ public class RecipeItemOutput extends RecipeOutput<ItemStack>
                                 inventory[slot.getId()] = outputStack;
                             }
                             return true;
-                        } else if (stack.stackSize + outputStack.stackSize <= stack.getMaxStackSize() && stack.isItemEqual(outputStack))
+                        }
+                        else if (stack.stackSize + outputStack.stackSize <= stack.getMaxStackSize() && stack.isItemEqual(outputStack))
                         {
                             if (!simulate)
                             {

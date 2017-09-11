@@ -1,7 +1,5 @@
 package teamblep.blepcore.common.config;
 
-import teamblep.blepcore.common.Utils;
-import teamblep.blepcore.common.Names;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
@@ -11,6 +9,8 @@ import net.minecraftforge.fml.client.config.DummyConfigElement;
 import net.minecraftforge.fml.client.config.DummyConfigElement.DummyCategoryElement;
 import net.minecraftforge.fml.client.config.GuiConfig;
 import net.minecraftforge.fml.client.config.IConfigElement;
+import teamblep.blepcore.common.Names;
+import teamblep.blepcore.common.Utils;
 
 import java.util.ArrayList;
 import java.util.List;

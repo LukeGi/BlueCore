@@ -56,7 +56,8 @@ public class ProgressTracker
             {
                 ticked.add(progressBar);
                 progressBar.reset();
-            } else
+            }
+            else
             {
                 progressBar.tick();
             }

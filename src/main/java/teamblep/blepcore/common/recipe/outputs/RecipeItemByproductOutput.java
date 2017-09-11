@@ -1,8 +1,8 @@
 package teamblep.blepcore.common.recipe.outputs;
 
+import net.minecraft.item.ItemStack;
 import teamblep.blepcore.common.Utils;
 import teamblep.blepcore.common.inventory.EnumSlotType;
-import net.minecraft.item.ItemStack;
 
 import java.util.List;
 
@@ -28,6 +28,11 @@ public class RecipeItemByproductOutput extends RecipeOutput<ItemStack>
     public RecipeItemByproductOutput(ItemStack output, ItemStack byproduct, float byproductChance)
     {
         this(new RecipeItemOutput(output), new RecipeItemChanceOutput(byproduct, byproductChance));
+    }
+
+    public RecipeItemByproductOutput(ItemStack output)
+    {
+        this(output, null, 0.0F);
     }
 
     public RecipeItemOutput getRecipeItemOutput()
@@ -69,3 +74,4 @@ public class RecipeItemByproductOutput extends RecipeOutput<ItemStack>
         return true;
     }
 }
+

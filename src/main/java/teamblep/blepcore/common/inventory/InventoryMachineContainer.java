@@ -1,12 +1,6 @@
 package teamblep.blepcore.common.inventory;
 
 import com.sun.istack.internal.NotNull;
-import teamblep.blepcore.common.Utils;
-import teamblep.blepcore.common.block.machine.BlockMachine;
-import teamblep.blepcore.common.block.machine.MachineData;
-import teamblep.blepcore.common.inventory.container.ContainerMachine;
-import teamblep.blepcore.common.inventory.gui.GuiMachine;
-import teamblep.blepcore.common.tileentity.core.TileEntityAbstractMachine;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -16,6 +10,12 @@ import net.minecraftforge.fml.common.network.IGuiHandler;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
+import teamblep.blepcore.common.Utils;
+import teamblep.blepcore.common.block.machine.BlockMachine;
+import teamblep.blepcore.common.block.machine.MachineData;
+import teamblep.blepcore.common.inventory.container.ContainerMachine;
+import teamblep.blepcore.common.inventory.gui.GuiMachine;
+import teamblep.blepcore.common.tileentity.core.TileEntityAbstractMachine;
 
 import java.util.*;
 

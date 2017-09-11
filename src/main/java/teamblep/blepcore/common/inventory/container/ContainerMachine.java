@@ -1,14 +1,14 @@
 package teamblep.blepcore.common.inventory.container;
 
-import teamblep.blepcore.common.inventory.EnumSlotType;
-import teamblep.blepcore.common.inventory.SlotData;
-import teamblep.blepcore.common.inventory.SlotRange;
-import teamblep.blepcore.common.tileentity.core.TileEntityAbstractMachine;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import teamblep.blepcore.common.inventory.EnumSlotType;
+import teamblep.blepcore.common.inventory.SlotData;
+import teamblep.blepcore.common.inventory.SlotRange;
+import teamblep.blepcore.common.tileentity.core.TileEntityAbstractMachine;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -129,7 +129,8 @@ public abstract class ContainerMachine<T extends TileEntityAbstractMachine> exte
             if (slotStack.stackSize == 0)
             {
                 slot.putStack(null);
-            } else
+            }
+            else
             {
                 slot.onSlotChanged();
             }
@@ -207,13 +208,15 @@ public abstract class ContainerMachine<T extends TileEntityAbstractMachine> exte
             if (slotData.getSlotType() == EnumSlotType.INPUT)
             {
                 range.setReverse(false);
-            } else if (slotData.getSlotType() == EnumSlotType.OUTPUT)
+            }
+            else if (slotData.getSlotType() == EnumSlotType.OUTPUT)
             {
                 range.setReverse(true);
             }
 
             list.add(range);
-        } else if (playerInventory.isSlotInRange(index) || playerHotbar.isSlotInRange(index)) //The item that was shift clicked was inside the players inventory and should either be transferred to the players hotbar or to the machines inventory, depending on the implementation.
+        }
+        else if (playerInventory.isSlotInRange(index) || playerHotbar.isSlotInRange(index)) //The item that was shift clicked was inside the players inventory and should either be transferred to the players hotbar or to the machines inventory, depending on the implementation.
         {
             addMachineTransferSlots(list, slot);
             addPlayerTransferSlots(list, slot);

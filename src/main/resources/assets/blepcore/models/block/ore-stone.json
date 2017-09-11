@@ -1,0 +1,7 @@
+{
+  "parent": "blepcore:block/ore",
+  "textures": {
+    "all": "blocks/stone",
+    "overlay": "blepcore:block/ore"
+  }
+}

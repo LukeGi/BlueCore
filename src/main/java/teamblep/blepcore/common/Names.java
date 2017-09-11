@@ -14,6 +14,7 @@ public class Names
         public static final String MACHINE_CENTRIFUGE = "machine_centrifuge";
         public static final String LADDER = "ladder";
         public static final String ORE = "ore";
+        public static final String METAL_BLOCK = "metal_block";
     }
 
     public static class Items

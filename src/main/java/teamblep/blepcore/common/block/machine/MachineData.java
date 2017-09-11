@@ -1,6 +1,8 @@
 package teamblep.blepcore.common.block.machine;
 
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import teamblep.blepcore.common.BlepCore;
+import teamblep.blepcore.common.Names;
 import teamblep.blepcore.common.Utils;
 import teamblep.blepcore.common.inventory.EnumSlotType;
 import teamblep.blepcore.common.inventory.GuiHandler;
@@ -21,8 +23,6 @@ import teamblep.blepcore.common.tileentity.machine.TileEntityCentrifuge;
 import teamblep.blepcore.common.tileentity.machine.TileEntityCrusher;
 import teamblep.blepcore.common.tileentity.machine.TileEntityElectrolysisChamber;
 import teamblep.blepcore.common.tileentity.machine.TileEntitySmelter;
-import teamblep.blepcore.common.Names;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 /**
  * @author Blue

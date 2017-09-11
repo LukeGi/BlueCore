@@ -1,23 +1,25 @@
 package teamblep.blepcore.common.item.materials;
 
-import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.IStringSerializable;
 import teamblep.blepcore.common.BlepCore;
 import teamblep.blepcore.common.ModInfo;
 import teamblep.blepcore.common.Names;
+import teamblep.blepcore.common.item.ItemHandler;
 import teamblep.blepcore.common.item.core.ItemBase;
 
-import java.awt.*;
 import java.util.List;
 
 /**
  * @author Blue
  */
 
-public class ItemMaterial extends ItemBase implements IItemColor
+public class ItemMaterial extends ItemBase
 {
+//    public static final IProperty<ItemMaterial.Variants> VARIANT = PropertyEnum.create("variant", ItemMaterial.Variants.class);
+
     public ItemMaterial()
     {
         super(Names.Items.MATERIAL);
@@ -28,46 +30,84 @@ public class ItemMaterial extends ItemBase implements IItemColor
     @Override
     public String getUnlocalizedName(ItemStack stack)
     {
-        int metadata = stack.getMetadata();
-        int matmeta = Math.floorDiv(metadata, 8);
-        int typemeta = metadata % 8;
-
-        return "item." + ModInfo.MOD_ID + ":" + EnumMaterial.MATERIALS[matmeta].getNameOfType(EnumMaterialType.byMeta(EnumRegistryType.ITEM, typemeta));
+        return "item." + ModInfo.RESOURCE_PREFIX + Variants.byMeta(stack.getMetadata()).getName();
     }
 
     @Override
     public void getSubItems(Item itemIn, CreativeTabs tab, List<ItemStack> subItems)
     {
-        for (EnumMaterialType materialType : EnumMaterialType.values())
+        for (Variants variant : Variants.values())
         {
-            if (materialType.getRegistryType() == EnumRegistryType.ITEM)
-            {
-                for (EnumMaterial material : EnumMaterial.MATERIALS)
-                {
-                    if (material.hasType(materialType))
-                    {
-                        subItems.add(new ItemStack(this, 1, material.getMetadata(materialType)));
-                    }
-                }
-            }
+            subItems.add(new ItemStack(this, 1, variant.getMetadata()));
         }
     }
 
-    @Override
-    public int getColorFromItemstack(ItemStack stack, int tintIndex)
+    public enum Variants implements IStringSerializable
     {
-        Color colour = EnumMaterial.MATERIALS[Math.floorDiv(stack.getMetadata(), 8)].getColor();
+        COPPER_INGOT(Substance.COPPER),
+        TIN_INGOT(Substance.TIN),
+        LEAD_INGOT(Substance.LEAD),
+        SILVER_INGOT(Substance.SILVER),
 
-        if (colour == null)
+        COPPER_NUGGET(Substance.COPPER),
+        TIN_NUGGET(Substance.TIN),
+        LEAD_NUGGET(Substance.LEAD),
+        SILVER_NUGGET(Substance.SILVER),
+
+        COPPER_DUST(Substance.COPPER),
+        TIN_DUST(Substance.TIN),
+        LEAD_DUST(Substance.LEAD),
+        SILVER_DUST(Substance.SILVER),
+        IRON_DUST(Substance.IRON),
+        GOLD_DUST(Substance.GOLD),
+        STONE_DUST(Substance.STONE),
+
+        COPPER_DIRTY_DUST(Substance.COPPER),
+        TIN_DIRTY_DUST(Substance.TIN),
+        LEAD_DIRTY_DUST(Substance.LEAD),
+        SILVER_DIRTY_DUST(Substance.SILVER);
+
+        private Substance substance;
+
+        Variants(Substance substance)
         {
-            colour = Color.WHITE;
+            this.substance = substance;
         }
 
-        int r = colour.getRed() << 16;
-        int g = colour.getGreen() << 8;
-        int b = colour.getBlue();
+        public static Variants byMeta(int meta)
+        {
+            return values()[meta % values().length];
+        }
 
-        return r + b + g;
+        public ItemStack getItemStack()
+        {
+            return getItemStack(1);
+        }
+
+        public ItemStack getItemStack(int amount)
+        {
+            return new ItemStack(ItemHandler.item_material, amount, getMetadata());
+        }
+
+        public Substance getSubstance()
+        {
+            return substance;
+        }
+
+        public int getColor()
+        {
+            return substance.getColor();
+        }
+
+        public int getMetadata()
+        {
+            return ordinal();
+        }
+
+        @Override
+        public String getName()
+        {
+            return name().toLowerCase();
+        }
     }
-
 }

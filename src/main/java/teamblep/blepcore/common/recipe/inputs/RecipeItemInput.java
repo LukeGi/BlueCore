@@ -1,9 +1,9 @@
 package teamblep.blepcore.common.recipe.inputs;
 
+import net.minecraft.item.ItemStack;
 import teamblep.blepcore.common.Utils;
 import teamblep.blepcore.common.inventory.EnumSlotType;
 import teamblep.blepcore.common.inventory.SlotData;
-import net.minecraft.item.ItemStack;
 
 import java.util.List;
 

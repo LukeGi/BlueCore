@@ -1,26 +1,24 @@
 package teamblep.blepcore.common;
 
-import net.minecraft.item.ItemStack;
-import teamblep.blepcore.common.inventory.GuiHandler;
-import teamblep.blepcore.common.item.ItemHandler;
-import teamblep.blepcore.common.item.materials.EnumMaterial;
-import teamblep.blepcore.common.item.materials.EnumMaterialType;
-import teamblep.blepcore.common.item.materials.ItemMaterial;
-import teamblep.blepcore.common.recipe.RecipeHandler;
-import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.relauncher.Side;
 import org.apache.logging.log4j.Logger;
+import teamblep.blepcore.client.ClientSide;
+import teamblep.blepcore.common.inventory.GuiHandler;
+import teamblep.blepcore.common.item.ItemHandler;
+import teamblep.blepcore.common.item.materials.ItemMaterial;
+import teamblep.blepcore.common.recipe.RecipeHandler;
 
 /**
  * @author Blue
@@ -48,7 +46,7 @@ public class BlepCore
         @Override
         public ItemStack getIconItemStack()
         {
-            return new ItemStack(ItemHandler.item_material, 1, EnumMaterial.COPPER.getMetadata(EnumMaterialType.INGOT));
+            return new ItemStack(ItemHandler.item_material, 1, ItemMaterial.Variants.COPPER_INGOT.getMetadata());
         }
     };
 
@@ -56,15 +54,18 @@ public class BlepCore
     public void preInit(FMLPreInitializationEvent e)
     {
         logger = e.getModLog();
+
         ConfigManager.load(ModInfo.MOD_ID, Config.Type.INSTANCE);
     }
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent e)
     {
-        if (e.getSide() == Side.CLIENT)
-            //noinspection MethodCallSideOnly
-            Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new ItemMaterial(), ItemHandler.item_material);
+        if (FMLCommonHandler.instance().getSide().isClient())
+        {
+            //noinspection NewExpressionSideOnly,MethodCallSideOnly
+            new ClientSide().init();
+        }
         GuiHandler.init();
         RecipeHandler.initRecipes();
     }

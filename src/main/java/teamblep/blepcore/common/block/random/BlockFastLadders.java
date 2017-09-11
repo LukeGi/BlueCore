@@ -54,13 +54,14 @@ public class BlockFastLadders extends BlockBase
         if (Keyboard.isKeyDown(Keyboard.KEY_SPACE) && !Keyboard.isKeyDown(Keyboard.KEY_LSHIFT))
         {
             entity.setPosition(entity.posX, entity.posY + .2, entity.posZ);
-        } else if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT))
+        }
+        else if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT))
         {
             Block blockUnder = entity.worldObj.getBlockState(entity.getPosition().down()).getBlock();
             if (blockUnder == Blocks.AIR || blockUnder == this)
             {
                 entity.setPosition(entity.posX, entity.posY - .2, entity.posZ);
-                if(entity.motionY < -1)
+                if (entity.motionY < -1)
                 {
                     entity.motionY = -1;
                 }
@@ -100,9 +101,9 @@ public class BlockFastLadders extends BlockBase
     public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
     {
         return worldIn.getBlockState(pos.west()).isSideSolid(worldIn, pos.west(), EnumFacing.EAST) ||
-                worldIn.getBlockState(pos.east()).isSideSolid(worldIn, pos.east(), EnumFacing.WEST) ||
-                worldIn.getBlockState(pos.north()).isSideSolid(worldIn, pos.north(), EnumFacing.SOUTH) ||
-                worldIn.getBlockState(pos.south()).isSideSolid(worldIn, pos.south(), EnumFacing.NORTH);
+               worldIn.getBlockState(pos.east()).isSideSolid(worldIn, pos.east(), EnumFacing.WEST) ||
+               worldIn.getBlockState(pos.north()).isSideSolid(worldIn, pos.north(), EnumFacing.SOUTH) ||
+               worldIn.getBlockState(pos.south()).isSideSolid(worldIn, pos.south(), EnumFacing.NORTH);
     }
 
     /**
@@ -114,7 +115,8 @@ public class BlockFastLadders extends BlockBase
         if (facing.getAxis().isHorizontal() && this.canBlockStay(worldIn, pos, facing))
         {
             return this.getDefaultState().withProperty(FACING, facing);
-        } else
+        }
+        else
         {
             for (EnumFacing enumfacing : EnumFacing.Plane.HORIZONTAL)
             {

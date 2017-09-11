@@ -1,8 +1,8 @@
 package teamblep.blepcore.common.item.core;
 
-import teamblep.blepcore.common.ModInfo;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import teamblep.blepcore.common.ModInfo;
 
 /**
  * @author Blue

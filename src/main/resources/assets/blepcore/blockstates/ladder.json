@@ -1,26 +1,18 @@
 {
   "forge_marker": 1,
-  "defaults": {
+  "defaults":     {
     "transform": "forge:default-block",
-    "model": "blepcore:ladder",
-    "textures": {
+    "model":     "blepcore:ladder",
+    "textures":  {
       "texture": "blepcore:block/ladder"
     }
   },
-  "variants": {
+  "variants":     {
     "facing": {
-      "north": {
-        "y": 0
-      },
-      "east": {
-        "y": 90
-      },
-      "south": {
-        "y": 180
-      },
-      "west": {
-        "y": 270
-      }
+      "north": { "y": 0 },
+      "east":  { "y": 90 },
+      "south": { "y": 180 },
+      "west":  { "y": 270 }
     }
   }
 }

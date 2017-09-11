@@ -1,7 +1,7 @@
 package teamblep.blepcore.common.inventory.container;
 
-import teamblep.blepcore.common.tileentity.machine.TileEntityCentrifuge;
 import net.minecraft.entity.player.InventoryPlayer;
+import teamblep.blepcore.common.tileentity.machine.TileEntityCentrifuge;
 
 /**
  * @author Kelan

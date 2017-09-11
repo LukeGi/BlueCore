@@ -1,5 +1,7 @@
 package teamblep.blepcore.common.tileentity.machine;
 
+import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntityFurnace;
 import teamblep.blepcore.common.Utils;
 import teamblep.blepcore.common.block.machine.MachineData;
 import teamblep.blepcore.common.inventory.SlotData;
@@ -11,8 +13,6 @@ import teamblep.blepcore.common.recipe.recipes.RecipeSmelter;
 import teamblep.blepcore.common.tileentity.ProgressBar;
 import teamblep.blepcore.common.tileentity.ProgressTracker;
 import teamblep.blepcore.common.tileentity.core.TileEntityAbstractMachine;
-import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntityFurnace;
 
 /**
  * @author Blue

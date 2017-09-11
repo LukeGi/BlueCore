@@ -1,10 +1,10 @@
 package teamblep.blepcore.common.inventory;
 
-import teamblep.blepcore.common.BlepCore;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
+import teamblep.blepcore.common.BlepCore;
 
 import java.util.ArrayList;
 import java.util.List;

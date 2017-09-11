@@ -11,7 +11,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.BlockPos;
@@ -28,13 +27,13 @@ import java.util.List;
  * @author Blue
  */
 
-public class BlockOre extends BlockBase
+public class BlockMetal extends BlockBase
 {
-    public static final IProperty<BlockOre.Variants> VARIANT = PropertyEnum.create("variant", BlockOre.Variants.class);
+    public static final IProperty<BlockMetal.Variants> VARIANT = PropertyEnum.create("variant", BlockMetal.Variants.class);
 
-    public BlockOre()
+    public BlockMetal()
     {
-        super(Material.ROCK, Names.Blocks.ORE);
+        super(Material.IRON, Names.Blocks.METAL_BLOCK);
         this.setDefaultState(this.blockState.getBaseState().withProperty(VARIANT, Variants.COPPER));
     }
 
@@ -48,15 +47,9 @@ public class BlockOre extends BlockBase
     }
 
     @Override
-    public BlockRenderLayer getBlockLayer()
-    {
-        return BlockRenderLayer.CUTOUT_MIPPED;
-    }
-
-    @Override
     public ItemBlock getItemBlock()
     {
-        return new ItemBlockOre(this);
+        return new ItemBlockMetal(this);
     }
 
     @Override
@@ -92,9 +85,9 @@ public class BlockOre extends BlockBase
     @Override
     public void getSubBlocks(Item itemIn, CreativeTabs tab, List<ItemStack> list)
     {
-        for (Variants ores : Variants.values())
+        for (Variants metals : Variants.values())
         {
-            list.add(new ItemStack(this, 1, ores.getMetadata()));
+            list.add(new ItemStack(this, 1, metals.getMetadata()));
         }
     }
 
@@ -124,7 +117,7 @@ public class BlockOre extends BlockBase
 
         public ItemStack getItemStack(int amount)
         {
-            return new ItemStack(BlockHandler.ORE, amount, getMetadata());
+            return new ItemStack(BlockHandler.BLOCK_METAL, amount, getMetadata());
         }
 
         public Substance getSubstance()

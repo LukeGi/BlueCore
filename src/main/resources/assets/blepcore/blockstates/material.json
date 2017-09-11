@@ -1,106 +1,30 @@
 {
   "forge_marker": 1,
-  "defaults": {
-    "model": "builtin/generated",
+  "defaults":     {
+    "model":     "builtin/generated",
     "transform": "forge:default-item"
   },
-  "variants": {
+  "variants":     {
     "variant": {
-      "iron_dust": {
-        "textures": {
-          "layer0": "blepcore:items/dust"
-        }
-      },
-      "gold_dust": {
-        "textures": {
-          "layer0": "blepcore:items/dust"
-        }
-      },
-      "stone_dust": {
-        "textures": {
-          "layer0": "blepcore:items/dirty_dust"
-        }
-      },
-      "copper_ingot": {
-        "textures": {
-          "layer0": "blepcore:items/ingot"
-        }
-      },
-      "copper_nugget": {
-        "textures": {
-          "layer0": "blepcore:items/nugget"
-        }
-      },
-      "copper_dust": {
-        "textures": {
-          "layer0": "blepcore:items/dust"
-        }
-      },
-      "copper_dirty_dust": {
-        "textures": {
-          "layer0": "blepcore:items/dirty_dust"
-        }
-      },
-      "tin_ingot": {
-        "textures": {
-          "layer0": "blepcore:items/ingot"
-        }
-      },
-      "tin_nugget": {
-        "textures": {
-          "layer0": "blepcore:items/nugget"
-        }
-      },
-      "tin_dust": {
-        "textures": {
-          "layer0": "blepcore:items/dust"
-        }
-      },
-      "tin_dirty_dust": {
-        "textures": {
-          "layer0": "blepcore:items/dirty_dust"
-        }
-      },
-      "lead_ingot": {
-        "textures": {
-          "layer0": "blepcore:items/ingot"
-        }
-      },
-      "lead_nugget": {
-        "textures": {
-          "layer0": "blepcore:items/nugget"
-        }
-      },
-      "lead_dust": {
-        "textures": {
-          "layer0": "blepcore:items/dust"
-        }
-      },
-      "lead_dirty_dust": {
-        "textures": {
-          "layer0": "blepcore:items/dirty_dust"
-        }
-      },
-      "silver_ingot": {
-        "textures": {
-          "layer0": "blepcore:items/ingot"
-        }
-      },
-      "silver_nugget": {
-        "textures": {
-          "layer0": "blepcore:items/nugget"
-        }
-      },
-      "silver_dust": {
-        "textures": {
-          "layer0": "blepcore:items/dust"
-        }
-      },
-      "silver_dirty_dust": {
-        "textures": {
-          "layer0": "blepcore:items/dirty_dust"
-        }
-      }
+      "iron_dust":         { "textures": { "layer0": "blepcore:items/dust" } },
+      "gold_dust":         { "textures": { "layer0": "blepcore:items/dust" } },
+      "stone_dust":        { "textures": { "layer0": "blepcore:items/dirty_dust" } },
+      "copper_ingot":      { "textures": { "layer0": "blepcore:items/ingot" } },
+      "copper_nugget":     { "textures": { "layer0": "blepcore:items/nugget" } },
+      "copper_dust":       { "textures": { "layer0": "blepcore:items/dust" } },
+      "copper_dirty_dust": { "textures": { "layer0": "blepcore:items/dirty_dust" } },
+      "tin_ingot":         { "textures": { "layer0": "blepcore:items/ingot" } },
+      "tin_nugget":        { "textures": { "layer0": "blepcore:items/nugget" } },
+      "tin_dust":          { "textures": { "layer0": "blepcore:items/dust" } },
+      "tin_dirty_dust":    { "textures": { "layer0": "blepcore:items/dirty_dust" } },
+      "lead_ingot":        { "textures": { "layer0": "blepcore:items/ingot" } },
+      "lead_nugget":       { "textures": { "layer0": "blepcore:items/nugget" } },
+      "lead_dust":         { "textures": { "layer0": "blepcore:items/dust" } },
+      "lead_dirty_dust":   { "textures": { "layer0": "blepcore:items/dirty_dust" } },
+      "silver_ingot":      { "textures": { "layer0": "blepcore:items/ingot" } },
+      "silver_nugget":     { "textures": { "layer0": "blepcore:items/nugget" } },
+      "silver_dust":       { "textures": { "layer0": "blepcore:items/dust" } },
+      "silver_dirty_dust": { "textures": { "layer0": "blepcore:items/dirty_dust" } }
     }
   }
 }

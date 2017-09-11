@@ -29,4 +29,14 @@ tile.blepcore:machine_crusher.name=Crusher
 tile.blepcore:machine_electrolysis_chamber.name=Electrolysis Chamber
 tile.blepcore:machine_centrifuge.name=Centrifuge
 
+tile.blepcore:copper_ore.name=Copper Ore
+tile.blepcore:tin_ore.name=Tin Ore
+tile.blepcore:lead_ore.name=Lead Ore
+tile.blepcore:silver_ore.name=Silver Ore
+
+tile.blepcore:copper_block.name=Copper Block
+tile.blepcore:tin_block.name=Tin Block
+tile.blepcore:lead_block.name=Lead Block
+tile.blepcore:silver_block.name=Silver Block
+
 itemGroup.blepcore=Blep Core Tab

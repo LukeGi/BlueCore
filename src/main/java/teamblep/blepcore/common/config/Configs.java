@@ -1,7 +1,7 @@
 package teamblep.blepcore.common.config;
 
-import teamblep.blepcore.common.ModInfo;
 import net.minecraftforge.common.config.Config;
+import teamblep.blepcore.common.ModInfo;
 
 /**
  * @author Blue

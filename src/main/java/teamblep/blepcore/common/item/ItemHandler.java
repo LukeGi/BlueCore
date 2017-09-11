@@ -10,9 +10,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import teamblep.blepcore.common.BlepCore;
 import teamblep.blepcore.common.item.core.ItemBase;
-import teamblep.blepcore.common.item.materials.EnumMaterial;
-import teamblep.blepcore.common.item.materials.EnumMaterialType;
-import teamblep.blepcore.common.item.materials.EnumRegistryType;
 import teamblep.blepcore.common.item.materials.ItemMaterial;
 
 /**
@@ -37,19 +34,10 @@ public class ItemHandler
     @SideOnly(Side.CLIENT)
     public static void registerItemModels()
     {
-        for (EnumMaterialType materialType : EnumMaterialType.values())
+        for (ItemMaterial.Variants variant : ItemMaterial.Variants.values())
         {
-            if (materialType.getRegistryType() == EnumRegistryType.ITEM)
-            {
-                for (EnumMaterial material : EnumMaterial.MATERIALS)
-                {
-                    if (material.hasType(materialType))
-                    {
-                        ItemStack mat = new ItemStack(item_material, 1, material.getMetadata(materialType));
-                        BlepCore.proxy.registerModel(mat, item_material.getRegistryName(), "variant=" + material.getNameOfType(materialType));
-                    }
-                }
-            }
+            ItemStack mat = new ItemStack(item_material, 1, variant.getMetadata());
+            BlepCore.proxy.registerModel(mat, item_material.getRegistryName(), "variant=" + variant.getName());
         }
     }
 }

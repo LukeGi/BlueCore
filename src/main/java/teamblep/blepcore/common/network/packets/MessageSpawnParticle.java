@@ -1,9 +1,9 @@
 package teamblep.blepcore.common.network.packets;
 
-import teamblep.blepcore.common.network.MessageBase;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumParticleTypes;
+import teamblep.blepcore.common.network.MessageBase;
 
 import javax.annotation.Nullable;
 

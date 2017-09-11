@@ -1,9 +1,5 @@
 package teamblep.blepcore.common.block.machine;
 
-import teamblep.blepcore.common.BlepCore;
-import teamblep.blepcore.common.Utils;
-import teamblep.blepcore.common.block.core.BlockTile;
-import teamblep.blepcore.common.tileentity.core.TileEntityAbstractMachine;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
@@ -16,6 +12,10 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import teamblep.blepcore.common.BlepCore;
+import teamblep.blepcore.common.Utils;
+import teamblep.blepcore.common.block.core.BlockTile;
+import teamblep.blepcore.common.tileentity.core.TileEntityAbstractMachine;
 
 import javax.annotation.Nullable;
 

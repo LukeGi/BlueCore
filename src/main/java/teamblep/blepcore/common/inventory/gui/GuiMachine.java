@@ -1,12 +1,12 @@
 package teamblep.blepcore.common.inventory.gui;
 
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.util.ResourceLocation;
 import teamblep.blepcore.common.BlepCore;
+import teamblep.blepcore.common.ModInfo;
 import teamblep.blepcore.common.inventory.SlotData;
 import teamblep.blepcore.common.inventory.container.ContainerMachine;
 import teamblep.blepcore.common.tileentity.core.TileEntityAbstractMachine;
-import teamblep.blepcore.common.ModInfo;
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.util.ResourceLocation;
 
 /**
  * @author Kelan

@@ -1,15 +1,17 @@
 package teamblep.blepcore.common;
 
-import teamblep.blepcore.common.block.machine.MachineData;
-import teamblep.blepcore.common.inventory.GuiHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import teamblep.blepcore.common.block.machine.MachineData;
+import teamblep.blepcore.common.inventory.GuiHandler;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
@@ -19,11 +21,11 @@ import java.util.stream.Collectors;
 
 public final class Utils
 {
+    private static final Random random = new Random();
+
     private Utils()
     {
     }
-
-    private static final Random random = new Random();
 
     @SideOnly(Side.CLIENT)
     public static Random worldRandom()
@@ -56,7 +58,8 @@ public final class Utils
         if (exception == null)
         {
             Utils.crashWithException(new NullPointerException("You crashed with isInventoryValid null exception??? U dumb :("), 69, false);
-        } else
+        }
+        else
         {
             BlepCore.logger.error("Your game appears to have crashed.", exception);
             FMLCommonHandler.instance().exitJava(error, hardExit);
@@ -68,7 +71,8 @@ public final class Utils
         try
         {
             return clazz.getDeclaredConstructor(parameterTypes).newInstance(parameters);
-        } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e)
+        }
+        catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e)
         {
             e.printStackTrace();
         }
@@ -111,5 +115,15 @@ public final class Utils
         }
 
         return false;
+    }
+
+    public static Object[] getObjectArray(Object t, int num)
+    {
+        List<Object> stackList = new ArrayList<>();
+        for (int i = 0; i < num; i++)
+        {
+            stackList.add(t);
+        }
+        return stackList.toArray();
     }
 }

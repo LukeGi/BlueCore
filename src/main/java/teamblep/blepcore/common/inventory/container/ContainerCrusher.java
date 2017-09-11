@@ -1,14 +1,14 @@
 package teamblep.blepcore.common.inventory.container;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
 import teamblep.blepcore.common.inventory.EnumSlotType;
 import teamblep.blepcore.common.inventory.InventoryMachineContainer;
 import teamblep.blepcore.common.inventory.SlotData;
 import teamblep.blepcore.common.inventory.SlotRange;
 import teamblep.blepcore.common.tileentity.machine.TileEntityCrusher;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Slot;
-import net.minecraft.item.ItemStack;
 
 import javax.annotation.Nullable;
 import java.util.List;

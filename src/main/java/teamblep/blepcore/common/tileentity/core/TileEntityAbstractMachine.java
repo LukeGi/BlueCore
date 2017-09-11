@@ -38,7 +38,8 @@ public abstract class TileEntityAbstractMachine<I extends RecipeInput, O extends
         if (machineData == null)
         {
             Utils.crashWithException(new IllegalStateException("A TileEntityAbstractMachine was created with a null MachineData object. This doesn't make any sense to do."));
-        } else
+        }
+        else
         {
             this.machineData = machineData;
             if (machineData.getInventoryContainer() != null)
@@ -199,7 +200,8 @@ public abstract class TileEntityAbstractMachine<I extends RecipeInput, O extends
             if (isInventoryValid())
             {
                 return tickProgressBar(processBar, !simulate, !simulate);
-            } else
+            }
+            else
             {
                 if (!simulate)
                 {

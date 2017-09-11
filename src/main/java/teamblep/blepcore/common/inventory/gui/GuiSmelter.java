@@ -1,9 +1,9 @@
 package teamblep.blepcore.common.inventory.gui;
 
+import net.minecraft.client.renderer.GlStateManager;
 import teamblep.blepcore.common.inventory.container.ContainerSmelter;
 import teamblep.blepcore.common.tileentity.ProgressBar;
 import teamblep.blepcore.common.tileentity.machine.TileEntitySmelter;
-import net.minecraft.client.renderer.GlStateManager;
 
 /**
  * @author Kelan

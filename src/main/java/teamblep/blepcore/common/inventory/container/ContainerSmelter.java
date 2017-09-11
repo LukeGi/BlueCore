@@ -1,16 +1,16 @@
 package teamblep.blepcore.common.inventory.container;
 
-import teamblep.blepcore.common.inventory.EnumSlotType;
-import teamblep.blepcore.common.inventory.InventoryMachineContainer;
-import teamblep.blepcore.common.inventory.SlotData;
-import teamblep.blepcore.common.inventory.SlotRange;
-import teamblep.blepcore.common.tileentity.machine.TileEntitySmelter;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.tileentity.TileEntityFurnace;
+import teamblep.blepcore.common.inventory.EnumSlotType;
+import teamblep.blepcore.common.inventory.InventoryMachineContainer;
+import teamblep.blepcore.common.inventory.SlotData;
+import teamblep.blepcore.common.inventory.SlotRange;
+import teamblep.blepcore.common.tileentity.machine.TileEntitySmelter;
 
 import javax.annotation.Nullable;
 import java.util.List;

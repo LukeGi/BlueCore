@@ -75,7 +75,8 @@ public class ProgressBar
         if (reversed)
         {
             ticksElapsed--;
-        } else
+        }
+        else
         {
             ticksElapsed++;
         }
@@ -86,7 +87,8 @@ public class ProgressBar
         if (reversed)
         {
             ticksElapsed = ticksRequired;
-        } else
+        }
+        else
         {
             ticksElapsed = 0;
         }
@@ -97,7 +99,8 @@ public class ProgressBar
         if (reversed)
         {
             return ticksElapsed <= 0;
-        } else
+        }
+        else
         {
             return ticksElapsed >= ticksRequired;
         }

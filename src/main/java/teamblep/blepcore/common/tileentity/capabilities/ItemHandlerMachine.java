@@ -1,12 +1,12 @@
 package teamblep.blepcore.common.tileentity.capabilities;
 
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.energy.CapabilityEnergy;
+import net.minecraftforge.items.ItemStackHandler;
 import teamblep.blepcore.common.Utils;
 import teamblep.blepcore.common.inventory.EnumSlotType;
 import teamblep.blepcore.common.inventory.InventoryMachineContainer;
 import teamblep.blepcore.common.inventory.SlotData;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.energy.CapabilityEnergy;
-import net.minecraftforge.items.ItemStackHandler;
 
 /**
  * @author Blue
@@ -41,7 +41,8 @@ public class ItemHandlerMachine extends ItemStackHandler
             }
 
             return itemstack;
-        } else
+        }
+        else
         {
             return null;
         }

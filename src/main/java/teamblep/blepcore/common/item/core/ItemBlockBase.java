@@ -1,7 +1,7 @@
 package teamblep.blepcore.common.item.core;
 
-import teamblep.blepcore.common.block.core.BlockBase;
 import net.minecraft.item.ItemBlock;
+import teamblep.blepcore.common.block.core.BlockBase;
 
 public class ItemBlockBase extends ItemBlock
 {

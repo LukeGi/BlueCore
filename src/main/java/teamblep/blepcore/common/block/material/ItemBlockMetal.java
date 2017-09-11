@@ -8,9 +8,9 @@ import teamblep.blepcore.common.ModInfo;
  * @author Blue
  */
 
-public class ItemBlockOre extends ItemBlock
+public class ItemBlockMetal extends ItemBlock
 {
-    public ItemBlockOre(BlockOre block)
+    public ItemBlockMetal(BlockMetal block)
     {
         super(block);
         setHasSubtypes(true);
@@ -20,6 +20,6 @@ public class ItemBlockOre extends ItemBlock
     @Override
     public String getUnlocalizedName(ItemStack stack)
     {
-        return "tile." + ModInfo.RESOURCE_PREFIX + BlockOre.Variants.byMeta(stack.getMetadata()).getName() + "_ore";
+        return "tile." + ModInfo.RESOURCE_PREFIX + BlockMetal.Variants.byMeta(stack.getMetadata()).getName() + "_block";
     }
 }
