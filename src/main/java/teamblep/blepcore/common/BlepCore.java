@@ -12,6 +12,8 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import org.apache.logging.log4j.Logger;
 import teamblep.blepcore.client.ClientSide;
+import teamblep.blepcore.client.DummyClientSide;
+import teamblep.blepcore.client.IClientSide;
 import teamblep.blepcore.common.inventory.GuiHandler;
 import teamblep.blepcore.common.recipe.RecipeHandler;
 
@@ -28,6 +30,8 @@ public class BlepCore
     @SidedProxy(clientSide = ModInfo.PROXY_CLIENT, serverSide = ModInfo.PROXY_SERVER)
     public static IProxy proxy;
 
+    public static IClientSide clientSide;
+
     public static boolean debug = false;
     public static Logger logger;
 
@@ -35,6 +39,10 @@ public class BlepCore
     public void preInit(FMLPreInitializationEvent e)
     {
         logger = e.getModLog();
+        //noinspection NewExpressionSideOnly
+        clientSide = FMLCommonHandler.instance().getSide().isClient() ? new ClientSide() : new DummyClientSide();
+
+        clientSide.preinit();
 
         ConfigManager.load(ModInfo.MOD_ID, Config.Type.INSTANCE);
     }
@@ -42,11 +50,7 @@ public class BlepCore
     @Mod.EventHandler
     public void init(FMLInitializationEvent e)
     {
-        if (FMLCommonHandler.instance().getSide().isClient())
-        {
-            //noinspection NewExpressionSideOnly,MethodCallSideOnly
-            new ClientSide().init();
-        }
+        clientSide.init();
         GuiHandler.init();
         RecipeHandler.initRecipes();
     }
