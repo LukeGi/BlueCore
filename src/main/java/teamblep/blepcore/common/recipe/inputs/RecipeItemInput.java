@@ -41,7 +41,7 @@ public class RecipeItemInput extends RecipeInput<ItemStack>
     {
         if (input != null && getInput() != null)
         {
-            if (input.getItem() == getInput().getItem() && input.stackSize >= getInput().stackSize)
+            if (input.getItem() == getInput().getItem() && input.getMetadata() == getInput().getMetadata() && input.stackSize >= getInput().stackSize)
             {
                 return true;
             }
