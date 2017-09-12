@@ -67,6 +67,7 @@ public class BlockFastLadders extends BlockBase
                 }
             }
         }
+        entity.fallDistance = 0;
     }
 
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
