@@ -17,8 +17,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import teamblep.blepcore.common.BlepCore;
 import teamblep.blepcore.common.Names;
+import teamblep.blepcore.common.Utils;
 import teamblep.blepcore.common.block.BlockHandler;
 import teamblep.blepcore.common.block.core.BlockBase;
+import teamblep.blepcore.common.creativetab.CreativeTab;
 import teamblep.blepcore.common.item.materials.Substance;
 
 import java.util.List;
@@ -85,9 +87,12 @@ public class BlockMetal extends BlockBase
     @Override
     public void getSubBlocks(Item itemIn, CreativeTabs tab, List<ItemStack> list)
     {
-        for (Variants metals : Variants.values())
+        if (CreativeTab.MAIN_TAB.equals(tab))
         {
-            list.add(new ItemStack(this, 1, metals.getMetadata()));
+            for (Variants metals : Variants.values())
+            {
+                list.add(metals.getItemStack());
+            }
         }
     }
 
@@ -99,6 +104,7 @@ public class BlockMetal extends BlockBase
         SILVER(Substance.SILVER);
 
         private Substance substance;
+        private ItemStack stack;
 
         Variants(Substance substance)
         {
@@ -117,7 +123,11 @@ public class BlockMetal extends BlockBase
 
         public ItemStack getItemStack(int amount)
         {
-            return new ItemStack(BlockHandler.BLOCK_METAL, amount, getMetadata());
+            if (Utils.isItemStackNull(stack))
+            {
+                stack = new ItemStack(BlockHandler.BLOCK_METAL, 1, getMetadata());
+            }
+            return amount > 1 ? Utils.copyStackWithSize(stack, amount) : stack;
         }
 
         public Substance getSubstance()

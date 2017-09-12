@@ -1,8 +1,5 @@
 package teamblep.blepcore.common;
 
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
@@ -16,8 +13,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import org.apache.logging.log4j.Logger;
 import teamblep.blepcore.client.ClientSide;
 import teamblep.blepcore.common.inventory.GuiHandler;
-import teamblep.blepcore.common.item.ItemHandler;
-import teamblep.blepcore.common.item.materials.ItemMaterial;
 import teamblep.blepcore.common.recipe.RecipeHandler;
 
 /**
@@ -35,20 +30,6 @@ public class BlepCore
 
     public static boolean debug = false;
     public static Logger logger;
-    public static CreativeTabs tabBlepCore = new CreativeTabs(ModInfo.MOD_ID)
-    {
-        @Override
-        public Item getTabIconItem()
-        {
-            return ItemHandler.item_material;
-        }
-
-        @Override
-        public ItemStack getIconItemStack()
-        {
-            return new ItemStack(ItemHandler.item_material, 1, ItemMaterial.Variants.COPPER_INGOT.getMetadata());
-        }
-    };
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent e)

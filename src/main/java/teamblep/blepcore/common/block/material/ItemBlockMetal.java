@@ -1,20 +1,19 @@
 package teamblep.blepcore.common.block.material;
 
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import teamblep.blepcore.common.ModInfo;
+import teamblep.blepcore.common.item.core.ItemBlockBase;
 
 /**
  * @author Blue
  */
 
-public class ItemBlockMetal extends ItemBlock
+public class ItemBlockMetal extends ItemBlockBase
 {
     public ItemBlockMetal(BlockMetal block)
     {
         super(block);
         setHasSubtypes(true);
-        setRegistryName(block.getRegistryName());
     }
 
     @Override

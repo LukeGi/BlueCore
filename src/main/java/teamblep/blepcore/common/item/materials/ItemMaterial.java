@@ -4,9 +4,10 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
-import teamblep.blepcore.common.BlepCore;
 import teamblep.blepcore.common.ModInfo;
 import teamblep.blepcore.common.Names;
+import teamblep.blepcore.common.Utils;
+import teamblep.blepcore.common.creativetab.CreativeTab;
 import teamblep.blepcore.common.item.ItemHandler;
 import teamblep.blepcore.common.item.core.ItemBase;
 
@@ -23,23 +24,25 @@ public class ItemMaterial extends ItemBase
     public ItemMaterial()
     {
         super(Names.Items.MATERIAL);
-        setCreativeTab(BlepCore.tabBlepCore);
         setHasSubtypes(true);
+    }
+
+    @Override
+    public void getSubItems(Item itemIn, CreativeTabs tab, List<ItemStack> subItems)
+    {
+        if (CreativeTab.MAIN_TAB.equals(tab))
+        {
+            for (Variants variant : Variants.values())
+            {
+                subItems.add(variant.getItemStack());
+            }
+        }
     }
 
     @Override
     public String getUnlocalizedName(ItemStack stack)
     {
         return "item." + ModInfo.RESOURCE_PREFIX + Variants.byMeta(stack.getMetadata()).getName();
-    }
-
-    @Override
-    public void getSubItems(Item itemIn, CreativeTabs tab, List<ItemStack> subItems)
-    {
-        for (Variants variant : Variants.values())
-        {
-            subItems.add(new ItemStack(this, 1, variant.getMetadata()));
-        }
     }
 
     public enum Variants implements IStringSerializable
@@ -68,6 +71,7 @@ public class ItemMaterial extends ItemBase
         SILVER_DIRTY_DUST(Substance.SILVER);
 
         private Substance substance;
+        private ItemStack stack;
 
         Variants(Substance substance)
         {
@@ -86,7 +90,11 @@ public class ItemMaterial extends ItemBase
 
         public ItemStack getItemStack(int amount)
         {
-            return new ItemStack(ItemHandler.item_material, amount, getMetadata());
+            if (Utils.isItemStackNull(stack))
+            {
+                stack = new ItemStack(ItemHandler.item_material, 1, getMetadata());
+            }
+            return amount > 1 ? Utils.copyStackWithSize(stack, amount) : stack;
         }
 
         public Substance getSubstance()

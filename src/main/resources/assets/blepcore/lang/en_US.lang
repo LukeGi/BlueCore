@@ -39,4 +39,5 @@ tile.blepcore:tin_block.name=Tin Block
 tile.blepcore:lead_block.name=Lead Block
 tile.blepcore:silver_block.name=Silver Block
 
-itemGroup.blepcore=Blep Core Tab
+itemGroup.blepcore:main=Blep Core Main
+itemGroup.blepcore:misc=Blep Core Misc

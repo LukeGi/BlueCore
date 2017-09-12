@@ -126,4 +126,21 @@ public final class Utils
         }
         return stackList.toArray();
     }
+
+    public static ItemStack copyStackWithSize(ItemStack stack, int amount)
+    {
+        if (!isItemStackNull(stack))
+        {
+            ItemStack ret = stack.copy();
+
+            if (amount > 0)
+            {
+                ret.stackSize = amount;
+            }
+
+            return ret;
+        }
+
+        return null;
+    }
 }

@@ -31,4 +31,10 @@ public class Names
     {
         public static final String INVENTORY = ModInfo.RESOURCE_PREFIX + "inventory";
     }
+
+    public class CreativeTabs
+    {
+        public static final String MAIN = "main";
+        public static final String MISC = "misc";
+    }
 }
