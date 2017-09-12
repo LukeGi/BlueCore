@@ -72,17 +72,17 @@ public class ItemHandlerMachine extends ItemStackHandler
     @Override
     public ItemStack extractItem(int slot, int amount, boolean simulate)
     {
-//        SlotData slotData = inventoryContainer.getSlotData(slot);
-//
-//        if (inventoryContainer.getSlotsWithType(EnumSlotType.OUTPUT).contains(slotData))
-//        {
-//            return super.extractItem(slot, amount, simulate);
-//        }
+        SlotData slotData = inventoryContainer.getSlotData(slot);
+
+        if (inventoryContainer.getSlotsWithType(EnumSlotType.OUTPUT).contains(slotData))
+        {
+            return super.extractItem(slot, amount, simulate);
+        }
 //        if (inventoryContainer.getSlotsWithType(EnumSlotType.BATTERY).contains(slotData)) //TODO: check if battery is empty, and if it is, pull it out of the machine.
 //        {
 //            return super.extractItem(slot, amount, simulate);
 //        }
-        return super.extractItem(slot, amount, simulate);
+        return null;
     }
 
     public ItemStack[] getItemStacks()
