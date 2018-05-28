@@ -1,19 +1,25 @@
-/*
-!/.gitignore
-!/.gitmodules
-!/update.json
-!/BuildCraftAPI
-!/src
-!/gradle
-!/gradlew
-!/gradlew.bat
-!/README.md
-!/License.txt
-!/LICENSE
-!/build.gradle
-!/build.properties
-!/build.bat
-!/build.sh
-!/gradle.properties
-!/webresources
-.DS_Store
+# eclipse
+bin
+*.launch
+.settings
+.metadata
+.classpath
+.project
+
+# idea
+out
+*.ipr
+*.iws
+*.iml
+.idea
+
+# gradle
+build
+.gradle
+
+# other
+eclipse
+run
+classes
+
+old/*
