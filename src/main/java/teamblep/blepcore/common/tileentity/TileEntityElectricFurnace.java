@@ -1,7 +1,12 @@
 package teamblep.blepcore.common.tileentity;
 
+import net.minecraft.util.EnumFacing;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.energy.CapabilityEnergy;
 import teamblep.blepcore.common.energy.EnergyStorageBase;
 import teamblep.blepcore.common.energy.EnergyStorageConsumer;
+
+import javax.annotation.Nullable;
 
 public class TileEntityElectricFurnace extends TileEntityMachine {
 
