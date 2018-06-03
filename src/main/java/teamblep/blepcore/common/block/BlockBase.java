@@ -16,6 +16,7 @@ public class BlockBase extends Block {
 
     public BlockBase(Material materialIn, String name) {
         super(materialIn);
+        setup(name);
     }
 
     @SuppressWarnings("unchecked")
