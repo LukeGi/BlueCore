@@ -24,29 +24,24 @@ public class TileEntityBase extends TileEntity {
         markDirty();
     }
 
-    @Nullable
-    @Override
-    public SPacketUpdateTileEntity getUpdatePacket() {
+    @Nullable @Override public SPacketUpdateTileEntity getUpdatePacket() {
         return new SPacketUpdateTileEntity(getPos(), 0, getUpdateTag());
     }
 
-    @Override
-    public NBTTagCompound getUpdateTag() {
+    @Override public NBTTagCompound getUpdateTag() {
         return writeToNBT(new NBTTagCompound());
     }
 
-    @Override
-    public void handleUpdateTag(NBTTagCompound tag) {
+    @Override public void handleUpdateTag(NBTTagCompound tag) {
         readFromNBT(tag);
         getWorld().markBlockRangeForRenderUpdate(getPos(), getPos());
     }
 
-    @Override
-    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
+    @Override public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
         handleUpdateTag(pkt.getNbtCompound());
     }
 
-    protected EnergyStorageBase getEnergyBase (@Nullable EnumFacing side) {
+    protected EnergyStorageBase getEnergyBase(@Nullable EnumFacing side) {
         IEnergyStorage m_energy = getEnergy(side);
         return m_energy instanceof EnergyStorageBase ? (EnergyStorageBase) m_energy : null;
     }

@@ -34,29 +34,24 @@ public class AirClickMessage implements IMessage, IMessageHandler<AirClickMessag
         m_hand = hand.ordinal();
     }
 
-    @Override
-    public void toBytes(ByteBuf buf) {
+    @Override public void toBytes(ByteBuf buf) {
         ByteBufUtils.writeTag(buf, NBTUtil.createUUIDTag(m_uuid));
         buf.writeBoolean(m_left);
         if (!m_left) buf.writeInt(m_hand);
     }
 
-    @Override
-    public void fromBytes(ByteBuf buf) {
+    @Override public void fromBytes(ByteBuf buf) {
         m_uuid = NBTUtil.getUUIDFromTag(ByteBufUtils.readTag(buf));
         m_left = buf.readBoolean();
         if (!m_left) m_hand = buf.readInt();
     }
 
-    @Override
-    public IMessage onMessage(AirClickMessage message, MessageContext ctx) {
+    @Override public IMessage onMessage(AirClickMessage message, MessageContext ctx) {
         MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
         server.addScheduledTask(() -> {
             EntityPlayerMP player = server.getPlayerList().getPlayerByUUID(message.m_uuid);
-            if (message.m_left)
-                ForgeHooks.onEmptyLeftClick(player);
-            else
-                ForgeHooks.onItemRightClick(player, EnumHand.values()[message.m_hand]);
+            if (message.m_left) { ForgeHooks.onEmptyLeftClick(player); }
+            else { ForgeHooks.onItemRightClick(player, EnumHand.values()[message.m_hand]); }
         });
         return null;
     }

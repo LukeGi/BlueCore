@@ -17,26 +17,23 @@ public abstract class TileEntityMachine extends TileEntityBase implements ITicka
 
     /**
      * This will be used to create the energy storage on initialization.
+     *
      * @return energy storage or null if machine does not have one
      */
     protected abstract EnergyStorageBase createEnergyStorage();
 
-    @Override
-    public void update() {
+    @Override public void update() {
 
     }
 
-    @Override
-    public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
+    @Override public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
         if (energyStorage != null && CapabilityEnergy.ENERGY.equals(capability)) {
             return true;
         }
         return super.hasCapability(capability, facing);
     }
 
-    @Nullable
-    @Override
-    public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
+    @Nullable @Override public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
         if (energyStorage != null && CapabilityEnergy.ENERGY.equals(capability)) {
             return CapabilityEnergy.ENERGY.cast(energyStorage);
         }

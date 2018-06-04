@@ -15,15 +15,13 @@ public class GuiMachine extends GuiContainer {
         ySize = 100;
     }
 
-    @Override
-    public void initGui() {
+    @Override public void initGui() {
         this.mc.player.openContainer = this.inventorySlots;
         guiTop = height - ySize;
         guiLeft = (width - xSize) / 2;
     }
 
-    @Override
-    protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
+    @Override protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
         drawPlayerSlots();
     }
 

@@ -27,7 +27,8 @@ public class EnergyStorageBase extends EnergyStorage {
         int energyReceived;
         if (forced) {
             energyReceived = Math.min(capacity - energy, amount);
-        } else {
+        }
+        else {
             energyReceived = Math.min(capacity - energy, Math.min(maxReceive, amount));
         }
         energy += energyReceived;
@@ -42,7 +43,8 @@ public class EnergyStorageBase extends EnergyStorage {
         int energyExtracted;
         if (forced) {
             energyExtracted = Math.min(energy, amount);
-        } else {
+        }
+        else {
             energyExtracted = Math.min(energy, Math.min(this.maxExtract, amount));
         }
         energy -= energyExtracted;

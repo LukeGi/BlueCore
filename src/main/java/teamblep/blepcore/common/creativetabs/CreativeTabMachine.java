@@ -10,8 +10,7 @@ public class CreativeTabMachine extends CreativeTabBase {
         super("blep:machines");
     }
 
-    @Override
-    public ItemStack getTabIconItem() {
+    @Override public ItemStack getTabIconItem() {
         return new ItemStack(Blocks.LIT_FURNACE);
     }
 }

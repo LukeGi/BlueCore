@@ -24,28 +24,27 @@ public abstract class BlockMachine extends BlockBase implements ITileEntityConta
         setCreativeTab(CreativeTabMachine.INSTANCE);
     }
 
-    @Override
-    protected BlockStateContainer createBlockState() {
+    @Override protected BlockStateContainer createBlockState() {
         Builder m_builder = new Builder(this);
         m_builder.add(Properties.FACING4);
         return m_builder.build();
     }
 
     @Override
-    public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
+    public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY,
+                                            float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
         EnumFacing direction = placer.getHorizontalFacing();
         if (!placer.isSneaking()) direction = direction.getOpposite();
-        return super.getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, meta, placer, hand).withProperty(Properties.FACING4, direction);
+        return super.getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, meta, placer, hand).withProperty(
+                Properties.FACING4, direction);
     }
 
-    @Override
-    public IBlockState getStateFromMeta(int meta) {
+    @Override public IBlockState getStateFromMeta(int meta) {
         EnumFacing[] m_allowedValues = Properties.FACING4.getAllowedValues().toArray(new EnumFacing[0]);
         return getDefaultState().withProperty(Properties.FACING4, m_allowedValues[meta & m_allowedValues.length]);
     }
 
-    @Override
-    public int getMetaFromState(IBlockState state) {
+    @Override public int getMetaFromState(IBlockState state) {
         return new ArrayList<>(Properties.FACING4.getAllowedValues()).indexOf(state.getValue(Properties.FACING4));
     }
 }

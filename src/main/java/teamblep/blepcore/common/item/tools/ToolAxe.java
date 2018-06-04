@@ -17,43 +17,46 @@ public class ToolAxe extends ToolBase {
         super(name);
     }
 
-    @Override
-    public boolean isEffective(IBlockState block) {
+    @Override public boolean isEffective(IBlockState block) {
         Material material = block.getMaterial();
         return material.equals(Material.LEAVES) || material.equals(Material.WOOD);
     }
 
-    @Override
-    public float getEffectiveSpeed() {
+    @Override public float getEffectiveSpeed() {
         return 3.0F;
     }
 
-    @Override
-    public float getIneffectiveSpeed() {
+    @Override public float getIneffectiveSpeed() {
         return 0.5F;
     }
 
     @Override
-    public boolean rightClickBlockAction(EntityPlayer player, EnumHand hand, World world, BlockPos pos, IBlockState blockState, EnumFacing side, Vec3d hit) {
-        player.sendStatusMessage(new TextComponentString("You right clicked a block").setStyle(new Style().setColor(TextFormatting.GREEN)), false);
+    public boolean rightClickBlockAction(EntityPlayer player, EnumHand hand, World world, BlockPos pos,
+                                         IBlockState blockState, EnumFacing side, Vec3d hit) {
+        player.sendStatusMessage(new TextComponentString("You right clicked a block").setStyle(
+                new Style().setColor(TextFormatting.GREEN)), false);
         return false;
     }
 
     @Override
-    public boolean leftClickBlockAction(EntityPlayer player, EnumHand hand, World world, BlockPos pos, IBlockState blockState, EnumFacing side, Vec3d hit) {
-        player.sendStatusMessage(new TextComponentString("You left clicked a block").setStyle(new Style().setColor(TextFormatting.GREEN)), false);
+    public boolean leftClickBlockAction(EntityPlayer player, EnumHand hand, World world, BlockPos pos,
+                                        IBlockState blockState, EnumFacing side, Vec3d hit) {
+        player.sendStatusMessage(new TextComponentString("You left clicked a block").setStyle(
+                new Style().setColor(TextFormatting.GREEN)), false);
         return false;
     }
 
-    @Override
-    public boolean rightClickAirAction(EntityPlayer player, EnumHand hand, World world) {
-        player.sendStatusMessage(new TextComponentString("You right clicked a air").setStyle(new Style().setColor(TextFormatting.RED)), false);
+    @Override public boolean rightClickAirAction(EntityPlayer player, EnumHand hand, World world) {
+        player.sendStatusMessage(
+                new TextComponentString("You right clicked a air").setStyle(new Style().setColor(TextFormatting.RED)),
+                false);
         return false;
     }
 
-    @Override
-    public boolean leftClickAirAction(EntityPlayer player, EnumHand hand, World world) {
-        player.sendStatusMessage(new TextComponentString("You left clicked a air").setStyle(new Style().setColor(TextFormatting.RED)), false);
+    @Override public boolean leftClickAirAction(EntityPlayer player, EnumHand hand, World world) {
+        player.sendStatusMessage(
+                new TextComponentString("You left clicked a air").setStyle(new Style().setColor(TextFormatting.RED)),
+                false);
         return false;
     }
 }

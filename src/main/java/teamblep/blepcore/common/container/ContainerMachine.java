@@ -65,20 +65,15 @@ public class ContainerMachine<T extends TileEntityMachine> extends Container {
         this.addSlotToContainer(new Slot(playerInventory, 38, -22, 30));
         this.addSlotToContainer(new Slot(playerInventory, 39, -22, 6));
 
-        this.addSlotToContainer(new Slot(playerInventory, 40, 238, 78)
-        {
-            @Nullable
-            @SideOnly(Side.CLIENT)
-            public String getSlotTexture()
-            {
+        this.addSlotToContainer(new Slot(playerInventory, 40, 238, 78) {
+            @Nullable @SideOnly(Side.CLIENT) public String getSlotTexture() {
                 return "minecraft:items/empty_armor_slot_shield";
             }
         });
     }
 
 
-    @Override
-    public boolean canInteractWith(EntityPlayer playerIn) {
+    @Override public boolean canInteractWith(EntityPlayer playerIn) {
         return playerIn.getDistanceSq(tileEntity.getPos()) < 196;
     }
 }

@@ -23,8 +23,7 @@ public class EventHandlerTool {
     private EventHandlerTool() {
     }
 
-    @SubscribeEvent
-    public void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
+    @SubscribeEvent public void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
         if (event.getSide() == Side.SERVER) {
             ItemStack itemStack = event.getItemStack();
             if (itemStack.getItem() instanceof ToolBase) {
@@ -39,7 +38,8 @@ public class EventHandlerTool {
 
                 if (item.rightClickBlockAction(player, hand, world, pos, blockState, side, hit)) {
                     event.setCancellationResult(EnumActionResult.SUCCESS);
-                } else {
+                }
+                else {
                     event.setCancellationResult(EnumActionResult.PASS);
                 }
                 event.setCanceled(true);
@@ -47,8 +47,7 @@ public class EventHandlerTool {
         }
     }
 
-    @SubscribeEvent
-    public void onLeftClickBlock(PlayerInteractEvent.LeftClickBlock event) {
+    @SubscribeEvent public void onLeftClickBlock(PlayerInteractEvent.LeftClickBlock event) {
         if (event.getSide() == Side.SERVER) {
             ItemStack itemStack = event.getItemStack();
             if (itemStack.getItem() instanceof ToolBase) {
@@ -63,7 +62,8 @@ public class EventHandlerTool {
 
                 if (item.leftClickBlockAction(player, hand, world, pos, blockState, side, hit)) {
                     event.setCancellationResult(EnumActionResult.SUCCESS);
-                } else {
+                }
+                else {
                     event.setCancellationResult(EnumActionResult.PASS);
                 }
                 event.setCanceled(true);
@@ -71,8 +71,7 @@ public class EventHandlerTool {
         }
     }
 
-    @SubscribeEvent
-    public void onRightClickAir(PlayerInteractEvent.RightClickItem event) {
+    @SubscribeEvent public void onRightClickAir(PlayerInteractEvent.RightClickItem event) {
         if (event.getSide() == Side.SERVER) {
             ItemStack itemStack = event.getItemStack();
             if (itemStack.getItem() instanceof ToolBase) {
@@ -82,7 +81,8 @@ public class EventHandlerTool {
                 World world = event.getWorld();
                 if (item.rightClickAirAction(player, hand, world)) {
                     event.setCancellationResult(EnumActionResult.SUCCESS);
-                } else {
+                }
+                else {
                     event.setCancellationResult(EnumActionResult.PASS);
                 }
                 event.setCanceled(true);
@@ -90,8 +90,7 @@ public class EventHandlerTool {
         }
     }
 
-    @SubscribeEvent
-    public void onLeftClickAir(PlayerInteractEvent.LeftClickEmpty event) {
+    @SubscribeEvent public void onLeftClickAir(PlayerInteractEvent.LeftClickEmpty event) {
         if (event.getSide() == Side.CLIENT) {
             BlepCore.net.sendToServer(new AirClickMessage(event.getEntityPlayer().getGameProfile().getId()));
         }
