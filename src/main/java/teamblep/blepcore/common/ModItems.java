@@ -8,13 +8,16 @@ import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
 import teamblep.blepcore.BlepCore;
 import teamblep.blepcore.common.item.tools.ToolAxe;
 
-@ObjectHolder(BlepCore.MOD_ID) @EventBusSubscriber public class ModItems {
+@ObjectHolder(BlepCore.MOD_ID)
+@EventBusSubscriber
+public class ModItems {
 
-    //    public static final Item EXAMPLE_ITEM = null;
-    public static final ToolAxe EXAMPLE_AXE = null;
+  //    public static final Item EXAMPLE_ITEM = null;
+  public static final ToolAxe EXAMPLE_AXE = null;
 
-    @SubscribeEvent public static void onRegisterItems(Register<Item> event) {
-        BlepCore.log("Registering Items");
-        event.getRegistry().registerAll(new ToolAxe("example_axe"));
-    }
+  @SubscribeEvent
+  public static void onRegisterItems(Register<Item> event) {
+    BlepCore.log("Registering Items");
+    event.getRegistry().registerAll(new ToolAxe("example_axe"));
+  }
 }

@@ -3,60 +3,99 @@ package teamblep.blepcore.common.item.tools;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.text.Style;
-import net.minecraft.util.text.TextComponentString;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import teamblep.blepcore.common.util.Tree;
 
 public class ToolAxe extends ToolBase {
-    public ToolAxe(String name) {
-        super(name);
-    }
 
-    @Override public boolean isEffective(IBlockState block) {
-        Material material = block.getMaterial();
-        return material.equals(Material.LEAVES) || material.equals(Material.WOOD);
-    }
+  public ToolAxe(String name) {
+    super(name);
+  }
 
-    @Override public float getEffectiveSpeed() {
-        return 3.0F;
-    }
+  private static boolean isLeaves(World world, BlockPos blockPos) {
+    IBlockState blockState = world.getBlockState(blockPos);
+    return blockState.getBlock().isLeaves(blockState, world, blockPos);
+  }
 
-    @Override public float getIneffectiveSpeed() {
-        return 0.5F;
-    }
+  @Override
+  public boolean isEffective(IBlockState block) {
+    Material material = block.getMaterial();
+    return material.equals(Material.LEAVES) || material.equals(Material.WOOD);
+  }
 
-    @Override
-    public boolean rightClickBlockAction(EntityPlayer player, EnumHand hand, World world, BlockPos pos,
-                                         IBlockState blockState, EnumFacing side, Vec3d hit) {
-        player.sendStatusMessage(new TextComponentString("You right clicked a block").setStyle(
-                new Style().setColor(TextFormatting.GREEN)), false);
-        return false;
-    }
+  @Override
+  public float getEffectiveSpeed() {
+    return 3.0F;
+  }
 
-    @Override
-    public boolean leftClickBlockAction(EntityPlayer player, EnumHand hand, World world, BlockPos pos,
-                                        IBlockState blockState, EnumFacing side, Vec3d hit) {
-        player.sendStatusMessage(new TextComponentString("You left clicked a block").setStyle(
-                new Style().setColor(TextFormatting.GREEN)), false);
-        return false;
-    }
+  @Override
+  public float getIneffectiveSpeed() {
+    return 0.5F;
+  }
 
-    @Override public boolean rightClickAirAction(EntityPlayer player, EnumHand hand, World world) {
-        player.sendStatusMessage(
-                new TextComponentString("You right clicked a air").setStyle(new Style().setColor(TextFormatting.RED)),
-                false);
-        return false;
-    }
+  @Override
+  public boolean rightClickBlockAction(EntityPlayer player, EnumHand hand, World world,
+      BlockPos pos, IBlockState blockState, EnumFacing side, Vec3d hit) {
+    return chopTree(player, hand, world, pos, blockState);
+  }
 
-    @Override public boolean leftClickAirAction(EntityPlayer player, EnumHand hand, World world) {
-        player.sendStatusMessage(
-                new TextComponentString("You left clicked a air").setStyle(new Style().setColor(TextFormatting.RED)),
-                false);
-        return false;
+  @Override
+  public boolean leftClickBlockAction(EntityPlayer player, EnumHand hand, World world, BlockPos pos,
+      IBlockState blockState, EnumFacing side, Vec3d hit) {
+    return chopTree(player, hand, world, pos, blockState);
+  }
+
+  @Override
+  public boolean rightClickAirAction(EntityPlayer player, EnumHand hand, World world) {
+    return false;
+  }
+
+  @Override
+  public boolean leftClickAirAction(EntityPlayer player, EnumHand hand, World world) {
+    return false;
+  }
+
+  private boolean chopTree(EntityPlayer player, EnumHand hand, World world, BlockPos pos,
+      IBlockState blockState) {
+    if (hand != EnumHand.MAIN_HAND
+        || !blockState.getBlock().isLeaves(blockState, world, pos) && !blockState.getBlock()
+        .isWood(world, pos)) {
+      return false;
     }
+    ItemStack inst = player.getHeldItem(hand);
+    NBTTagCompound nbt = inst.getTagCompound();
+    if (nbt == null) {
+      nbt = new NBTTagCompound();
+    }
+    Tree tree = nbt.hasKey("tree") ? new Tree((NBTTagCompound) nbt.getTag("tree"), world)
+        : new Tree(pos, world);
+    if (!tree.contains(pos)) {
+      tree = new Tree(pos, world);
+    }
+    BlockPos topLog = tree.getTopLog();
+    if (topLog != null) {
+      int itter = nbt.hasKey("itter") ? nbt.getInteger("itter") : 0;
+      if (itter > 5) {
+        nbt.removeTag("itter");
+        tree.breakBlock(topLog);
+      } else {
+        nbt.setInteger("itter", itter + 1);
+      }
+      nbt.setTag("tree", tree.serializeNBT());
+      if (tree.getWood().isEmpty()) {
+        tree.getLeaves().forEach(blockPos -> world
+            .scheduleUpdate(blockPos, world.getBlockState(blockPos).getBlock(),
+                world.rand.nextInt(15)));
+        nbt.removeTag("tree");
+      }
+    }
+    inst.setTagCompound(nbt);
+    return true;
+  }
 }

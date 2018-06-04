@@ -13,22 +13,23 @@ import teamblep.blepcore.common.item.EventHandlerTool;
 import teamblep.blepcore.common.network.AirClickMessage;
 
 public class ProxyCommon {
-    public void initPre(FMLPreInitializationEvent event) {
-        MinecraftForge.EVENT_BUS.register(EventHandlerTool.INSTANCE);
-        // NOTE: register packets here.
-        NetworkRegistry.INSTANCE.registerGuiHandler(BlepCore.MOD_ID, new GuiHandlerElectricFurnace());
-        BlepCore.net.registerMessage(AirClickMessage.class, AirClickMessage.class, 0, Side.SERVER);
-    }
 
-    public void init(FMLInitializationEvent event) {
+  public void initPre(FMLPreInitializationEvent event) {
+    MinecraftForge.EVENT_BUS.register(EventHandlerTool.INSTANCE);
+    // NOTE: register packets here.
+    NetworkRegistry.INSTANCE.registerGuiHandler(BlepCore.MOD_ID, new GuiHandlerElectricFurnace());
+    BlepCore.net.registerMessage(AirClickMessage.class, AirClickMessage.class, 0, Side.SERVER);
+  }
 
-    }
+  public void init(FMLInitializationEvent event) {
 
-    public void initPost(FMLPostInitializationEvent event) {
+  }
 
-    }
+  public void initPost(FMLPostInitializationEvent event) {
 
-    public void scheduleTask(Runnable r) {
-        FMLCommonHandler.instance().getMinecraftServerInstance().addScheduledTask(r);
-    }
+  }
+
+  public void scheduleTask(Runnable r) {
+    FMLCommonHandler.instance().getMinecraftServerInstance().addScheduledTask(r);
+  }
 }
