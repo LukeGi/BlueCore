@@ -9,19 +9,19 @@ import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import teamblep.blepcore.BlepCore;
-import teamblep.blepcore.common.item.tools.ToolAxe;
+import teamblep.blepcore.common.item.tools.ToolChainsaw;
 
 @ObjectHolder(BlepCore.MOD_ID)
 @EventBusSubscriber
 public class ModItems {
 
   //    public static final Item EXAMPLE_ITEM = null;
-  public static final ToolAxe EXAMPLE_AXE = null;
+  public static final ToolChainsaw EXAMPLE_AXE = null;
 
   @SubscribeEvent
   public static void onRegisterItems(Register<Item> event) {
     BlepCore.log("Registering Items");
-    event.getRegistry().registerAll(new ToolAxe("example_axe"));
+    event.getRegistry().registerAll(new ToolChainsaw("example_axe"));
   }
 
   @SideOnly(Side.CLIENT)

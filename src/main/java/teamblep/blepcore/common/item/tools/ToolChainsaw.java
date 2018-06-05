@@ -10,11 +10,14 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
+import teamblep.blepcore.BlepCore;
+import teamblep.blepcore.common.network.MessageBlockBreakProgress;
 import teamblep.blepcore.common.util.Tree;
 
-public class ToolAxe extends ToolBase {
+public class ToolChainsaw extends ToolBase {
 
-  public ToolAxe(String name) {
+  public ToolChainsaw(String name) {
     super(name);
   }
 
@@ -85,14 +88,20 @@ public class ToolAxe extends ToolBase {
         nbt.removeTag("itter");
         tree.breakBlock(topLog);
       } else {
-        nbt.setInteger("itter", itter + 1);
+        nbt.setInteger("itter", ++itter);
+        MessageBlockBreakProgress message = new MessageBlockBreakProgress(player.getEntityId(),
+            topLog, itter * 2 - 1);
+        TargetPoint point = new TargetPoint(world.provider.getDimension(), topLog.getX(),
+            topLog.getY(), topLog.getZ(), 4096);
+        BlepCore.net.sendToAllAround(message, point);
       }
-      nbt.setTag("tree", tree.serializeNBT());
       if (tree.getWood().isEmpty()) {
         tree.getLeaves().forEach(blockPos -> world
             .scheduleUpdate(blockPos, world.getBlockState(blockPos).getBlock(),
                 world.rand.nextInt(15)));
         nbt.removeTag("tree");
+      } else {
+        nbt.setTag("tree", tree.serializeNBT());
       }
     }
     inst.setTagCompound(nbt);

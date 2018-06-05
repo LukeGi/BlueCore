@@ -18,6 +18,7 @@ public class Tree implements INBTSerializable<NBTTagCompound> {
   private World world;
   private List<BlockPos> wood;
   private List<BlockPos> leaves;
+  private BlockPos topLog;
 
   public Tree(BlockPos start, World world) {
     this.world = world;
@@ -69,10 +70,16 @@ public class Tree implements INBTSerializable<NBTTagCompound> {
   }
 
   public BlockPos getTopLog() {
-    return wood.stream().max(Comparator.comparingInt(Vec3i::getY)).orElse(null);
+    if (topLog == null) {
+      topLog = wood.stream().max(Comparator.comparingInt(Vec3i::getY)).orElse(null);
+    }
+    return topLog;
   }
 
   public boolean breakBlock(BlockPos pos) {
+    if (pos.equals(topLog)) {
+      topLog = null;
+    }
     if (wood.remove(pos) || leaves.remove(pos)) {
       world.destroyBlock(pos, true);
       return true;
@@ -97,6 +104,9 @@ public class Tree implements INBTSerializable<NBTTagCompound> {
     NBTTagCompound nbt = new NBTTagCompound();
     nbt.setInteger("wood", wood.size());
     nbt.setInteger("leaves", leaves.size());
+    if (topLog != null) {
+      nbt.setLong("toplog", topLog.toLong());
+    }
     for (int i = 0; i < wood.size(); i++) {
       nbt.setLong("wood" + i, wood.get(i).toLong());
     }
@@ -112,6 +122,9 @@ public class Tree implements INBTSerializable<NBTTagCompound> {
     leaves.clear();
     int woodSize = nbt.getInteger("wood");
     int leavesSize = nbt.getInteger("leaves");
+    if (nbt.hasKey("toplog")) {
+      topLog = BlockPos.fromLong(nbt.getLong("toplog"));
+    }
     for (int i = 0; i < woodSize; i++) {
       wood.add(BlockPos.fromLong(nbt.getLong("wood" + i)));
     }

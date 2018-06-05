@@ -11,6 +11,7 @@ import teamblep.blepcore.BlepCore;
 import teamblep.blepcore.client.gui.handler.GuiHandlerElectricFurnace;
 import teamblep.blepcore.common.item.EventHandlerTool;
 import teamblep.blepcore.common.network.AirClickMessage;
+import teamblep.blepcore.common.network.MessageBlockBreakProgress;
 
 public class ProxyCommon {
 
@@ -20,6 +21,7 @@ public class ProxyCommon {
     // NOTE: register packets here.
     NetworkRegistry.INSTANCE.registerGuiHandler(BlepCore.MOD_ID, new GuiHandlerElectricFurnace());
     BlepCore.net.registerMessage(AirClickMessage.class, AirClickMessage.class, 0, Side.SERVER);
+    BlepCore.net.registerMessage(MessageBlockBreakProgress.class, MessageBlockBreakProgress.class, 1, Side.CLIENT);
   }
 
   public void init(FMLInitializationEvent event) {
