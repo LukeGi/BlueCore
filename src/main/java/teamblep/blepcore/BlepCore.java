@@ -26,17 +26,17 @@ public class BlepCore {
   public static ProxyCommon proxy;
 
   /**
-   * Mod netty wrapper
+   * Mod netty wrapper.
    */
   public static SimpleNetworkWrapper net = NetworkRegistry.INSTANCE.newSimpleChannel(MOD_ID);
 
   /**
-   * Private mod logger
+   * Private mod logger.
    */
   private static Logger logger;
 
   /**
-   * Static encapsulation of mod logger
+   * Static encapsulation of mod logger.
    *
    * @return mod logger
    */
@@ -45,7 +45,7 @@ public class BlepCore {
   }
 
   /**
-   * Uses mod logger on info level to write a message to console
+   * Uses mod logger on info level to write a message to console.
    *
    * @param message the message you would like to write to console
    */
@@ -54,7 +54,7 @@ public class BlepCore {
   }
 
   /**
-   * Uses mod logger and String.format to write a message to the console
+   * Uses mod logger and String.format to write a message to the console.
    *
    * @param message the message string to be formatted and then written to the console
    * @param args the args for formatting the message
@@ -64,7 +64,7 @@ public class BlepCore {
   }
 
   /**
-   * Uses mod logger on error level to write a message to console
+   * Uses mod logger on error level to write a message to console.
    *
    * @param message the message you would like to write to console
    */

@@ -16,6 +16,7 @@ public class ProxyCommon {
 
   public void initPre(FMLPreInitializationEvent event) {
     MinecraftForge.EVENT_BUS.register(EventHandlerTool.INSTANCE);
+    MinecraftForge.EVENT_BUS.register(Configs.class);
     // NOTE: register packets here.
     NetworkRegistry.INSTANCE.registerGuiHandler(BlepCore.MOD_ID, new GuiHandlerElectricFurnace());
     BlepCore.net.registerMessage(AirClickMessage.class, AirClickMessage.class, 0, Side.SERVER);
@@ -29,6 +30,11 @@ public class ProxyCommon {
 
   }
 
+  /**
+   * Schedules a task to be ran ASAP.
+   *
+   * @param r the task to be scheduled
+   */
   public void scheduleTask(Runnable r) {
     FMLCommonHandler.instance().getMinecraftServerInstance().addScheduledTask(r);
   }

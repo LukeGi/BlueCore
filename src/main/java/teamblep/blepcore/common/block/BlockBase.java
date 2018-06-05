@@ -19,6 +19,10 @@ public class BlockBase extends Block {
     setup(name);
   }
 
+  /**
+   * Sets up the block with the given name.
+   * @param name the name of the block
+   */
   @SuppressWarnings("unchecked")
   private void setup(String name) {
     this.setRegistryName(BlepCore.MOD_ID, name);

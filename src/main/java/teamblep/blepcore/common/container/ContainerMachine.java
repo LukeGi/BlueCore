@@ -18,6 +18,11 @@ public class ContainerMachine<T extends TileEntityMachine> extends Container {
     addPlayerSlots(playerInventory);
   }
 
+  /**
+   * This adds the player's slots to a machine's container.
+   *
+   * @param playerInventory
+   */
   protected void addPlayerSlots(InventoryPlayer playerInventory) {
     // Add vanilla slots
     this.addSlotToContainer(new Slot(playerInventory, 0, 18, 78));
