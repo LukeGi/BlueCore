@@ -16,12 +16,12 @@ import teamblep.blepcore.common.item.tools.ToolChainsaw;
 public class ModItems {
 
   //    public static final Item EXAMPLE_ITEM = null;
-  public static final ToolChainsaw EXAMPLE_AXE = null;
+  public static final ToolChainsaw CHAINSAW = null;
 
   @SubscribeEvent
   public static void onRegisterItems(Register<Item> event) {
     BlepCore.log("Registering Items");
-    event.getRegistry().registerAll(new ToolChainsaw("example_axe"));
+    event.getRegistry().registerAll(new ToolChainsaw("chainsaw"));
   }
 
   @SideOnly(Side.CLIENT)
