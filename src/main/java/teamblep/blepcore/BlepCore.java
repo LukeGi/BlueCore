@@ -30,6 +30,9 @@ public class BlepCore {
    */
   public static SimpleNetworkWrapper net = NetworkRegistry.INSTANCE.newSimpleChannel(MOD_ID);
 
+  /**
+   * Private mod logger
+   */
   private static Logger logger;
 
   /**
@@ -48,6 +51,16 @@ public class BlepCore {
    */
   public static void log(String message) {
     logger.info("[Blep Core] " + message);
+  }
+
+  /**
+   * Uses mod logger and String.format to write a message to the console
+   *
+   * @param message the message string to be formatted and then written to the console
+   * @param args the args for formatting the message
+   */
+  public static void logf(String message, String... args) {
+    log(String.format(message, args));
   }
 
   /**
