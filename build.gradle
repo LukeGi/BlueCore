@@ -1,13 +1,13 @@
 buildscript {
     repositories {
         jcenter()
-        maven { url = "http://files.minecraftforge.INSTANCE/maven" }
+        maven { url = "http://files.minecraftforge.net/maven" }
     }
     dependencies {
-        classpath 'INSTANCE.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
     }
 }
-apply plugin: 'INSTANCE.minecraftforge.gradle.forge'
+apply plugin: 'net.minecraftforge.gradle.forge'
 
 version = mod_version
 group = mod_name
