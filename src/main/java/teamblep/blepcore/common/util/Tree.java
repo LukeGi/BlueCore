@@ -42,33 +42,6 @@ public class Tree implements INBTSerializable<NBTTagCompound> {
     pathfind(start);
   }
 
-  public Tree(NBTTagCompound nbt, World world) {
-    this.world = world;
-    wood = new ArrayList<>();
-    leaves = new ArrayList<>();
-    deserializeNBT(nbt);
-  }
-
-  public static Tree get(BlockPos pos, World world) {
-    Tree tree = null;
-    int dim = world.provider.getDimension();
-    for (Iterator<Tree> iterator = treeCache.iterator(); iterator.hasNext(); ) {
-      Tree cachee = iterator.next();
-      if (cachee.isEmpty()) {
-        iterator.remove();
-        continue;
-      }
-      if (cachee.world.provider.getDimension() == dim && cachee.contains(pos)) {
-        tree = cachee;
-        break;
-      }
-    }
-    if (tree == null) {
-      treeCache.add(tree = new Tree(pos, world));
-    }
-    return tree;
-  }
-
   //TODO: write pathfind to not count other trees.
   private void pathfind(BlockPos start) {
     Set<BlockPos> visited = new HashSet<>();
@@ -114,6 +87,39 @@ public class Tree implements INBTSerializable<NBTTagCompound> {
     return wood.size() + leaves.size();
   }
 
+  public Tree(NBTTagCompound nbt, World world) {
+    this.world = world;
+    wood = new ArrayList<>();
+    leaves = new ArrayList<>();
+    deserializeNBT(nbt);
+  }
+
+  public static Tree get(BlockPos pos, World world) {
+    Tree tree = null;
+    int dim = world.provider.getDimension();
+    for (Iterator<Tree> iterator = treeCache.iterator(); iterator.hasNext(); ) {
+      Tree cachee = iterator.next();
+      if (cachee.isEmpty()) {
+        iterator.remove();
+        continue;
+      }
+      if (cachee.world.provider.getDimension() == dim && cachee.contains(pos)) {
+        tree = cachee;
+        break;
+      }
+    }
+    if (tree == null) {
+      treeCache.add(tree = new Tree(pos, world));
+    }
+    return tree;
+  }
+
+  public boolean isEmpty() {
+    wood = wood.stream().filter(pos -> !world.isAirBlock(pos)).collect(Collectors.toList());
+    leaves = leaves.stream().filter(pos -> !world.isAirBlock(pos)).collect(Collectors.toList());
+    return wood.isEmpty() && leaves.isEmpty();
+  }
+
   public boolean contains(BlockPos pos) {
     return wood.parallelStream().anyMatch(blockPos -> blockPos.equals(pos)) || leaves
         .parallelStream().anyMatch(blockPos -> blockPos.equals(pos));
@@ -138,12 +144,6 @@ public class Tree implements INBTSerializable<NBTTagCompound> {
       return true;
     }
     return false;
-  }
-
-  public boolean isEmpty() {
-    wood = wood.stream().filter(pos -> !world.isAirBlock(pos)).collect(Collectors.toList());
-    leaves = leaves.stream().filter(pos -> !world.isAirBlock(pos)).collect(Collectors.toList());
-    return wood.isEmpty() && leaves.isEmpty();
   }
 
   public List<BlockPos> getWood() {

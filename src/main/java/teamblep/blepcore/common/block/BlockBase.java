@@ -14,13 +14,9 @@ public class BlockBase extends Block {
     setup(name);
   }
 
-  public BlockBase(Material materialIn, String name) {
-    super(materialIn);
-    setup(name);
-  }
-
   /**
    * Sets up the block with the given name.
+   *
    * @param name the name of the block
    */
   @SuppressWarnings("unchecked")
@@ -31,5 +27,10 @@ public class BlockBase extends Block {
       TileEntity
           .register(BlepCore.MOD_ID + ":" + name, ((ITileEntityContainer) this).getTileClass());
     }
+  }
+
+  public BlockBase(Material materialIn, String name) {
+    super(materialIn);
+    setup(name);
   }
 }

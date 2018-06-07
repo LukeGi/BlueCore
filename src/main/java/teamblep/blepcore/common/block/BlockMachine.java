@@ -25,6 +25,19 @@ public abstract class BlockMachine extends BlockBase implements
   }
 
   @Override
+  public IBlockState getStateFromMeta(int meta) {
+    EnumFacing[] m_allowedValues = Properties.FACING4.getAllowedValues().toArray(new EnumFacing[0]);
+    return getDefaultState()
+        .withProperty(Properties.FACING4, m_allowedValues[meta & m_allowedValues.length]);
+  }
+
+  @Override
+  public int getMetaFromState(IBlockState state) {
+    return new ArrayList<>(Properties.FACING4.getAllowedValues())
+        .indexOf(state.getValue(Properties.FACING4));
+  }
+
+  @Override
   protected BlockStateContainer createBlockState() {
     Builder m_builder = new Builder(this);
     m_builder.add(Properties.FACING4);
@@ -42,18 +55,5 @@ public abstract class BlockMachine extends BlockBase implements
     return super.getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, meta, placer, hand)
         .withProperty(
             Properties.FACING4, direction);
-  }
-
-  @Override
-  public IBlockState getStateFromMeta(int meta) {
-    EnumFacing[] m_allowedValues = Properties.FACING4.getAllowedValues().toArray(new EnumFacing[0]);
-    return getDefaultState()
-        .withProperty(Properties.FACING4, m_allowedValues[meta & m_allowedValues.length]);
-  }
-
-  @Override
-  public int getMetaFromState(IBlockState state) {
-    return new ArrayList<>(Properties.FACING4.getAllowedValues())
-        .indexOf(state.getValue(Properties.FACING4));
   }
 }

@@ -7,8 +7,6 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
-import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import org.apache.logging.log4j.Logger;
 import teamblep.blepcore.common.ProxyCommon;
 
@@ -26,11 +24,6 @@ public class BlepCore {
   public static ProxyCommon proxy;
 
   /**
-   * Mod netty wrapper.
-   */
-  public static SimpleNetworkWrapper net = NetworkRegistry.INSTANCE.newSimpleChannel(MOD_ID);
-
-  /**
    * Private mod logger.
    */
   private static Logger logger;
@@ -45,15 +38,6 @@ public class BlepCore {
   }
 
   /**
-   * Uses mod logger on info level to write a message to console.
-   *
-   * @param message the message you would like to write to console
-   */
-  public static void log(String message) {
-    logger.info("[Blep Core] " + message);
-  }
-
-  /**
    * Uses mod logger and String.format to write a message to the console.
    *
    * @param message the message string to be formatted and then written to the console
@@ -61,6 +45,15 @@ public class BlepCore {
    */
   public static void logf(String message, String... args) {
     log(String.format(message, args));
+  }
+
+  /**
+   * Uses mod logger on info level to write a message to console.
+   *
+   * @param message the message you would like to write to console
+   */
+  public static void log(String message) {
+    logger.info("[Blep Core] " + message);
   }
 
   /**

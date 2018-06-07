@@ -14,9 +14,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
-import teamblep.blepcore.BlepCore;
 import teamblep.blepcore.common.item.tools.ToolBase;
-import teamblep.blepcore.common.network.AirClickMessage;
+import teamblep.blepcore.common.network.MessageAirClick;
+import teamblep.blepcore.common.network.NetworkManager;
 
 public class EventHandlerTool {
 
@@ -98,8 +98,8 @@ public class EventHandlerTool {
   @SubscribeEvent
   public void onLeftClickAir(PlayerInteractEvent.LeftClickEmpty event) {
     if (event.getSide() == Side.CLIENT) {
-      BlepCore.net
-          .sendToServer(new AirClickMessage(event.getEntityPlayer().getGameProfile().getId()));
+      NetworkManager.INSTANCE
+          .sendToServer(new MessageAirClick(event.getEntityPlayer().getGameProfile().getId()));
     }
     if (event.getSide() == Side.SERVER) {
       ItemStack itemStack = event.getItemStack();

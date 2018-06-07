@@ -20,8 +20,8 @@ import net.minecraft.util.math.RayTraceResult.Type;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
-import teamblep.blepcore.BlepCore;
 import teamblep.blepcore.common.network.MessageBlockBreakProgress;
+import teamblep.blepcore.common.network.NetworkManager;
 import teamblep.blepcore.common.util.Tree;
 
 public class ToolChainsaw extends ToolBase {
@@ -35,16 +35,6 @@ public class ToolChainsaw extends ToolBase {
       EnumHand handIn) {
     playerIn.setActiveHand(handIn);
     return ActionResult.newResult(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
-  }
-
-  @Override
-  public EnumAction getItemUseAction(ItemStack stack) {
-    return EnumAction.NONE;
-  }
-
-  @Override
-  public int getMaxItemUseDuration(ItemStack stack) {
-    return 10;
   }
 
   @Override
@@ -68,24 +58,38 @@ public class ToolChainsaw extends ToolBase {
             .reduce(BinaryOperator.maxBy(Comparator.comparingLong(bp -> bp.toLong()))).get();
         BlockPos bottomRight = tree.stream()
             .reduce(BinaryOperator.maxBy(Comparator.comparingLong(bp -> -bp.toLong()))).get();
-        MessageBlockBreakProgress message = new MessageBlockBreakProgress(player.getEntityId(), 10,
-            tree.getWood().toArray(new BlockPos[0]));
-        TargetPoint point = new TargetPoint(world.provider.getDimension(), player.posX, player.posY,
-            player.posZ, 512);
-        BlepCore.net.sendToAllAround(message, point);
-        tree.getWood().forEach((pos) -> {
-          IBlockState state = world.getBlockState(pos);
-          state.getBlock().harvestBlock(world, player, pos, state,
-              world.getTileEntity(pos), stack);
-          world.setBlockState(pos, Blocks.AIR.getDefaultState(), 3);
-        });
-        world.markBlockRangeForRenderUpdate(topLeft, bottomRight);
-        tree.getWood().clear();
-        tree.getLeaves().forEach(blockPos -> scheduleBlockUpdate(world, blockPos));
-        tree.getLeaves().clear();
+        if (bottomRight != null && topLeft != null) {
+          MessageBlockBreakProgress message = new MessageBlockBreakProgress(player.getEntityId(),
+              10,
+              tree.getWood().toArray(new BlockPos[0]));
+          TargetPoint point = new TargetPoint(world.provider.getDimension(), player.posX,
+              player.posY,
+              player.posZ, 512);
+          NetworkManager.INSTANCE.sendToAllAround(message, point);
+          tree.getWood().forEach((pos) -> {
+            IBlockState state = world.getBlockState(pos);
+            state.getBlock().harvestBlock(world, player, pos, state,
+                world.getTileEntity(pos), stack);
+            world.setBlockState(pos, Blocks.AIR.getDefaultState(), 3);
+          });
+          world.markBlockRangeForRenderUpdate(topLeft, bottomRight);
+          tree.getWood().clear();
+          tree.getLeaves().forEach(blockPos -> scheduleBlockUpdate(world, blockPos));
+          tree.getLeaves().clear();
+        }
       }
     }
     return super.onItemUseFinish(stack, worldIn, entityLiving);
+  }
+
+  @Override
+  public EnumAction getItemUseAction(ItemStack stack) {
+    return EnumAction.NONE;
+  }
+
+  @Override
+  public int getMaxItemUseDuration(ItemStack stack) {
+    return 10;
   }
 
   @Override
@@ -106,9 +110,14 @@ public class ToolChainsaw extends ToolBase {
             10 - (count % 10), wood.toArray(new BlockPos[0]));
         TargetPoint point = new TargetPoint(world.provider.getDimension(), player.posX, player.posY,
             player.posZ, 512);
-        BlepCore.net.sendToAllAround(message, point);
+        NetworkManager.INSTANCE.sendToAllAround(message, point);
       }
     }
+  }
+
+  private void scheduleBlockUpdate(World world, BlockPos blockPos) {
+    world.scheduleUpdate(blockPos, world.getBlockState(blockPos).getBlock(),
+        world.rand.nextInt(15));
   }
 
   @Override
@@ -146,10 +155,5 @@ public class ToolChainsaw extends ToolBase {
   @Override
   public boolean leftClickAirAction(EntityPlayer player, EnumHand hand, World world) {
     return false;
-  }
-
-  private void scheduleBlockUpdate(World world, BlockPos blockPos) {
-    world.scheduleUpdate(blockPos, world.getBlockState(blockPos).getBlock(),
-        world.rand.nextInt(15));
   }
 }

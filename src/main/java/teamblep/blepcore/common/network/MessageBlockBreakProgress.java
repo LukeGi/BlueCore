@@ -24,16 +24,6 @@ public class MessageBlockBreakProgress implements IMessage,
   }
 
   @Override
-  public void toBytes(ByteBuf buf) {
-    buf.writeInt(breakerID);
-    buf.writeInt(blockPos.length);
-    for (int i = 0; i < blockPos.length; i++) {
-      buf.writeLong(blockPos[i].toLong());
-    }
-    buf.writeInt(progress);
-  }
-
-  @Override
   public void fromBytes(ByteBuf buf) {
     breakerID = buf.readInt();
     int arrsize = buf.readInt();
@@ -42,6 +32,16 @@ public class MessageBlockBreakProgress implements IMessage,
       blockPos[i] = BlockPos.fromLong(buf.readLong());
     }
     progress = buf.readInt();
+  }
+
+  @Override
+  public void toBytes(ByteBuf buf) {
+    buf.writeInt(breakerID);
+    buf.writeInt(blockPos.length);
+    for (int i = 0; i < blockPos.length; i++) {
+      buf.writeLong(blockPos[i].toLong());
+    }
+    buf.writeInt(progress);
   }
 
   @Override

@@ -10,36 +10,26 @@ import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-public class AirClickMessage implements IMessage, IMessageHandler<AirClickMessage, IMessage> {
+public class MessageAirClick implements IBlepMessage<MessageAirClick> {
 
   private UUID m_uuid;
   private boolean m_left;
   private int m_hand;
 
-  public AirClickMessage() {
+  public MessageAirClick() {
   }
 
-  public AirClickMessage(UUID uuid) {
+  public MessageAirClick(UUID uuid) {
     m_uuid = uuid;
     m_left = true;
   }
 
-  public AirClickMessage(UUID uuid, EnumHand hand) {
+  public MessageAirClick(UUID uuid, EnumHand hand) {
     m_uuid = uuid;
     m_left = false;
     m_hand = hand.ordinal();
-  }
-
-  @Override
-  public void toBytes(ByteBuf buf) {
-    ByteBufUtils.writeTag(buf, NBTUtil.createUUIDTag(m_uuid));
-    buf.writeBoolean(m_left);
-    if (!m_left) {
-      buf.writeInt(m_hand);
-    }
   }
 
   @Override
@@ -52,7 +42,16 @@ public class AirClickMessage implements IMessage, IMessageHandler<AirClickMessag
   }
 
   @Override
-  public IMessage onMessage(AirClickMessage message, MessageContext ctx) {
+  public void toBytes(ByteBuf buf) {
+    ByteBufUtils.writeTag(buf, NBTUtil.createUUIDTag(m_uuid));
+    buf.writeBoolean(m_left);
+    if (!m_left) {
+      buf.writeInt(m_hand);
+    }
+  }
+
+  @Override
+  public IMessage onMessage(MessageAirClick message, MessageContext ctx) {
     MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
     server.addScheduledTask(() -> {
       EntityPlayerMP player = server.getPlayerList().getPlayerByUUID(message.m_uuid);

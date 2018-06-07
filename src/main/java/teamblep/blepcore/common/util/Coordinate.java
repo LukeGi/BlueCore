@@ -3,6 +3,7 @@ package teamblep.blepcore.common.util;
 import net.minecraft.util.math.BlockPos;
 
 public class Coordinate {
+
   private int dim;
   private BlockPos pos;
 
@@ -11,12 +12,11 @@ public class Coordinate {
     this.pos = pos;
   }
 
-  public int getDim() {
-    return dim;
-  }
-
-  public BlockPos getPos() {
-    return pos;
+  @Override
+  public int hashCode() {
+    int result = getDim();
+    result = 31 * result + getPos().hashCode();
+    return result;
   }
 
   @Override
@@ -36,10 +36,11 @@ public class Coordinate {
     return getPos().equals(that.getPos());
   }
 
-  @Override
-  public int hashCode() {
-    int result = getDim();
-    result = 31 * result + getPos().hashCode();
-    return result;
+  public int getDim() {
+    return dim;
+  }
+
+  public BlockPos getPos() {
+    return pos;
   }
 }

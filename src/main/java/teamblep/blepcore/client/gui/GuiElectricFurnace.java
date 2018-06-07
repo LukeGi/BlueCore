@@ -11,6 +11,11 @@ public class GuiElectricFurnace extends GuiMachine {
   }
 
   @Override
+  public void initGui() {
+    super.initGui();
+  }
+
+  @Override
   protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
     super.drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);
     Minecraft.getMinecraft().renderEngine.bindTexture(GUI_BASE);
@@ -28,10 +33,5 @@ public class GuiElectricFurnace extends GuiMachine {
     drawTexturedModalRect(x, y, 0, 200, 18, 18);
     GlStateManager.popMatrix();
 
-  }
-
-  @Override
-  public void initGui() {
-    super.initGui();
   }
 }

@@ -35,14 +35,14 @@ public class TileEntityBase extends TileEntity {
   }
 
   @Override
-  public void handleUpdateTag(NBTTagCompound tag) {
-    readFromNBT(tag);
-    getWorld().markBlockRangeForRenderUpdate(getPos(), getPos());
+  public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
+    handleUpdateTag(pkt.getNbtCompound());
   }
 
   @Override
-  public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
-    handleUpdateTag(pkt.getNbtCompound());
+  public void handleUpdateTag(NBTTagCompound tag) {
+    readFromNBT(tag);
+    getWorld().markBlockRangeForRenderUpdate(getPos(), getPos());
   }
 
   protected EnergyStorageBase getEnergyBase(@Nullable EnumFacing side) {
