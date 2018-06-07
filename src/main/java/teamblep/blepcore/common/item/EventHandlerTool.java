@@ -39,12 +39,12 @@ public class EventHandlerTool {
         EnumFacing side = event.getFace();
         Vec3d hit = event.getHitVec();
 
-        if (item.rightClickBlockAction(player, hand, world, pos, blockState, side, hit)) {
-          event.setCancellationResult(EnumActionResult.SUCCESS);
-        } else {
-          event.setCancellationResult(EnumActionResult.PASS);
-        }
-        event.setCanceled(true);
+//        if (item.rightClickBlockAction(player, hand, world, pos, blockState, side, hit)) {
+//          event.setCancellationResult(EnumActionResult.SUCCESS);
+//          event.setCanceled(true);
+//        } else {
+//          event.setCancellationResult(EnumActionResult.PASS);
+//        }
       }
     }
   }
@@ -65,10 +65,10 @@ public class EventHandlerTool {
 
         if (item.leftClickBlockAction(player, hand, world, pos, blockState, side, hit)) {
           event.setCancellationResult(EnumActionResult.SUCCESS);
+          event.setCanceled(true);
         } else {
           event.setCancellationResult(EnumActionResult.PASS);
         }
-        event.setCanceled(true);
       }
     }
   }
@@ -86,10 +86,10 @@ public class EventHandlerTool {
           World world = event.getWorld();
           if (item.rightClickAirAction(player, hand, world)) {
             event.setCancellationResult(EnumActionResult.SUCCESS);
+            event.setCanceled(true);
           } else {
             event.setCancellationResult(EnumActionResult.PASS);
           }
-          event.setCanceled(true);
         }
       }
     }

@@ -1,11 +1,16 @@
 package teamblep.blepcore.common.util;
 
+import com.google.common.collect.Sets;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
@@ -15,6 +20,16 @@ import net.minecraftforge.common.util.INBTSerializable;
 
 public class Tree implements INBTSerializable<NBTTagCompound> {
 
+  private static final Set<Tree> treeCache = Sets.newHashSet();
+  private static final Vec3i[] CHECK_ORDER = new Vec3i[]{
+      new Vec3i(0, 1, 0), new Vec3i(0, -1, 0), new Vec3i(0, 0, 1), new Vec3i(0, 0, -1),
+      new Vec3i(1, 0, 0), new Vec3i(-1, 0, 0), new Vec3i(0, 1, 1), new Vec3i(0, 1, -1),
+      new Vec3i(1, 1, 0), new Vec3i(-1, 1, 0), new Vec3i(0, 1, 1), new Vec3i(0, 1, -1),
+      new Vec3i(1, 1, 0), new Vec3i(-1, 1, 0), new Vec3i(1, 0, 1), new Vec3i(1, 0, -1),
+      new Vec3i(-1, 0, 1), new Vec3i(-1, 0, -1), new Vec3i(1, 1, 1), new Vec3i(1, 1, -1),
+      new Vec3i(-1, 1, 1), new Vec3i(-1, 1, -1), new Vec3i(1, 0, 1), new Vec3i(1, 0, -1),
+      new Vec3i(-1, 0, 1), new Vec3i(-1, 0, -1)
+  };
   private World world;
   private List<BlockPos> wood;
   private List<BlockPos> leaves;
@@ -34,34 +49,69 @@ public class Tree implements INBTSerializable<NBTTagCompound> {
     deserializeNBT(nbt);
   }
 
+  public static Tree get(BlockPos pos, World world) {
+    Tree tree = null;
+    int dim = world.provider.getDimension();
+    for (Iterator<Tree> iterator = treeCache.iterator(); iterator.hasNext(); ) {
+      Tree cachee = iterator.next();
+      if (cachee.isEmpty()) {
+        iterator.remove();
+        continue;
+      }
+      if (cachee.world.provider.getDimension() == dim && cachee.contains(pos)) {
+        tree = cachee;
+        break;
+      }
+    }
+    if (tree == null) {
+      treeCache.add(tree = new Tree(pos, world));
+    }
+    return tree;
+  }
+
+  //TODO: write pathfind to not count other trees.
   private void pathfind(BlockPos start) {
     Set<BlockPos> visited = new HashSet<>();
     LinkedList<BlockPos> toCheck = new LinkedList<>();
+    IBlockState woodState = null;
     visited.add(start);
     toCheck.add(start);
     BlockPos currentPos;
+    boolean currentLeaves, currentWood;
     do {
       currentPos = toCheck.removeFirst();
       IBlockState currentState = world.getBlockState(currentPos);
-      boolean currentLeaves = currentState.getBlock().isLeaves(currentState, world, currentPos);
-      boolean currentWood = currentState.getBlock().isWood(world, currentPos);
+      Block currentBlock = currentState.getBlock();
+      if (woodState == null) {
+        currentWood = currentBlock.isWood(world, currentPos);
+        if (currentWood) {
+          woodState = currentState;
+        }
+      } else {
+        currentWood = woodState.equals(currentState);
+      }
+      currentLeaves = currentBlock.isLeaves(currentState, world, currentPos);
+
       if (currentLeaves) {
         leaves.add(currentPos);
       } else if (currentWood) {
         wood.add(currentPos);
       }
       if (currentLeaves || currentWood) {
-        for (BlockPos iq : BlockPos
-            .getAllInBox(currentPos.add(-1, -1, -1), currentPos.add(1, 1, 1))) {
-          if (visited.contains(iq)) {
-            continue;
+        BlockPos iq;
+        for (Vec3i offset : CHECK_ORDER) {
+          iq = currentPos.add(offset);
+          if (visited.add(iq)) {
+            toCheck.add(iq);
           }
-          visited.add(iq);
-          toCheck.add(iq);
         }
       }
     } while (!toCheck.isEmpty()
-        && visited.size() < 8192); // Possibly change this, depends on how well it manages big trees
+        && this.size() < 512); // Possibly change this, depends on how well it manages big trees
+  }
+
+  private int size() {
+    return wood.size() + leaves.size();
   }
 
   public boolean contains(BlockPos pos) {
@@ -82,12 +132,17 @@ public class Tree implements INBTSerializable<NBTTagCompound> {
     }
     if (wood.remove(pos) || leaves.remove(pos)) {
       world.destroyBlock(pos, true);
+      if (isEmpty()) {
+        treeCache.remove(this);
+      }
       return true;
     }
     return false;
   }
 
   public boolean isEmpty() {
+    wood = wood.stream().filter(pos -> !world.isAirBlock(pos)).collect(Collectors.toList());
+    leaves = leaves.stream().filter(pos -> !world.isAirBlock(pos)).collect(Collectors.toList());
     return wood.isEmpty() && leaves.isEmpty();
   }
 
@@ -131,5 +186,9 @@ public class Tree implements INBTSerializable<NBTTagCompound> {
     for (int i = 0; i < leavesSize; i++) {
       leaves.add(BlockPos.fromLong(nbt.getLong("leaves" + i)));
     }
+  }
+
+  public Stream<BlockPos> stream() {
+    return Stream.concat(wood.stream(), leaves.stream());
   }
 }

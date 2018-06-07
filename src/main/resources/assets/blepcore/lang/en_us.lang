@@ -1,0 +1,4 @@
+itemGroup.blepcore:machines=Blep Core Machines
+itemGroup.blepcore:tools=Blep Core Tools
+
+item.blepcore:chainsaw.name=Chainsaw

@@ -7,12 +7,18 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import teamblep.blepcore.common.creativetabs.CreativeTabTool;
 import teamblep.blepcore.common.item.ItemBase;
 
 public abstract class ToolBase extends ItemBase {
 
+  private String name;
+
   public ToolBase(String name) {
     super(name);
+    this.name = name;
+    this.setCreativeTab(CreativeTabTool.INSTANCE);
+    this.setMaxStackSize(1);
   }
 
   /**
@@ -88,4 +94,8 @@ public abstract class ToolBase extends ItemBase {
    * @return true if an action is performed and false if not
    */
   public abstract boolean leftClickAirAction(EntityPlayer player, EnumHand hand, World world);
+
+  public String getName() {
+    return name;
+  }
 }
