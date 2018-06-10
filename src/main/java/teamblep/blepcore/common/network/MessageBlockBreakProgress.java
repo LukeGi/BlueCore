@@ -7,8 +7,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-public class MessageBlockBreakProgress implements IMessage,
-    IMessageHandler<MessageBlockBreakProgress, IMessage> {
+public class MessageBlockBreakProgress implements IMessage, IMessageHandler<MessageBlockBreakProgress, IMessage> {
 
   private int breakerID;
   private BlockPos[] blockPos;
@@ -49,8 +48,7 @@ public class MessageBlockBreakProgress implements IMessage,
     Minecraft.getMinecraft().addScheduledTask(() -> {
       BlockPos[] blockPos1 = message.blockPos;
       for (int i = 0; i < blockPos1.length; i++) {
-        Minecraft.getMinecraft().renderGlobal
-            .sendBlockBreakProgress(Integer.MAX_VALUE - i, message.blockPos[i], message.progress);
+        Minecraft.getMinecraft().renderGlobal.sendBlockBreakProgress(Integer.MAX_VALUE - i, message.blockPos[i], message.progress);
       }
     });
     return null;

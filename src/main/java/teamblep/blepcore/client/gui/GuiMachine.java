@@ -8,8 +8,7 @@ import teamblep.blepcore.BlepCore;
 
 public class GuiMachine extends GuiContainer {
 
-  public static final ResourceLocation GUI_BASE = new ResourceLocation(BlepCore.MOD_ID,
-      "textures/gui/guibase.png");
+  public static final ResourceLocation GUI_BASE = new ResourceLocation(BlepCore.MOD_ID, "textures/gui/guibase.png");
 
   public GuiMachine(Container inventorySlotsIn) {
     super(inventorySlotsIn);
@@ -36,7 +35,6 @@ public class GuiMachine extends GuiContainer {
     drawTexturedModalRect(guiLeft - 28, guiTop, 0, 100, 28, 100);
     drawTexturedModalRect(guiLeft + xSize, guiTop + ySize - 28, 28, 100, 28, 28);
     int stringwidth = mc.fontRenderer.getStringWidth("Inventory");
-    mc.fontRenderer
-        .drawString("Inventory", guiLeft + (xSize - stringwidth) / 2, guiTop + 4, 0xFFFFFF);
+    mc.fontRenderer.drawString("Inventory", guiLeft + (xSize - stringwidth) / 2, guiTop + 4, 0xFFFFFF);
   }
 }

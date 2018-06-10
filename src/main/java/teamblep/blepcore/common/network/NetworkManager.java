@@ -29,7 +29,6 @@ public class NetworkManager {
 
   private static void registerPackets() {
     INSTANCE.registerMessage(MessageAirClick.class, MessageAirClick.class, 0, Side.SERVER);
-    INSTANCE.registerMessage(MessageBlockBreakProgress.class, MessageBlockBreakProgress.class, 1,
-        Side.CLIENT);
+    INSTANCE.registerMessage(MessageBlockBreakProgress.class, MessageBlockBreakProgress.class, 1, Side.CLIENT);
   }
 }

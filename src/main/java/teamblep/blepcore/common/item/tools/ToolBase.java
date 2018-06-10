@@ -55,9 +55,7 @@ public abstract class ToolBase extends ItemBase {
    * @param hit The position on the block that was clicked
    * @return true if an action is performed and false if not
    */
-  public abstract boolean rightClickBlockAction(EntityPlayer player, EnumHand hand, World world,
-      BlockPos pos,
-      IBlockState blockState, EnumFacing side, Vec3d hit);
+  public abstract boolean rightClickBlockAction(EntityPlayer player, EnumHand hand, World world, BlockPos pos, IBlockState blockState, EnumFacing side, Vec3d hit);
 
   /**
    * This method will be called when a player left clicks a block.
@@ -71,9 +69,7 @@ public abstract class ToolBase extends ItemBase {
    * @param hit The position on the block that was clicked
    * @return true if an action is performed and false if not
    */
-  public abstract boolean leftClickBlockAction(EntityPlayer player, EnumHand hand, World world,
-      BlockPos pos,
-      IBlockState blockState, EnumFacing side, Vec3d hit);
+  public abstract boolean leftClickBlockAction(EntityPlayer player, EnumHand hand, World world, BlockPos pos, IBlockState blockState, EnumFacing side, Vec3d hit);
 
   /**
    * This method will be called when a player right clicks air.

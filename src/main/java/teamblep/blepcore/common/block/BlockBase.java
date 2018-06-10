@@ -24,8 +24,7 @@ public class BlockBase extends Block {
     this.setRegistryName(BlepCore.MOD_ID, name);
     this.setUnlocalizedName(BlepCore.MOD_ID + ":" + name);
     if (this instanceof ITileEntityContainer) {
-      TileEntity
-          .register(BlepCore.MOD_ID + ":" + name, ((ITileEntityContainer) this).getTileClass());
+      TileEntity.register(BlepCore.MOD_ID + ":" + name, ((ITileEntityContainer) this).getTileClass());
     }
   }
 

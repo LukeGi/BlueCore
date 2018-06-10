@@ -76,12 +76,14 @@ public class EventHandlerTool {
   @SubscribeEvent
   public void onRightClickAir(PlayerInteractEvent.RightClickItem event) {
     if (event.getSide() == Side.SERVER) {
-      RayTraceResult rayTraceResult = event.getEntityPlayer().rayTrace(14D, 0);
+      EntityPlayer entityPlayer = event.getEntityPlayer();
+      double playerReach = entityPlayer.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue();
+      RayTraceResult rayTraceResult = entityPlayer.rayTrace(playerReach, 0);
       if (rayTraceResult == null || rayTraceResult.typeOfHit == Type.MISS) {
         ItemStack itemStack = event.getItemStack();
         if (itemStack.getItem() instanceof ToolBase) {
           ToolBase item = (ToolBase) itemStack.getItem();
-          EntityPlayer player = event.getEntityPlayer();
+          EntityPlayer player = entityPlayer;
           EnumHand hand = event.getHand();
           World world = event.getWorld();
           if (item.rightClickAirAction(player, hand, world)) {
@@ -98,8 +100,8 @@ public class EventHandlerTool {
   @SubscribeEvent
   public void onLeftClickAir(PlayerInteractEvent.LeftClickEmpty event) {
     if (event.getSide() == Side.CLIENT) {
-      NetworkManager.INSTANCE
-          .sendToServer(new MessageAirClick(event.getEntityPlayer().getGameProfile().getId()));
+      MessageAirClick message = MessageAirClick.leftClickMessage(event.getHand());
+      NetworkManager.INSTANCE.sendToServer(message);
     }
     if (event.getSide() == Side.SERVER) {
       ItemStack itemStack = event.getItemStack();

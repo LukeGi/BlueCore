@@ -21,15 +21,10 @@ import net.minecraftforge.common.util.INBTSerializable;
 public class Tree implements INBTSerializable<NBTTagCompound> {
 
   private static final Set<Tree> treeCache = Sets.newHashSet();
-  private static final Vec3i[] CHECK_ORDER = new Vec3i[]{
-      new Vec3i(0, 1, 0), new Vec3i(0, -1, 0), new Vec3i(0, 0, 1), new Vec3i(0, 0, -1),
-      new Vec3i(1, 0, 0), new Vec3i(-1, 0, 0), new Vec3i(0, 1, 1), new Vec3i(0, 1, -1),
-      new Vec3i(1, 1, 0), new Vec3i(-1, 1, 0), new Vec3i(0, 1, 1), new Vec3i(0, 1, -1),
-      new Vec3i(1, 1, 0), new Vec3i(-1, 1, 0), new Vec3i(1, 0, 1), new Vec3i(1, 0, -1),
-      new Vec3i(-1, 0, 1), new Vec3i(-1, 0, -1), new Vec3i(1, 1, 1), new Vec3i(1, 1, -1),
-      new Vec3i(-1, 1, 1), new Vec3i(-1, 1, -1), new Vec3i(1, 0, 1), new Vec3i(1, 0, -1),
-      new Vec3i(-1, 0, 1), new Vec3i(-1, 0, -1)
-  };
+  private static final Vec3i[] CHECK_ORDER = new Vec3i[]{new Vec3i(0, 1, 0), new Vec3i(0, -1, 0), new Vec3i(0, 0, 1), new Vec3i(0, 0, -1), new Vec3i(1, 0, 0), new Vec3i(-1, 0, 0), new Vec3i(0, 1, 1),
+      new Vec3i(0, 1, -1), new Vec3i(1, 1, 0), new Vec3i(-1, 1, 0), new Vec3i(0, 1, 1), new Vec3i(0, 1, -1), new Vec3i(1, 1, 0), new Vec3i(-1, 1, 0), new Vec3i(1, 0, 1), new Vec3i(1, 0, -1),
+      new Vec3i(-1, 0, 1), new Vec3i(-1, 0, -1), new Vec3i(1, 1, 1), new Vec3i(1, 1, -1), new Vec3i(-1, 1, 1), new Vec3i(-1, 1, -1), new Vec3i(1, 0, 1), new Vec3i(1, 0, -1), new Vec3i(-1, 0, 1),
+      new Vec3i(-1, 0, -1)};
   private World world;
   private List<BlockPos> wood;
   private List<BlockPos> leaves;
@@ -79,8 +74,7 @@ public class Tree implements INBTSerializable<NBTTagCompound> {
           }
         }
       }
-    } while (!toCheck.isEmpty()
-        && this.size() < 512); // Possibly change this, depends on how well it manages big trees
+    } while (!toCheck.isEmpty() && this.size() < 512); // Possibly change this, depends on how well it manages big trees
   }
 
   private int size() {
@@ -121,8 +115,7 @@ public class Tree implements INBTSerializable<NBTTagCompound> {
   }
 
   public boolean contains(BlockPos pos) {
-    return wood.parallelStream().anyMatch(blockPos -> blockPos.equals(pos)) || leaves
-        .parallelStream().anyMatch(blockPos -> blockPos.equals(pos));
+    return wood.parallelStream().anyMatch(blockPos -> blockPos.equals(pos)) || leaves.parallelStream().anyMatch(blockPos -> blockPos.equals(pos));
   }
 
   public BlockPos getTopLog() {

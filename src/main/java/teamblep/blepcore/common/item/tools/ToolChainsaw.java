@@ -31,8 +31,7 @@ public class ToolChainsaw extends ToolBase {
   }
 
   @Override
-  public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn,
-      EnumHand handIn) {
+  public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
     playerIn.setActiveHand(handIn);
     return ActionResult.newResult(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
   }
@@ -54,22 +53,15 @@ public class ToolChainsaw extends ToolBase {
       IBlockState stateHit = world.getBlockState(rtr.getBlockPos());
       if (stateHit.getBlock().isWood(world, rtr.getBlockPos())) {
         Tree tree = Tree.get(rtr.getBlockPos(), world);
-        BlockPos topLeft = tree.stream()
-            .reduce(BinaryOperator.maxBy(Comparator.comparingLong(bp -> bp.toLong()))).get();
-        BlockPos bottomRight = tree.stream()
-            .reduce(BinaryOperator.maxBy(Comparator.comparingLong(bp -> -bp.toLong()))).get();
+        BlockPos topLeft = tree.stream().reduce(BinaryOperator.maxBy(Comparator.comparingLong(bp -> bp.toLong()))).get();
+        BlockPos bottomRight = tree.stream().reduce(BinaryOperator.maxBy(Comparator.comparingLong(bp -> -bp.toLong()))).get();
         if (bottomRight != null && topLeft != null) {
-          MessageBlockBreakProgress message = new MessageBlockBreakProgress(player.getEntityId(),
-              10,
-              tree.getWood().toArray(new BlockPos[0]));
-          TargetPoint point = new TargetPoint(world.provider.getDimension(), player.posX,
-              player.posY,
-              player.posZ, 512);
+          MessageBlockBreakProgress message = new MessageBlockBreakProgress(player.getEntityId(), 10, tree.getWood().toArray(new BlockPos[0]));
+          TargetPoint point = new TargetPoint(world.provider.getDimension(), player.posX, player.posY, player.posZ, 512);
           NetworkManager.INSTANCE.sendToAllAround(message, point);
           tree.getWood().forEach((pos) -> {
             IBlockState state = world.getBlockState(pos);
-            state.getBlock().harvestBlock(world, player, pos, state,
-                world.getTileEntity(pos), stack);
+            state.getBlock().harvestBlock(world, player, pos, state, world.getTileEntity(pos), stack);
             world.setBlockState(pos, Blocks.AIR.getDefaultState(), 3);
           });
           world.markBlockRangeForRenderUpdate(topLeft, bottomRight);
@@ -106,18 +98,15 @@ public class ToolChainsaw extends ToolBase {
       if (stateHit.getBlock().isWood(world, rtr.getBlockPos())) {
         Tree tree = Tree.get(rtr.getBlockPos(), world);
         List<BlockPos> wood = tree.getWood();
-        MessageBlockBreakProgress message = new MessageBlockBreakProgress(player.getEntityId(),
-            10 - (count % 10), wood.toArray(new BlockPos[0]));
-        TargetPoint point = new TargetPoint(world.provider.getDimension(), player.posX, player.posY,
-            player.posZ, 512);
+        MessageBlockBreakProgress message = new MessageBlockBreakProgress(player.getEntityId(), 10 - (count % 10), wood.toArray(new BlockPos[0]));
+        TargetPoint point = new TargetPoint(world.provider.getDimension(), player.posX, player.posY, player.posZ, 512);
         NetworkManager.INSTANCE.sendToAllAround(message, point);
       }
     }
   }
 
   private void scheduleBlockUpdate(World world, BlockPos blockPos) {
-    world.scheduleUpdate(blockPos, world.getBlockState(blockPos).getBlock(),
-        world.rand.nextInt(15));
+    world.scheduleUpdate(blockPos, world.getBlockState(blockPos).getBlock(), world.rand.nextInt(15));
   }
 
   @Override
@@ -136,14 +125,12 @@ public class ToolChainsaw extends ToolBase {
   }
 
   @Override
-  public boolean rightClickBlockAction(EntityPlayer player, EnumHand hand, World world,
-      BlockPos pos, IBlockState blockState, EnumFacing side, Vec3d hit) {
+  public boolean rightClickBlockAction(EntityPlayer player, EnumHand hand, World world, BlockPos pos, IBlockState blockState, EnumFacing side, Vec3d hit) {
     return false;//chopTree(player, hand, world, pos, blockState);
   }
 
   @Override
-  public boolean leftClickBlockAction(EntityPlayer player, EnumHand hand, World world, BlockPos pos,
-      IBlockState blockState, EnumFacing side, Vec3d hit) {
+  public boolean leftClickBlockAction(EntityPlayer player, EnumHand hand, World world, BlockPos pos, IBlockState blockState, EnumFacing side, Vec3d hit) {
     return false;//chopTree(player, hand, world, pos, blockState);
   }
 

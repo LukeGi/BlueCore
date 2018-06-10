@@ -14,8 +14,7 @@ import teamblep.blepcore.common.creativetabs.CreativeTabMachine;
 import teamblep.blepcore.common.tileentity.TileEntityBase;
 import teamblep.blepcore.common.util.ITileEntityContainer;
 
-public abstract class BlockMachine extends BlockBase implements
-    ITileEntityContainer<TileEntityBase> {
+public abstract class BlockMachine extends BlockBase implements ITileEntityContainer<TileEntityBase> {
 
   public BlockMachine(String name) {
     super(Material.IRON, name);
@@ -27,14 +26,12 @@ public abstract class BlockMachine extends BlockBase implements
   @Override
   public IBlockState getStateFromMeta(int meta) {
     EnumFacing[] m_allowedValues = Properties.FACING4.getAllowedValues().toArray(new EnumFacing[0]);
-    return getDefaultState()
-        .withProperty(Properties.FACING4, m_allowedValues[meta & m_allowedValues.length]);
+    return getDefaultState().withProperty(Properties.FACING4, m_allowedValues[meta & m_allowedValues.length]);
   }
 
   @Override
   public int getMetaFromState(IBlockState state) {
-    return new ArrayList<>(Properties.FACING4.getAllowedValues())
-        .indexOf(state.getValue(Properties.FACING4));
+    return new ArrayList<>(Properties.FACING4.getAllowedValues()).indexOf(state.getValue(Properties.FACING4));
   }
 
   @Override
@@ -45,15 +42,11 @@ public abstract class BlockMachine extends BlockBase implements
   }
 
   @Override
-  public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX,
-      float hitY,
-      float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
+  public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
     EnumFacing direction = placer.getHorizontalFacing();
     if (!placer.isSneaking()) {
       direction = direction.getOpposite();
     }
-    return super.getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, meta, placer, hand)
-        .withProperty(
-            Properties.FACING4, direction);
+    return super.getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, meta, placer, hand).withProperty(Properties.FACING4, direction);
   }
 }

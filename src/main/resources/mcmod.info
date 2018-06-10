@@ -8,14 +8,18 @@
       "version": "${version}",
       "mcversion": "${mcversion}",
       "url": "",
-      "updateUrl": "",
+      "updateJSON": "",
       "authorList": [
-        "Luke"
+        "BlueMonster122"
       ],
       "credits": "Kelan - For creating some of the textures.",
       "logoFile": "",
       "screenshots": [],
-      "dependencies": []
+      "parent": "",
+      "useDependencyInformation": false,
+      "requiredMods": [],
+      "dependencies": [],
+      "dependants": []
     }
   ]
 }

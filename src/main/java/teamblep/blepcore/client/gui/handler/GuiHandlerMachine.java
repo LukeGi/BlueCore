@@ -9,8 +9,7 @@ import teamblep.blepcore.client.gui.GuiMachine;
 import teamblep.blepcore.common.container.ContainerMachine;
 import teamblep.blepcore.common.tileentity.TileEntityMachine;
 
-public abstract class GuiHandlerMachine<C extends ContainerMachine<T>, G extends GuiMachine, T extends TileEntityMachine> implements
-    IGuiHandler {
+public abstract class GuiHandlerMachine<C extends ContainerMachine<T>, G extends GuiMachine, T extends TileEntityMachine> implements IGuiHandler {
 
   @Nullable
   @Override

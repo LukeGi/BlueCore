@@ -34,7 +34,6 @@ public class ModItems {
   }
 
   private static void registerToolModel(ToolBase tool) {
-    ModelLoader.setCustomModelResourceLocation(tool, 0,
-        new ModelResourceLocation(BlepCore.MOD_ID + ":tools", "tool=" + tool.getName()));
+    ModelLoader.setCustomModelResourceLocation(tool, 0, new ModelResourceLocation(BlepCore.MOD_ID + ":tools", "tool=" + tool.getName()));
   }
 }
