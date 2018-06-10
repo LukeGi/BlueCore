@@ -2,6 +2,7 @@ package teamblep.blepcore.common.item.tools;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
@@ -90,6 +91,36 @@ public abstract class ToolBase extends ItemBase {
    * @return true if an action is performed and false if not
    */
   public abstract boolean leftClickAirAction(EntityPlayer player, EnumHand hand, World world);
+
+  @Override
+  protected String[] getBasicInformation(ItemStack stack, World world) {
+    return new String[0];
+  }
+
+  @Override
+  protected boolean hasShiftInformation() {
+    return false;
+  }
+
+  @Override
+  protected String[] getShiftInformation(ItemStack stack, World world) {
+    return new String[0];
+  }
+
+  @Override
+  protected boolean hasControlInformation() {
+    return false;
+  }
+
+  @Override
+  protected String[] getControlInformation(ItemStack stack, World world) {
+    return new String[0];
+  }
+
+  @Override
+  protected String[] getAdvancedInformation(ItemStack stack, World world) {
+    return new String[0];
+  }
 
   public String getName() {
     return name;
