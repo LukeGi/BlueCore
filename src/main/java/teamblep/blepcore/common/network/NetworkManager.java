@@ -4,6 +4,7 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
 import teamblep.blepcore.BlepCore;
+import teamblep.blepcore.client.gui.GuiHandlerBlepCore;
 import teamblep.blepcore.client.gui.handler.GuiHandlerElectricFurnace;
 
 public class NetworkManager {
@@ -15,8 +16,12 @@ public class NetworkManager {
 
   public static void register() {
     initialize();
-    registerGuiHandlers();
     registerPackets();
+    registerGuiHandler();
+  }
+
+  private static void registerGuiHandler() {
+    NetworkRegistry.INSTANCE.registerGuiHandler(BlepCore.MOD_ID, new GuiHandlerBlepCore());
   }
 
   private static void initialize() {
