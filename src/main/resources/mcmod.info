@@ -2,9 +2,9 @@
   "modListVersion": 2,
   "modList": [
     {
-      "modid": "blepcore",
-      "name": "Blep Core",
-      "description": "A mod that adds the core features of mods created by Team Blep",
+      "modid": "bluecore",
+      "name": "Blue Core",
+      "description": "A mod that adds the core features of mods created by BlueMonster122",
       "version": "${version}",
       "mcversion": "${mcversion}",
       "url": "",
@@ -12,7 +12,7 @@
       "authorList": [
         "BlueMonster122"
       ],
-      "credits": "Kelan - For creating some of the textures.",
+      "credits": "",
       "logoFile": "",
       "screenshots": [],
       "parent": "",
